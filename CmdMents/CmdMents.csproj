@@ -50,7 +50,12 @@
     <Compile Include="CommandmentBook.cs" />
     <Compile Include="CommandmentType.cs" />
     <Compile Include="God\AcknowledgeGodAsHoly.cs" />
+    <Compile Include="God\ClingToGod.cs" />
     <Compile Include="God\FearGod.cs" />
+    <Compile Include="Torah\HonorTheElderly.cs" />
+    <Compile Include="Torah\NoAddingCommandments.cs" />
+    <Compile Include="Torah\NoRemovingCommandments.cs" />
+    <Compile Include="Torah\TeachYourChildrenTorah.cs" />
     <Compile Include="Torah\KeepGodsCommandments.cs" />
     <Compile Include="God\KnowGodExists.cs" />
     <Compile Include="God\KnowThatGodIsOne.cs" />

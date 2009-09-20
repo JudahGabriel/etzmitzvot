@@ -5,21 +5,21 @@ using System.Text;
 
 namespace CmdMents.Torah
 {
-    class KeepGodsCommandments : LoveGodWithHeartSoulStrength
+    class TeachYourChildrenTorah : KeepGodsCommandments
     {
-        public KeepGodsCommandments()
+        public TeachYourChildrenTorah()
         {
             base.Book = CommandmentBook.Deuteronomy;
             base.CanBeCarriedOutToday = true;
-            base.Chapter = 28;
+            base.Chapter = 6;
             base.CommandmentType = CommandmentType.Positive;
             base.FollowedByChristians = false;
             base.FollowedByMessianics = true;
             base.FollowedByObservantJews = true;
-            base.Number = 10;
-            base.ShortSummary = "Keep all God's commandments.";
-            base.Text = "The LORD will establish you as his holy people, as he promised you on oath, if you keep the commands of the LORD your God and walk in his ways.";
-            base.Verse = 9;
+            base.Number = 12;
+            base.ShortSummary = "Teach your children Torah.";
+            base.Text = "Impress them on your children. Talk about them when you sit at home and when you walk along the road, when you lie down and when you get up.";
+            base.Verse = 7;
         }
     }
 }
