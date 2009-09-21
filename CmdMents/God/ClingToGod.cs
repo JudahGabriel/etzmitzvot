@@ -17,7 +17,7 @@ namespace CmdMents.God
             base.FollowedByMessianics = true;
             base.FollowedByObservantJews = true;
             base.Number = 13;
-            base.ShortSummary = "Cling to your God";
+            base.ShortSummary = "Cling to God and serve him.";
             base.Text = "Fear the LORD your God and serve him. Hold fast to him and take your oaths in his name.";
             base.Verse = 20;
         }
