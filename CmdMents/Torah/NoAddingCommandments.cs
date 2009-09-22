@@ -16,7 +16,7 @@ namespace CmdMents.Torah
             base.FollowedByChristians = false;
             base.FollowedByMessianics = true;
             base.FollowedByObservantJews = true;
-            base.Number = 14;
+            base.Number = 580;
             base.ShortSummary = "No adding commandments.";
             base.Text = "See that you do all I command you; do not add to it....";
             base.Verse = 32;

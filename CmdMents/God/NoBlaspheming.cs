@@ -17,7 +17,7 @@ namespace CmdMents
             base.FollowedByChristians = true;
             base.FollowedByMessianics = true;
             base.FollowedByObservantJews = true;
-            base.Number = 3;
+            base.Number = 26;
             base.ShortSummary = "No blaspheming God.";
             base.Text = "Do not blaspheme God.";
             base.Verse = 28;

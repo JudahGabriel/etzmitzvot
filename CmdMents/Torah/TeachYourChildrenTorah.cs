@@ -16,7 +16,7 @@ namespace CmdMents.Torah
             base.FollowedByChristians = false;
             base.FollowedByMessianics = true;
             base.FollowedByObservantJews = true;
-            base.Number = 12;
+            base.Number = 22;
             base.ShortSummary = "Teach your children Torah.";
             base.Text = "Impress them on your children. Talk about them when you sit at home and when you walk along the road, when you lie down and when you get up.";
             base.Verse = 7;

@@ -16,7 +16,7 @@ namespace CmdMents.Torah
             base.FollowedByChristians = false;
             base.FollowedByMessianics = true;
             base.FollowedByObservantJews = true;
-            base.Number = 10;
+            base.Number = 11;
             base.ShortSummary = "Keep all God's commandments.";
             base.Text = "The LORD will establish you as his holy people, as he promised you on oath, if you keep the commands of the LORD your God and walk in his ways.";
             base.Verse = 9;

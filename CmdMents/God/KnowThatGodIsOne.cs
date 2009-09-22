@@ -16,7 +16,7 @@ namespace CmdMents
             base.FollowedByChristians = true;
             base.FollowedByMessianics = true;
             base.FollowedByObservantJews = true;
-            base.Number = 6;
+            base.Number = 3;
             base.ShortSummary = "Know that God is one.";
             base.Text = "Hear, O Israel: The LORD our God, the LORD is one.";
             base.Verse = 4;

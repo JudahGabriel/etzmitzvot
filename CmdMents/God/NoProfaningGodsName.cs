@@ -16,7 +16,7 @@ namespace CmdMents
             base.FollowedByChristians = true;
             base.FollowedByMessianics = true;
             base.FollowedByObservantJews = true;
-            base.Number = 5;
+            base.Number = 6;
             base.ShortSummary = "No profaning God's name.";
             base.Text = "Do not profane my holy name.";
             base.Verse = 32;

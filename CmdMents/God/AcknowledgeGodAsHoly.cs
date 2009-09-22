@@ -16,7 +16,7 @@ namespace CmdMents
             base.FollowedByChristians = true;
             base.FollowedByMessianics = true;
             base.FollowedByObservantJews = true;
-            base.Number = 4;
+            base.Number = 6;
             base.ShortSummary = "Acknowledge God as holy.";
             base.Text = "I must be acknowledged as holy by the Israelites.";
             base.Verse = 32;

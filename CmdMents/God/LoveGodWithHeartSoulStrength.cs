@@ -16,7 +16,7 @@ namespace CmdMents
             base.FollowedByChristians = true;
             base.FollowedByMessianics = true;
             base.FollowedByObservantJews = true;
-            base.Number = 7;
+            base.Number = 4;
             base.ShortSummary = "Love God with all your being.";
             base.Text = "Love the LORD your God with all your heart and with all your soul and with all your strength.";
             base.Verse = 5;

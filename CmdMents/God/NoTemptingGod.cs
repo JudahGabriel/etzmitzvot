@@ -17,7 +17,7 @@ namespace CmdMents.God
             base.FollowedByChristians = true;
             base.FollowedByMessianics = true;
             base.FollowedByObservantJews = true;
-            base.Number = 9;
+            base.Number = 10;
             base.ShortSummary = "No tempting God.";
             base.Text = "You shall not tempt the LORD your God.";
             base.Verse = 16;

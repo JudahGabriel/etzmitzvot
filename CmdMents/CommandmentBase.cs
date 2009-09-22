@@ -80,12 +80,15 @@ namespace CmdMents
         public CommandmentType CommandmentType { get; set; }
         /// <summary>
         /// The number of the commandment as found in Maimonides traditional listing of the 613 commandments.
+        /// 
+        /// See http://en.wikipedia.org/wiki/613_commandments#Maimonides.27_list
         /// </summary>
         /// <value>The number.</value>
         /// <author>JGH</author>
         public int Number { get; set; }
         /// <summary>
         /// An alternative text or different reading from older or different scrolls.
+        /// This may be null.
         /// </summary>
         /// <value>The alternate text.</value>
         /// <author>JGH</author>
