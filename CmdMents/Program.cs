@@ -44,7 +44,7 @@ namespace CmdMents
         {
             foreach (var derived in GetAllTypesDerivingFrom(type))
             {
-                yield return CommandmentBase.CreateInstance(derived).GetDotHiearchyString();
+                yield return CommandmentBase.CreateInstance(derived).GetDotHierarchyString();
                 foreach (var childOfDerivedString in BuildDescendantTree(derived))
                 {
                     yield return childOfDerivedString;
@@ -55,7 +55,7 @@ namespace CmdMents
         private static string BuildLineFrom(Type type)
         {
             var instance = (CommandmentBase)Activator.CreateInstance(type);
-            return instance.GetDotHiearchyString();
+            return instance.GetDotHierarchyString();
         }
 
         static IEnumerable<Type> GetAllTypesDerivingFrom(Type t)

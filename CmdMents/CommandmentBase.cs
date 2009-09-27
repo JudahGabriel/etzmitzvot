@@ -79,7 +79,7 @@ namespace CmdMents
         /// <author>JGH</author>
         public CommandmentType CommandmentType { get; set; }
         /// <summary>
-        /// The number of the commandment as found in Maimonides traditional listing of the 613 commandments.
+        /// The number of the commandment as found in Maimonides' traditional listing of the 613 commandments.
         /// 
         /// See http://en.wikipedia.org/wiki/613_commandments#Maimonides.27_list
         /// </summary>
@@ -123,10 +123,10 @@ namespace CmdMents
                 Book, Chapter, Verse);
         }
 
-        public string GetDotHiearchyString()
+        public string GetDotHierarchyString()
         {
             Type baseType = this.GetType().BaseType;
-            if(!typeof(CommandmentBase).IsAssignableFrom(baseType))
+            if (!typeof(CommandmentBase).IsAssignableFrom(baseType))
             {
                 throw new InvalidOperationException("This type derives from a non-commandment type.");
             }
