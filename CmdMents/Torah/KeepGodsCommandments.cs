@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CmdMents.Torah
 {
-    class KeepGodsCommandments : LoveGodWithHeartSoulStrength
+    class KeepGodsCommandments : God.LoveGodWithHeartSoulStrength
     {
         public KeepGodsCommandments()
         {

@@ -59,7 +59,7 @@ namespace CmdMents
         /// <author>JGH</author>
         public bool FollowedByObservantJews { get; set; }
         /// <summary>
-        /// Whether hte commandment generally is followed by Christians.
+        /// Whether the commandment generally is followed by Christians.
         /// </summary>
         /// <value>
         /// 	<c>true</c> if [followed by christians]; otherwise, <c>false</c>.

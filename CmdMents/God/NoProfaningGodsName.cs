@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CmdMents
+namespace CmdMents.God
 {
     class NoProfaningGodsName : NoBlaspheming
     {
@@ -16,7 +16,7 @@ namespace CmdMents
             base.FollowedByChristians = true;
             base.FollowedByMessianics = true;
             base.FollowedByObservantJews = true;
-            base.Number = 6;
+            base.Number = 7;
             base.ShortSummary = "No profaning God's name.";
             base.Text = "Do not profane my holy name.";
             base.Verse = 32;

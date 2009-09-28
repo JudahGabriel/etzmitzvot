@@ -52,7 +52,8 @@
     <Compile Include="God\AcknowledgeGodAsHoly.cs" />
     <Compile Include="God\ClingToGod.cs" />
     <Compile Include="God\FearGod.cs" />
-    <Compile Include="Torah\HonorTheElderly.cs" />
+    <Compile Include="Torah\ListenToProphet.cs" />
+    <Compile Include="HonorTheElderly.cs" />
     <Compile Include="Torah\NoAddingCommandments.cs" />
     <Compile Include="Torah\NoRemovingCommandments.cs" />
     <Compile Include="Torah\TeachYourChildrenTorah.cs" />
@@ -76,4 +77,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>"$(TargetPath)" | "%25ProgramFiles%25\Graphviz2.24\bin\dot.exe" -o..\..\CmdMents.png -Tpng
+..\..\CmdMents.png</PostBuildEvent>
+  </PropertyGroup>
 </Project>
