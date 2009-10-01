@@ -2,4 +2,9 @@
 bin
 obj
 CmdMents.csproj.user
+</Value></Property><Property><Name>svn:ignore</Name><Value>CmdMents.png
+bin
+obj
+CmdMents.csproj.user
+Thumbs.db
 </Value></Property></Properties></ItemProperties>

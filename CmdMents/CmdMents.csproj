@@ -52,8 +52,13 @@
     <Compile Include="God\AcknowledgeGodAsHoly.cs" />
     <Compile Include="God\ClingToGod.cs" />
     <Compile Include="God\FearGod.cs" />
+    <Compile Include="SacrificesAndOfferings\LevitesMustFollowYomKippurProcedures.cs" />
+    <Compile Include="TimesAndSeasons\AfflictYourselfOnYomKippur.cs" />
+    <Compile Include="SacrificesAndOfferings\BringAdditionalOfferingsOnYomKippur.cs" />
+    <Compile Include="TimesAndSeasons\FastOnYomKippur.cs" />
+    <Compile Include="TimesAndSeasons\NoWorkingOnYomKippur.cs" />
     <Compile Include="Torah\ListenToProphet.cs" />
-    <Compile Include="HonorTheElderly.cs" />
+    <Compile Include="LoveAndBrotherhood\HonorTheElderly.cs" />
     <Compile Include="Torah\NoAddingCommandments.cs" />
     <Compile Include="Torah\NoRemovingCommandments.cs" />
     <Compile Include="Torah\TeachYourChildrenTorah.cs" />
@@ -62,7 +67,7 @@
     <Compile Include="God\KnowThatGodIsOne.cs" />
     <Compile Include="God\LoveGodWithHeartSoulStrength.cs" />
     <Compile Include="God\NoTemptingGod.cs" />
-    <Compile Include="LoveNeighborAsSelf.cs" />
+    <Compile Include="LoveAndBrotherhood\LoveNeighborAsSelf.cs" />
     <Compile Include="God\NoBlaspheming.cs" />
     <Compile Include="God\NoOtherGods.cs" />
     <Compile Include="God\NoProfaningGodsName.cs" />
@@ -78,7 +83,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>"$(TargetPath)" | "%25ProgramFiles%25\Graphviz2.24\bin\dot.exe" -o..\..\CmdMents.png -Tpng
-..\..\CmdMents.png</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

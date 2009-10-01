@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using System.IO;
+using System.Diagnostics;
 
 namespace CmdMents
 {
@@ -23,6 +25,47 @@ namespace CmdMents
                 builder.AppendLine(item);
                 Console.WriteLine(item);
             }
+
+            var imagePath = CreateImageFromDotInstructions(builder.ToString());
+            Process.Start(imagePath);
+        }
+
+        private static string CreateImageFromDotInstructions(string dotInstructions)
+        {
+            using (var process = new Process())
+            {
+                var isX64 = IntPtr.Size == 8;
+
+                var programFiles = isX64 ? Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + " (x86)" : Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+                var graphVizPath = Path.Combine(programFiles, @"Graphviz2.24\bin\dot.exe");
+
+                process.StartInfo.FileName = graphVizPath;
+                process.StartInfo.Arguments = "-Tpng -Gcharset=latin1"; 
+                process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
+                process.StartInfo.RedirectStandardOutput = true;
+                process.StartInfo.RedirectStandardInput = true;
+                process.StartInfo.UseShellExecute = false;
+                process.Start();
+
+                byte[] buffer = new byte[4096];
+                var standardOutput = process.StandardOutput.BaseStream;
+                var imageOutputStream = File.Open("CmdMents.png", FileMode.Create);
+                AsyncCallback callback = null;
+                callback = result =>
+                {
+                    int numberOfBytesRead = standardOutput.EndRead(result);
+                    imageOutputStream.Write(buffer, 0, numberOfBytesRead);
+
+                    // Read next bytes.   
+                    standardOutput.BeginRead(buffer, 0, buffer.Length, callback, null);
+                };
+                standardOutput.BeginRead(buffer, 0, buffer.Length, callback, null);
+                process.StandardInput.Write(dotInstructions);
+                process.StandardInput.Close();
+                standardOutput.Flush();
+                process.WaitForExit();
+            }
+            return "CmdMents.png";
         }
 
         private static IEnumerable<string> BuildCommandmentsHierarchy()
