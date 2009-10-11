@@ -5,6 +5,7 @@ using System.Text;
 
 namespace CmdMents.Torah
 {
+    /// <author>NET</author>
     class ListenToProphet : KeepGodsCommandments
     {
         public ListenToProphet()
