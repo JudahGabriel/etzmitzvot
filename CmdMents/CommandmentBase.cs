@@ -9,6 +9,7 @@ namespace CmdMents
     abstract class CommandmentBase
     {
         const string quote = "\"";
+        const string centeredLineSeparator = "\\n", rightJustifiedLineSeparator = "\\r", leftJustifiedLineSeparator = "\\l";
 
         /// <summary>
         /// The Scripture text.
@@ -94,17 +95,23 @@ namespace CmdMents
         /// <author>JGH</author>
         public string AlternateText { get; set; }
 
-
+        /// <summary>
+        /// A human-readable description of this commandment.
+        /// </summary>
+        /// <returns>A quoted string with a summary and originating location.</returns>
         public override string ToString()
         {
-            return string.Format("{0}{1}\\r\\n{2} {3}:{4}{0}",
-                quote, ShortSummary, Book, Chapter, Verse);
+            return quote + ShortSummary + centeredLineSeparator + GetLocation() + quote;
         }
 
+        /// <summary>
+        /// The DOT color attribute string applicable to this commandment.
+        /// </summary>
+        /// <returns>A DOT color attribute string with the appropriate instructions.</returns>
         private string GetColorString()
         {
             var color = this.CanBeCarriedOutToday ? NormalColor : NotFollowableColor;
-            return "[color=\"" + color + "\"]";
+            return "color = \"" + color + "\"";
         }
 
         private static string NormalColor
@@ -117,12 +124,32 @@ namespace CmdMents
             get { return "0.000 1.000 1.000"; }
         }
 
+        /// <summary>
+        /// The DOT label attribute string applicable to this commandment.
+        /// </summary>
+        /// <returns>A DOT label attribute string with the appropriate instructions.</returns>
+        private string GetLabelString()
+        {
+            return "label = " + this.ToString();
+        }
+
+        /// <summary>
+        /// The originating location of this commandment.
+        /// </summary>
+        /// <returns>A string in the format 'Book ch:v', 
+        /// with the corresponding book name, chapter, and verse information.</returns>
         public string GetLocation()
         {
             return string.Format("{0} {1}:{2}",
                 Book, Chapter, Verse);
         }
 
+        // TODO (NET 2009-10-11): Make naming consistent with methods in Program
+        /// <summary>
+        /// The DOT parent -> descendant directed edge instructions for this commandment.
+        /// </summary>
+        /// <returns>A string containing the DOT instructions for the appropriate directed edge.</returns>
+        /// <remarks>Use <seealso cref="GetDotNodeDefinitionString"/> to emit definitions.</remarks>
         public string GetDotHierarchyString()
         {
             Type baseType = this.GetType().BaseType;
@@ -133,12 +160,23 @@ namespace CmdMents
 
             if (baseType == typeof(CommandmentBase))
             {
-                return this.ToString() + " " + this.GetColorString();
+                return "";
             }
 
             var baseTypeInstance = CreateInstance(baseType);
-            return string.Format("{0} -> {1} {2}",
-                baseTypeInstance, this, this.GetColorString());
+            return string.Format("{0} -> {1}",
+                baseTypeInstance, this);
+        }
+
+        /// <summary>
+        /// The DOT node definition instructions for this commandment.
+        /// </summary>
+        /// <returns>A string containing the DOT instructions to define the node.</returns>
+        /// <remarks>Use <seealso cref="GetDotHierarchyString"/> to emit hierarchies.</remarks>
+        public string GetDotNodeDefinitionString()
+        {
+            return string.Format("{0} [{1}, {2}]",
+                this, this.GetLabelString(), this.GetColorString());
         }
 
         public static CommandmentBase CreateInstance(Type commandmentType)
