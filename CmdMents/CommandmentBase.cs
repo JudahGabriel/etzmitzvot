@@ -160,12 +160,12 @@ namespace CmdMents
 
             if (baseType == typeof(CommandmentBase))
             {
-                return "";
+                return null;
             }
 
             var baseTypeInstance = CreateInstance(baseType);
             return string.Format("{0} -> {1}",
-                baseTypeInstance, this);
+                baseTypeInstance.GetNodeName(), this.GetNodeName());
         }
 
         /// <summary>
@@ -176,7 +176,17 @@ namespace CmdMents
         public string GetDotNodeDefinitionString()
         {
             return string.Format("{0} [{1}, {2}]",
-                this, this.GetLabelString(), this.GetColorString());
+                this.GetNodeName(), this.GetLabelString(), this.GetColorString());
+        }
+
+        /// <summary>
+        /// The machine-readable name of this node.
+        /// </summary>
+        /// <returns>A string with no spaces or illegal DOT ID characters.</returns>
+        /// <remarks>Currently returns the name of the node's declaring type.</remarks>
+        public string GetNodeName()
+        {
+            return this.GetType().Name;
         }
 
         public static CommandmentBase CreateInstance(Type commandmentType)

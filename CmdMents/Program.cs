@@ -45,7 +45,8 @@ namespace CmdMents
             {
                 var isX64 = IntPtr.Size == 8;
 
-                var programFiles = isX64 ? Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + " (x86)" : Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+                var programFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+                if (isX64) programFiles += " (x86)";                // Always grab the 32-bit version
                 var graphVizPath = Path.Combine(programFiles, @"Graphviz2.24\bin\dot.exe");
 
                 process.StartInfo.FileName = graphVizPath;
@@ -58,21 +59,34 @@ namespace CmdMents
 
                 byte[] buffer = new byte[4096];
                 var standardOutput = process.StandardOutput.BaseStream;
-                var imageOutputStream = File.Open("CmdMents.png", FileMode.Create);
-                AsyncCallback callback = null;
-                callback = result =>
+                using (var imageOutputStream = File.Open("CmdMents.png", FileMode.Create))
                 {
-                    int numberOfBytesRead = standardOutput.EndRead(result);
-                    imageOutputStream.Write(buffer, 0, numberOfBytesRead);
+                    AsyncCallback callback = null;
+                    IAsyncResult asyncResult = null;
+                    var evt = new System.Threading.AutoResetEvent(false);
+                    callback = result =>
+                    {
+                        int numberOfBytesRead = standardOutput.EndRead(result);
+                        imageOutputStream.Write(buffer, 0, numberOfBytesRead);
 
-                    // Read next bytes.   
-                    standardOutput.BeginRead(buffer, 0, buffer.Length, callback, null);
-                };
-                standardOutput.BeginRead(buffer, 0, buffer.Length, callback, null);
-                process.StandardInput.Write(dotInstructions);
-                process.StandardInput.Close();
-                standardOutput.Flush();
-                process.WaitForExit();
+                        if (numberOfBytesRead > 0)
+                        {
+                            // Read next bytes.   
+                            asyncResult = standardOutput.BeginRead(buffer, 0, buffer.Length, callback, null);
+                        }
+                        else
+                        {
+                            // Signal that we're done.
+                            evt.Set();
+                        }
+                    };
+                    asyncResult = standardOutput.BeginRead(buffer, 0, buffer.Length, callback, null);
+                    process.StandardInput.Write(dotInstructions);
+                    process.StandardInput.Close();
+                    standardOutput.Flush();
+                    process.WaitForExit();
+                    evt.WaitOne();
+                }
             }
             return "CmdMents.png";
         }
