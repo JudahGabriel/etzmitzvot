@@ -6,9 +6,13 @@ using System.Text;
 namespace CmdMents.LoveAndBrotherhood
 {
     /// <author>NET</author>
-    class LoveProselytes : LoveNeighborAsSelf
+    /// <revision author="JGH" date="10/22/09">
+    /// Renamed class from "LoveProselytes" to "LoveSojourners", and updated short summary to reflect this.
+    /// Big discussion on the reasoning behind this: http://judahgabriel.blogspot.com/2009/10/judaisms-alien-conversion-program.html
+    /// </revision>
+    class LoveSojourners : LoveNeighborAsSelf
     {
-        public LoveProselytes()
+        public LoveSojourners()
         {
             base.Book = CommandmentBook.Deuteronomy;
             base.CanBeCarriedOutToday = true;
@@ -22,7 +26,7 @@ namespace CmdMents.LoveAndBrotherhood
             base.FollowedByObservantJews = true;
 
             base.Number = 14;
-            base.ShortSummary = "Love converts.";
+            base.ShortSummary = "Love the sojourner."; // Changed by Judah from "love converts" to "love sojourners". I know Judaism traditionally treats "alien among you" as converts, however, the text here betrays this interpretation. http://judahgabriel.blogspot.com/2009/10/judaisms-alien-conversion-program.html
             base.Text = "And you are to love those who are aliens, for you yourselves were aliens in Egypt.";
             base.Verse = 19;
         }

@@ -23,6 +23,8 @@ namespace CmdMents
                                 where typeof(CommandmentBase).IsAssignableFrom(type) && !type.IsAbstract
                                 select type).ToArray();
 
+            EnsureNoDuplicates();
+
             var builder = new StringBuilder();
             foreach (var item in BuildCommandmentsHierarchy())
             {
@@ -32,6 +34,20 @@ namespace CmdMents
 
             var imagePath = CreateImageFromDotInstructions(builder.ToString());
             Process.Start(imagePath);
+        }
+
+        [Conditional("DEBUG")]
+        private static void EnsureNoDuplicates()
+        {
+            var commandmentInstances = commandmentTypes.Select(type => CommandmentBase.CreateInstance(type)).ToArray();
+            foreach (var cmd in commandmentInstances)
+            {
+                var cmdsWithSameBookChapterAndVerse = (from commandment in commandmentInstances
+                                                      where commandment.Book == cmd.Book && commandment.Chapter == cmd.Chapter && commandment.Verse == cmd.Verse
+                                                      select commandment).ToArray();
+
+                Debug.Assert(cmdsWithSameBookChapterAndVerse.Length == 1, string.Format("Duplicate commandments were detected: {0} and {1} have the same book, chapter, and verse.", cmdsWithSameBookChapterAndVerse.First().GetType().Name, cmdsWithSameBookChapterAndVerse.Last().GetType().Name));
+            }
         }
 
         /// <summary>

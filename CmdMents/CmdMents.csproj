@@ -52,8 +52,7 @@
     <Compile Include="God\AcknowledgeGodAsHoly.cs" />
     <Compile Include="God\ClingToGod.cs" />
     <Compile Include="God\FearGod.cs" />
-    <Compile Include="LoveAndBrotherhood\LoveJews.cs" />
-    <Compile Include="LoveAndBrotherhood\LoveProselytes.cs" />
+    <Compile Include="LoveAndBrotherhood\LoveSojourners.cs" />
     <Compile Include="SacrificesAndOfferings\LevitesMustFollowYomKippurProcedures.cs" />
     <Compile Include="TimesAndSeasons\AfflictYourselfOnYomKippur.cs" />
     <Compile Include="SacrificesAndOfferings\BringAdditionalOfferingsOnYomKippur.cs" />
