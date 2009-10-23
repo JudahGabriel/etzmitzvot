@@ -16,7 +16,7 @@ namespace CmdMents
             this.FollowedByChristians = true;
             this.FollowedByMessianics = true;
             this.FollowedByObservantJews = true;
-            this.Number = 26;
+            this.Number = 13;
             this.ShortSummary = "Love others as yourself.";
             this.Text = "Do not seek revenge or bear a grudge against one of your people, but love your neighbor as yourself.";
             this.Verse = 18;
