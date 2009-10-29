@@ -15,7 +15,7 @@ namespace CmdMents
         static IEnumerable<CommandmentBase> commandments;
 
         /// <summary>
-        /// Generates the internal graph, outputs it for rendering, and displays the rendered image.
+        /// Generates and displays the current commandment graph, along with basic statistics and next steps.
         /// </summary>
         /// <param name="args">Unused.</param>
         static void Main(string[] args)
@@ -31,10 +31,13 @@ namespace CmdMents
             GenerateCommandmentsHierarchyImage();
 
             Console.WriteLine();
-            Console.WriteLine("Press enter to exit.");
+            Console.WriteLine("Press Enter to exit.");
             Console.ReadLine();
         }
 
+        /// <summary>
+        /// Generates the internal graph, outputs it for rendering, and displays the rendered image.
+        /// </summary>
         private static void GenerateCommandmentsHierarchyImage()
         {
             var builder = new StringBuilder();
@@ -47,55 +50,78 @@ namespace CmdMents
             Process.Start(imagePath);
         }
 
+        /// <summary>
+        /// Displays some basic statistics relative to the commandments currently entered.
+        /// </summary>
+        /// <remarks>
+        /// Currently displays the total number of commandments, 
+        /// the average length of a commandment's text and summary, 
+        /// and percentages of commandments by location, presence of alternate 
+        /// readings, nature and possibility of modern fulfillment, and (approximately)
+        /// obedience by group (Christian, Messianic, observant Jews).
+        /// </remarks>
         private static void PrintStatistics()
         {
             var totalCommandmentsMapped = commandments.Count();
-            var percentageWithAlternateReadings = GetPercentageOfCommandmentsMatching(cmd => !string.IsNullOrEmpty(cmd.AlternateText));
-            var percentageInExodus = GetPercentageOfCommandmentsMatching(cmd => cmd.Book == CommandmentBook.Exodus);
-            var percentageInLeviticus = GetPercentageOfCommandmentsMatching(cmd => cmd.Book == CommandmentBook.Leviticus);
-            var percentageInNumbers = GetPercentageOfCommandmentsMatching(cmd => cmd.Book == CommandmentBook.Numbers);
-            var percentageInDeuteronomy = GetPercentageOfCommandmentsMatching(cmd => cmd.Book == CommandmentBook.Deuteronomy);
-            var percentageCanBeCarriedOutToday = GetPercentageOfCommandmentsMatching(cmd => cmd.CanBeCarriedOutToday);
-            var percentagePositiveCommandments = GetPercentageOfCommandmentsMatching(cmd => cmd.CommandmentType == CommandmentType.Positive);
-            var percentageNegativeCommandments = GetPercentageOfCommandmentsMatching(cmd => cmd.CommandmentType == CommandmentType.Negative);
-            var percentageFollowedByChristians = GetPercentageOfCommandmentsMatching(cmd => cmd.FollowedByChristians);
-            var percentageFollowedByMessianics = GetPercentageOfCommandmentsMatching(cmd => cmd.FollowedByMessianics);
-            var percentageFollowedByObservantJews = GetPercentageOfCommandmentsMatching(cmd => cmd.FollowedByObservantJews);
+            var percentageWithAlternateReadings = GetStatisticOfCommandmentsMatching(cmd => !string.IsNullOrEmpty(cmd.AlternateText));
+            var percentageInExodus = GetStatisticOfCommandmentsMatching(cmd => cmd.Book == CommandmentBook.Exodus);
+            var percentageInLeviticus = GetStatisticOfCommandmentsMatching(cmd => cmd.Book == CommandmentBook.Leviticus);
+            var percentageInNumbers = GetStatisticOfCommandmentsMatching(cmd => cmd.Book == CommandmentBook.Numbers);
+            var percentageInDeuteronomy = GetStatisticOfCommandmentsMatching(cmd => cmd.Book == CommandmentBook.Deuteronomy);
+            var percentageCanBeCarriedOutToday = GetStatisticOfCommandmentsMatching(cmd => cmd.CanBeCarriedOutToday);
+            var percentagePositiveCommandments = GetStatisticOfCommandmentsMatching(cmd => cmd.CommandmentType == CommandmentType.Positive);
+            var percentageNegativeCommandments = GetStatisticOfCommandmentsMatching(cmd => cmd.CommandmentType == CommandmentType.Negative);
+            var percentageFollowedByChristians = GetStatisticOfCommandmentsMatching(cmd => cmd.FollowedByChristians);
+            var percentageFollowedByMessianics = GetStatisticOfCommandmentsMatching(cmd => cmd.FollowedByMessianics);
+            var percentageFollowedByObservantJews = GetStatisticOfCommandmentsMatching(cmd => cmd.FollowedByObservantJews);
             var averageTextLengthInChars = (int)Math.Round(commandments.Average(cmd => cmd.Text.Length));
             var averageSummaryLengthInChars = (int)Math.Round(commandments.Average(cmd => cmd.ShortSummary.Length));
 
             Console.WriteLine();
             Console.WriteLine("Commandment statistics:");
             Console.WriteLine("\t{0} commandments have been mapped thus far.", totalCommandmentsMapped);
-            Console.WriteLine("\t{0}% have alternate readings.", percentageWithAlternateReadings);
-            Console.WriteLine("\t{0}% are from Exodus.", percentageInExodus);
-            Console.WriteLine("\t{0}% are from Leviticus.", percentageInLeviticus);
-            Console.WriteLine("\t{0}% are from Numbers.", percentageInNumbers);
-            Console.WriteLine("\t{0}% are from Deuteronomy.", percentageInDeuteronomy);
-            Console.WriteLine("\t{0}% can be carried out in modern times.", percentageCanBeCarriedOutToday);
-            Console.WriteLine("\t{0}% are positive commandments.", percentagePositiveCommandments);
-            Console.WriteLine("\t{0}% are negative commandments.", percentageNegativeCommandments);
-            Console.WriteLine("\t{0}% are observed by Christians.", percentageFollowedByChristians);
-            Console.WriteLine("\t{0}% are observed by Messianics.", percentageFollowedByMessianics);
-            Console.WriteLine("\t{0}% are observed by Jews.", percentageFollowedByObservantJews);
+            Console.WriteLine("\t{0} have alternate readings.", percentageWithAlternateReadings);
+            Console.WriteLine("\t{0} are from Exodus.", percentageInExodus);
+            Console.WriteLine("\t{0} are from Leviticus.", percentageInLeviticus);
+            Console.WriteLine("\t{0} are from Numbers.", percentageInNumbers);
+            Console.WriteLine("\t{0} are from Deuteronomy.", percentageInDeuteronomy);
+            Console.WriteLine("\t{0} can be carried out in modern times.", percentageCanBeCarriedOutToday);
+            Console.WriteLine("\t{0} are positive commandments.", percentagePositiveCommandments);
+            Console.WriteLine("\t{0} are negative commandments.", percentageNegativeCommandments);
+            Console.WriteLine("\t{0} are observed by Christians.", percentageFollowedByChristians);
+            Console.WriteLine("\t{0} are observed by Messianics.", percentageFollowedByMessianics);
+            Console.WriteLine("\t{0} are observed by Jews.", percentageFollowedByObservantJews);
             Console.WriteLine("\tThe average commandment length is {0} characters.", averageTextLengthInChars);
             Console.WriteLine("\tThe average summary length is {0} characters.", averageSummaryLengthInChars);
         }
 
-        private static int GetPercentageOfCommandmentsMatching(Func<CommandmentBase, bool> predicate)
+        /// <summary>
+        /// Statistics on commandments that match a given predicate condition.
+        /// </summary>
+        /// <param name="predicate">The condition commandments must match to be counted.</param>
+        /// <returns>A formatted <see cref="String"/> containing statistics 
+        /// on the commandments that match <paramref name="predicate"/>.</returns>
+        /// <remarks>Currently returns a percentage with two decimal places, 
+        /// along with a number in parentheses representing the count.</remarks>
+        private static string GetStatisticOfCommandmentsMatching(Func<CommandmentBase, bool> predicate)
         {
             var numMatchingCommandments = commandments.Where(predicate).Count();
+            int totalCommandmentCount = commandments.Count();
             var percentageInDecimal = (double)numMatchingCommandments / (double)commandments.Count();
             const int decimalPlaces = 2;
-            var percentageInDecimalRounded = Math.Round(percentageInDecimal, decimalPlaces);
-            var percentage = Math.Round(percentageInDecimalRounded * 100);
-            return (int)percentage;
+
+            // Right-align percentages and counts to the minimum sizes possible
+            string format = "{0,7:F" + decimalPlaces.ToString() + "}% ({1," + totalCommandmentCount.ToString().Length + ":F0})";
+            return String.Format(format, percentageInDecimal * 100, numMatchingCommandments);
         }
 
+        /// <summary>
+        /// Displays the next few commandments to be mapped.
+        /// </summary>
         private static void PrintNextCommandmentsToBeMapped()
         {
-            const int commandmentPrintCount = 5;
-            const int totalCommandmentCount = 613;
+            const int commandmentPrintCount = 5;        // TODO?: Parameterize
+            int totalCommandmentCount = commandments.Count();
             var nextCommandmentNumbersToMap = Enumerable.Range(1, totalCommandmentCount).Except(commandments.Select(cmd => cmd.Number)).Take(commandmentPrintCount);
             Console.WriteLine();
             Console.WriteLine("Next commandments that need mapping: ");
@@ -105,6 +131,9 @@ namespace CmdMents
             }
         }
 
+        /// <summary>
+        /// Sanity check to prevent accidental duplication of commandments by number.
+        /// </summary>
         private static void EnsureNoDuplicates()
         {
             foreach (var cmd in commandments)
@@ -112,7 +141,7 @@ namespace CmdMents
                 var commandmentsWithSameNumber = commandments.Where(input => input.Number == cmd.Number && input.GetType() != cmd.GetType());
                 if (commandmentsWithSameNumber.Count() > 1)
                 {
-                    var errorMessage= string.Format("Duplicate commandment detected: {0} and {1} are both commandment #{2}.", commandmentsWithSameNumber.First(), commandmentsWithSameNumber.Last(), cmd.Number);
+                    var errorMessage = string.Format("Duplicate commandment detected: {0} and {1} are both commandment #{2}.", commandmentsWithSameNumber.First(), commandmentsWithSameNumber.Last(), cmd.Number);
                     throw new ApplicationException(errorMessage);
                 }
             }
