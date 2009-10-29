@@ -54,8 +54,11 @@
     <Compile Include="God\FearGod.cs" />
     <Compile Include="God\NoDestroyingObjectsAssociatedWithGodsName.cs" />
     <Compile Include="LoveAndBrotherhood\LoveSojourners.cs" />
+    <Compile Include="LoveAndBrotherhood\NoRevenge.cs" />
+    <Compile Include="LoveAndBrotherhood\NoSlandering.cs" />
     <Compile Include="LoveAndBrotherhood\NoEmbarrassingOthers.cs" />
     <Compile Include="LoveAndBrotherhood\NoHatingYourBrother.cs" />
+    <Compile Include="LoveAndBrotherhood\NoOppressingWeak.cs" />
     <Compile Include="LoveAndBrotherhood\ReproveTheSinner.cs" />
     <Compile Include="SacrificesAndOfferings\LevitesMustFollowYomKippurProcedures.cs" />
     <Compile Include="TimesAndSeasons\AfflictYourselfOnYomKippur.cs" />
