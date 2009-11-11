@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="CommandmentBase.cs" />
     <Compile Include="CommandmentBook.cs" />
+    <Compile Include="CommandmentObedience.cs" />
     <Compile Include="CommandmentType.cs" />
     <Compile Include="God\AcknowledgeGodAsHoly.cs" />
     <Compile Include="God\ClingToGod.cs" />
@@ -57,7 +58,7 @@
     <Compile Include="LoveAndBrotherhood\LoveSojourners.cs" />
     <Compile Include="LoveAndBrotherhood\NoGrudges.cs" />
     <Compile Include="LoveAndBrotherhood\NoRevenge.cs" />
-    <Compile Include="LoveAndBrotherhood\NoSlandering.cs" />
+    <Compile Include="LoveAndBrotherhood\NoEvilSpeaking.cs" />
     <Compile Include="LoveAndBrotherhood\NoEmbarrassingOthers.cs" />
     <Compile Include="LoveAndBrotherhood\NoHatingYourBrother.cs" />
     <Compile Include="LoveAndBrotherhood\NoOppressingWeak.cs" />

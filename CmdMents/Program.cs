@@ -8,17 +8,17 @@ using System.Diagnostics;
 
 namespace CmdMents
 {
-    class Program
+    static class Program
     {
-        const string quote = "\"";
-        static IEnumerable<Type> commandmentTypes;
-        static IEnumerable<CommandmentBase> commandments;
+        private const string quote = "\"";
+        private static IEnumerable<Type> commandmentTypes;
+        private static IEnumerable<CommandmentBase> commandments;
 
         /// <summary>
         /// Generates and displays the current commandment graph, along with basic statistics and next steps.
         /// </summary>
         /// <param name="args">Unused.</param>
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             commandmentTypes = (from type in typeof(CommandmentBase).Assembly.GetTypes()
                                 where typeof(CommandmentBase).IsAssignableFrom(type) && !type.IsAbstract
@@ -31,8 +31,8 @@ namespace CmdMents
             GenerateCommandmentsHierarchyImage();
 
             Console.WriteLine();
-            Console.WriteLine("Press Enter to exit.");
-            Console.ReadLine();
+            Console.WriteLine("Press any key to exit.");
+            Console.ReadKey(true);
         }
 
         /// <summary>
@@ -79,7 +79,6 @@ namespace CmdMents
             var averageTextLengthInChars = (int)Math.Round(commandments.Average(cmd => cmd.Text.Length));
             var averageSummaryLengthInChars = (int)Math.Round(commandments.Average(cmd => cmd.ShortSummary.Length));
 
-            Console.WriteLine();
             Console.WriteLine("Commandment statistics:");
             Console.WriteLine("\t{0} commandments have been mapped, the project is {1}% completed.", totalCommandmentsMapped, percentageCommandmentsMapped);
             Console.WriteLine("\t{0} have alternate readings.", percentageWithAlternateReadings);
