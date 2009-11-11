@@ -14,9 +14,9 @@ namespace CmdMents.God
             base.CanBeCarriedOutToday = true;
             base.Chapter = 6;
             base.CommandmentType = CommandmentType.Negative;
-            base.FollowedByChristians = true;
-            base.FollowedByMessianics = true;
-            base.FollowedByObservantJews = true;
+            base.FollowedByChristians = CommandmentObedience.Obeyed;
+            base.FollowedByMessianics = CommandmentObedience.Obeyed;
+            base.FollowedByObservantJews = CommandmentObedience.Obeyed;
             base.Number = 10;
             base.ShortSummary = "No tempting God.";
             base.Text = "You shall not tempt the LORD your God.";

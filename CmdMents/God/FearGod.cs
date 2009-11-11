@@ -13,9 +13,9 @@ namespace CmdMents.God
             base.CanBeCarriedOutToday = true;
             base.Chapter = 10;
             base.CommandmentType = CommandmentType.Positive;
-            base.FollowedByChristians = true;
-            base.FollowedByMessianics = true;
-            base.FollowedByObservantJews = true;
+            base.FollowedByChristians = CommandmentObedience.Obeyed;    // Modulo occasional quirks
+            base.FollowedByMessianics = CommandmentObedience.Obeyed;
+            base.FollowedByObservantJews = CommandmentObedience.Obeyed;
             base.Number = 5;
             base.ShortSummary = "Fear the LORD your God";
             base.Text = "Fear the LORD your God.";

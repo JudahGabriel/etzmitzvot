@@ -21,9 +21,10 @@ namespace CmdMents.LoveAndBrotherhood
 
             // Hmmm... this is dicey. I really don't know that I can say off the top of my head.
             // I think, though, that this is likely to be correct.
-            base.FollowedByChristians = true;
-            base.FollowedByMessianics = true;
-            base.FollowedByObservantJews = true;
+            base.FollowedByChristians = CommandmentObedience.Attempted;
+            base.FollowedByMessianics = CommandmentObedience.Attempted;
+            // NET: I'm not too sure about this one. Comments?
+            base.FollowedByObservantJews = CommandmentObedience.Recognized;
 
             base.Number = 14;
             base.ShortSummary = "Love the sojourner."; // Changed by Judah from "love converts" to "love sojourners". I know Judaism traditionally treats "alien among you" as converts, however, the text here betrays this interpretation. http://judahgabriel.blogspot.com/2009/10/judaisms-alien-conversion-program.html

@@ -13,9 +13,9 @@ namespace CmdMents.LoveAndBrotherhood
             base.CanBeCarriedOutToday = true;
             base.Chapter = 19;
             base.CommandmentType = CommandmentType.Positive;
-            base.FollowedByChristians = true;
-            base.FollowedByMessianics = true;
-            base.FollowedByObservantJews = true;
+            base.FollowedByChristians = CommandmentObedience.Attempted;
+            base.FollowedByMessianics = CommandmentObedience.Attempted;
+            base.FollowedByObservantJews = CommandmentObedience.Attempted;
             base.Number = 16;
             base.ShortSummary = "Rebuke the sinner.";
             base.Text = "Rebuke your neighbor frankly so you will not share in his guilt.";

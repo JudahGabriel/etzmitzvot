@@ -14,9 +14,9 @@ namespace CmdMents.God
             base.CanBeCarriedOutToday = true;
             base.Chapter = 20;
             base.CommandmentType = CommandmentType.Negative;
-            base.FollowedByChristians = true;
-            base.FollowedByMessianics = true;
-            base.FollowedByObservantJews = true;
+            base.FollowedByChristians = CommandmentObedience.Obeyed;
+            base.FollowedByMessianics = CommandmentObedience.Obeyed;
+            base.FollowedByObservantJews = CommandmentObedience.Obeyed;
             base.Number = 2;
             base.ShortSummary = "Do not have gods besides the LORD.";
             base.Text = "You shall have no other gods before me.";

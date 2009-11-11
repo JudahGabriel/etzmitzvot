@@ -13,9 +13,10 @@ namespace CmdMents.Torah
             base.CanBeCarriedOutToday = true;
             base.Chapter = 28;
             base.CommandmentType = CommandmentType.Positive;
-            base.FollowedByChristians = false;
-            base.FollowedByMessianics = true;
-            base.FollowedByObservantJews = true;
+            // Note: No one really does keep all God's commandments, unless we add an extra category for HaMashiach
+            base.FollowedByChristians = CommandmentObedience.None;      // Doesn't sound right, but is technically accurate
+            base.FollowedByMessianics = CommandmentObedience.Attempted;
+            base.FollowedByObservantJews = CommandmentObedience.Attempted;
             base.Number = 11;
             base.ShortSummary = "Keep all God's commandments.";
             base.Text = "The LORD will establish you as his holy people, as he promised you on oath, if you keep the commands of the LORD your God and walk in his ways.";

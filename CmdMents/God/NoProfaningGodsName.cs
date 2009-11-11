@@ -13,9 +13,9 @@ namespace CmdMents.God
             base.CanBeCarriedOutToday = true;
             base.Chapter = 22;
             base.CommandmentType = CommandmentType.Negative;
-            base.FollowedByChristians = true;
-            base.FollowedByMessianics = true;
-            base.FollowedByObservantJews = true;
+            base.FollowedByChristians = CommandmentObedience.Attempted;
+            base.FollowedByMessianics = CommandmentObedience.Obeyed;
+            base.FollowedByObservantJews = CommandmentObedience.Obeyed;
             base.Number = 7;
             base.ShortSummary = "No profaning God's name.";
             base.Text = "Do not profane my holy name.";

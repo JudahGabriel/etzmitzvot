@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -64,56 +64,114 @@ namespace CmdMents
         {
             const int totalCommandmentCount = 613;
             var totalCommandmentsMapped = commandments.Count();
-            var percentageCommandmentsMapped = Math.Round(((double)totalCommandmentsMapped / (double)totalCommandmentCount) * 100, 1);
-            var percentageWithAlternateReadings = GetStatisticOfCommandmentsMatching(cmd => !string.IsNullOrEmpty(cmd.AlternateText));
-            var percentageInExodus = GetStatisticOfCommandmentsMatching(cmd => cmd.Book == CommandmentBook.Exodus);
-            var percentageInLeviticus = GetStatisticOfCommandmentsMatching(cmd => cmd.Book == CommandmentBook.Leviticus);
-            var percentageInNumbers = GetStatisticOfCommandmentsMatching(cmd => cmd.Book == CommandmentBook.Numbers);
-            var percentageInDeuteronomy = GetStatisticOfCommandmentsMatching(cmd => cmd.Book == CommandmentBook.Deuteronomy);
-            var percentageCanBeCarriedOutToday = GetStatisticOfCommandmentsMatching(cmd => cmd.CanBeCarriedOutToday);
-            var percentagePositiveCommandments = GetStatisticOfCommandmentsMatching(cmd => cmd.CommandmentType == CommandmentType.Positive);
-            var percentageNegativeCommandments = GetStatisticOfCommandmentsMatching(cmd => cmd.CommandmentType == CommandmentType.Negative);
-            var percentageFollowedByChristians = GetStatisticOfCommandmentsMatching(cmd => cmd.FollowedByChristians);
-            var percentageFollowedByMessianics = GetStatisticOfCommandmentsMatching(cmd => cmd.FollowedByMessianics);
-            var percentageFollowedByObservantJews = GetStatisticOfCommandmentsMatching(cmd => cmd.FollowedByObservantJews);
+            var pctCommandmentsMapped = (double)totalCommandmentsMapped / (double)totalCommandmentCount;
+            var pctWithAlternateReadings = FormattedStatistic(Matching(cmd => !string.IsNullOrEmpty(cmd.AlternateText)));
+            var pctInExodus = FormattedStatistic(Matching(cmd => cmd.Book == CommandmentBook.Exodus));
+            var pctInLeviticus = FormattedStatistic(Matching(cmd => cmd.Book == CommandmentBook.Leviticus));
+            var pctInNumbers = FormattedStatistic(Matching(cmd => cmd.Book == CommandmentBook.Numbers));
+            var pctInDeuteronomy = FormattedStatistic(Matching(cmd => cmd.Book == CommandmentBook.Deuteronomy));
+            var pctCanBeCarriedOutToday = FormattedStatistic(Matching(cmd => cmd.CanBeCarriedOutToday));
+            var pctPositiveCommandments = FormattedStatistic(Matching(cmd => cmd.CommandmentType == CommandmentType.Positive));
+            var pctNegativeCommandments = FormattedStatistic(Matching(cmd => cmd.CommandmentType == CommandmentType.Negative));
+
+            var pctObeyedByChristians = FormattedPercentage(Matching(cmd => cmd.FollowedByChristians == CommandmentObedience.Obeyed), 5);
+            var pctObeyedByMessianics = FormattedPercentage(Matching(cmd => cmd.FollowedByMessianics == CommandmentObedience.Obeyed), 5);
+            var pctObeyedByObservantJews = FormattedPercentage(Matching(cmd => cmd.FollowedByObservantJews == CommandmentObedience.Obeyed), 5);
+            var pctRecognizedByChristians = FormattedPercentage(Matching(cmd => cmd.FollowedByChristians == CommandmentObedience.Recognized), 5);
+            var pctRecognizedByMessianics = FormattedPercentage(Matching(cmd => cmd.FollowedByMessianics == CommandmentObedience.Recognized), 5);
+            var pctRecognizedByObservantJews = FormattedPercentage(Matching(cmd => cmd.FollowedByObservantJews == CommandmentObedience.Recognized), 5);
+            var pctAttemptedByChristians = FormattedPercentage(Matching(cmd => cmd.FollowedByChristians == CommandmentObedience.Attempted), 5);
+            var pctAttemptedByMessianics = FormattedPercentage(Matching(cmd => cmd.FollowedByMessianics == CommandmentObedience.Attempted), 5);
+            var pctAttemptedByObservantJews = FormattedPercentage(Matching(cmd => cmd.FollowedByObservantJews == CommandmentObedience.Attempted), 5);
+            var pctTotalObservedByChristians = FormattedPercentage(Matching(cmd => cmd.FollowedByChristians != CommandmentObedience.None), 5);
+            var pctTotalObservedByMessianics = FormattedPercentage(Matching(cmd => cmd.FollowedByMessianics != CommandmentObedience.None), 5);
+            var pctTotalObservedByObservantJews = FormattedPercentage(Matching(cmd => cmd.FollowedByObservantJews != CommandmentObedience.None), 5);
+
             var averageTextLengthInChars = (int)Math.Round(commandments.Average(cmd => cmd.Text.Length));
             var averageSummaryLengthInChars = (int)Math.Round(commandments.Average(cmd => cmd.ShortSummary.Length));
 
             Console.WriteLine("Commandment statistics:");
-            Console.WriteLine("\t{0} commandments have been mapped, the project is {1}% completed.", totalCommandmentsMapped, percentageCommandmentsMapped);
-            Console.WriteLine("\t{0} have alternate readings.", percentageWithAlternateReadings);
-            Console.WriteLine("\t{0} are from Exodus.", percentageInExodus);
-            Console.WriteLine("\t{0} are from Leviticus.", percentageInLeviticus);
-            Console.WriteLine("\t{0} are from Numbers.", percentageInNumbers);
-            Console.WriteLine("\t{0} are from Deuteronomy.", percentageInDeuteronomy);
-            Console.WriteLine("\t{0} can be carried out in modern times.", percentageCanBeCarriedOutToday);
-            Console.WriteLine("\t{0} are positive commandments.", percentagePositiveCommandments);
-            Console.WriteLine("\t{0} are negative commandments.", percentageNegativeCommandments);
-            Console.WriteLine("\t{0} are observed by Christians.", percentageFollowedByChristians);
-            Console.WriteLine("\t{0} are observed by Messianics.", percentageFollowedByMessianics);
-            Console.WriteLine("\t{0} are observed by Jews.", percentageFollowedByObservantJews);
+            Console.WriteLine("\t{0} commandments have been mapped; the project is {1} completed.", totalCommandmentsMapped, GetFormattedPercentage(pctCommandmentsMapped, 3, 5));
+            Console.WriteLine("\t{0} have alternate readings.", pctWithAlternateReadings);
+            Console.WriteLine("\t{0} are from Exodus.", pctInExodus);
+            Console.WriteLine("\t{0} are from Leviticus.", pctInLeviticus);
+            Console.WriteLine("\t{0} are from Numbers.", pctInNumbers);
+            Console.WriteLine("\t{0} are from Deuteronomy.", pctInDeuteronomy);
+            Console.WriteLine("\t{0} can be carried out in modern times.", pctCanBeCarriedOutToday);
+            Console.WriteLine("\t{0} are positive commandments.", pctPositiveCommandments);
+            Console.WriteLine("\t{0} are negative commandments.", pctNegativeCommandments);
+
+            Console.WriteLine("Christians observe {0} total (obey {1}, attempt {2}, recognize {3})", pctTotalObservedByChristians, pctObeyedByChristians, pctAttemptedByChristians, pctRecognizedByChristians);
+            Console.WriteLine("Messianics observe {0} total (obey {1}, attempt {2}, recognize {3})", pctTotalObservedByMessianics, pctObeyedByMessianics, pctAttemptedByMessianics, pctRecognizedByMessianics);
+            Console.WriteLine("      Jews observe {0} total (obey {1}, attempt {2}, recognize {3})", pctTotalObservedByObservantJews, pctObeyedByObservantJews, pctAttemptedByObservantJews, pctRecognizedByObservantJews);
+
             Console.WriteLine("\tThe average commandment length is {0} characters.", averageTextLengthInChars);
             Console.WriteLine("\tThe average summary length is {0} characters.", averageSummaryLengthInChars);
         }
 
         /// <summary>
-        /// Statistics on commandments that match a given predicate condition.
+        /// The number of commandments that match a given predicate condition.
         /// </summary>
         /// <param name="predicate">The condition commandments must match to be counted.</param>
-        /// <returns>A formatted <see cref="String"/> containing statistics 
-        /// on the commandments that match <paramref name="predicate"/>.</returns>
-        /// <remarks>Currently returns a percentage with two decimal places, 
-        /// along with a number in parentheses representing the count.</remarks>
-        private static string GetStatisticOfCommandmentsMatching(Func<CommandmentBase, bool> predicate)
+        /// <returns>The number of commandments that match <paramref name="predicate"/>.</returns>
+        private static int Matching(Func<CommandmentBase, bool> predicate)
         {
-            var numMatchingCommandments = commandments.Where(predicate).Count();
-            int totalCommandmentCount = commandments.Count();
-            var percentageInDecimal = (double)numMatchingCommandments / (double)commandments.Count();
-            const int decimalPlaces = 2;
+            return commandments.Where(predicate).Count();
+        }
 
-            // Right-align percentages and counts to the minimum sizes possible
-            string format = "{0,7:F" + decimalPlaces.ToString() + "}% ({1," + totalCommandmentCount.ToString().Length + ":F0})";
-            return String.Format(format, percentageInDecimal * 100, numMatchingCommandments);
+        /// <summary>
+        /// Formatted statistics on commandments by count.
+        /// </summary>
+        /// <returns>A formatted <see cref="String"/> containing statistics 
+        /// on the count of commandments given.</returns>
+        /// <remarks>Currently returns a percentage with two decimal places, 
+        /// along with a number in parentheses representing the actual count.</remarks>
+        private static string FormattedStatistic(int numMatchingCommandments)
+        {
+            int totalCommandmentCount = commandments.Count();
+            var percentageInDecimal = (double)numMatchingCommandments / (double)totalCommandmentCount;
+
+            string format = "{0} ({1})";
+            return String.Format(format, GetFormattedPercentage(percentageInDecimal), GetFormattedCount(numMatchingCommandments, totalCommandmentCount));
+        }
+
+        /// <summary>
+        /// Formatted percentage of commandments by count.
+        /// </summary>
+        /// <returns>A formatted <see cref="String"/> containing the 
+        /// percentage of commandments given.</returns>
+        /// <remarks>Currently returns a percentage with two decimal places.</remarks>
+        private static string FormattedPercentage(int numMatchingCommandments)
+        {
+            return FormattedPercentage(numMatchingCommandments, 6);
+        }
+        private static string FormattedPercentage(int numMatchingCommandments, int width)
+        {
+            var percentageInDecimal = (double)numMatchingCommandments / (double)commandments.Count();
+
+            return GetFormattedPercentage(percentageInDecimal, 2, width);
+        }
+
+        private static string GetFormattedPercentage(double ratio)
+        {
+            return GetFormattedPercentage(ratio, 2);
+        }
+        private static string GetFormattedPercentage(double ratio, int decimalPlaces)
+        {
+            return GetFormattedPercentage(ratio, decimalPlaces, 6);
+        }
+        private static string GetFormattedPercentage(double ratio, int decimalPlaces, int width)
+        {
+            // Right-align and format to decimal places
+            string format = "{0," + width.ToString() + ":F" + decimalPlaces.ToString() + "}%";
+            return string.Format(format, ratio * 100);
+        }
+
+        private static string GetFormattedCount(int number, int max)
+        {
+            // Right-align with no decimal places
+            string format = "{0," + max.ToString().Length.ToString() + ":F0}";
+            return string.Format(format, number);
         }
 
         /// <summary>

@@ -26,9 +26,9 @@ namespace CmdMents.Torah
             base.CanBeCarriedOutToday = true;
             base.Chapter = 15;
             base.CommandmentType = CommandmentType.Positive;
-            base.FollowedByChristians = false;
-            base.FollowedByMessianics = false; // Heh. Tough call, but I think a majority of practicing Messianics do not wear fringes.
-            base.FollowedByObservantJews = true;
+            base.FollowedByChristians = CommandmentObedience.None;
+            base.FollowedByMessianics = CommandmentObedience.Recognized; // Heh. Tough call, but I think a majority of practicing Messianics do not wear fringes.
+            base.FollowedByObservantJews = CommandmentObedience.Obeyed;
             base.Number = 25;
             base.ShortSummary = "Remember the commandments through tassels on your garment.";
             base.Text = "You will have these tassels to look at and so you will remember all the commands of the LORD, that you may obey them and not prostitute yourselves by going after the lusts of your own hearts and eyes.";

@@ -18,9 +18,9 @@ namespace CmdMents.LoveAndBrotherhood
             // One last time, difference between observance and acceptance.
             // On the whole, though, a better track record of observance here.
             base.CanBeCarriedOutToday = true;
-            base.FollowedByChristians = true;
-            base.FollowedByMessianics = true;
-            base.FollowedByObservantJews = true;
+            base.FollowedByChristians = CommandmentObedience.Attempted;
+            base.FollowedByMessianics = CommandmentObedience.Attempted;
+            base.FollowedByObservantJews = CommandmentObedience.Attempted;
 
             base.CommandmentType = CommandmentType.Negative;
             base.Number = 20;

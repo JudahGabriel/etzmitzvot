@@ -13,9 +13,9 @@ namespace CmdMents.God
             base.CanBeCarriedOutToday = true;
             base.Chapter = 20;
             base.CommandmentType = CommandmentType.Positive;
-            base.FollowedByChristians = true;
-            base.FollowedByMessianics = true;
-            base.FollowedByObservantJews = true;
+            base.FollowedByChristians = CommandmentObedience.Obeyed;
+            base.FollowedByMessianics = CommandmentObedience.Obeyed;
+            base.FollowedByObservantJews = CommandmentObedience.Obeyed;
             base.Number = 1;
             base.ShortSummary = "Know that God exists.";
             base.Text = "I am ADONAI your God, who brought you out of the land of Egypt, out of the abode of slavery.";

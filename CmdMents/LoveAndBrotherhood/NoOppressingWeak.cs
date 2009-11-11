@@ -22,12 +22,11 @@ namespace CmdMents.LoveAndBrotherhood
             base.Chapter = 22;
             base.CommandmentType = CommandmentType.Negative;
 
-            // In this particular commandment, I assume that "followed by X" means 
-            //      "followed by X when convenient, and generally agreed to loudly 
-            //      by every member of X at all times".
-            base.FollowedByChristians = true;
-            base.FollowedByMessianics = true;
-            base.FollowedByObservantJews = true;
+            // That is, "followed by X when convenient, and generally agreed to 
+            //      loudly by every member of X at all times".
+            base.FollowedByChristians = CommandmentObedience.Recognized;
+            base.FollowedByMessianics = CommandmentObedience.Recognized;
+            base.FollowedByObservantJews = CommandmentObedience.Recognized;
 
             base.Number = 18;
 

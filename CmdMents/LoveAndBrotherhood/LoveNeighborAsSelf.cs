@@ -13,9 +13,9 @@ namespace CmdMents
             this.CanBeCarriedOutToday = true;
             this.Chapter = 19;
             this.CommandmentType = CommandmentType.Positive;
-            this.FollowedByChristians = true;
-            this.FollowedByMessianics = true;
-            this.FollowedByObservantJews = true;
+            this.FollowedByChristians = CommandmentObedience.Attempted;
+            this.FollowedByMessianics = CommandmentObedience.Attempted;
+            this.FollowedByObservantJews = CommandmentObedience.Attempted;
             this.Number = 13;
             this.ShortSummary = "Love others as yourself.";
             this.Text = "Do not seek revenge or bear a grudge against one of your people, but love your neighbor as yourself.";

@@ -47,26 +47,29 @@ namespace CmdMents
         /// Whether the commandment generally is followed by Messianics.
         /// </summary>
         /// <value>
-        /// 	<c>true</c> if [followed by messianics]; otherwise, <c>false</c>.
+        /// One of the values of <see cref="CommandmentObedience" /> corresponding
+        /// to the level of obedience generally observed among Messianics.
         /// </value>
-        /// <author>JGH</author>
-        public bool FollowedByMessianics { get; set; }
+        /// <author>JGH, NET</author>
+        public CommandmentObedience FollowedByMessianics { get; set; }
         /// <summary>
         /// Whether the commandment generally is followed by various streams of Orthodox Judaism.
         /// </summary>
         /// <value>
-        /// 	<c>true</c> if [followed by observant jews]; otherwise, <c>false</c>.
+        /// One of the values of <see cref="CommandmentObedience" /> corresponding
+        /// to the level of obedience generally observed among observant Jews.
         /// </value>
-        /// <author>JGH</author>
-        public bool FollowedByObservantJews { get; set; }
+        /// <author>JGH, NET</author>
+        public CommandmentObedience FollowedByObservantJews { get; set; }
         /// <summary>
         /// Whether the commandment generally is followed by Christians.
         /// </summary>
         /// <value>
-        /// 	<c>true</c> if [followed by christians]; otherwise, <c>false</c>.
+        /// One of the values of <see cref="CommandmentObedience" /> corresponding
+        /// to the level of obedience generally observed among Christians.
         /// </value>
-        /// <author>JGH</author>
-        public bool FollowedByChristians { get; set; }
+        /// <author>JGH, NET</author>
+        public CommandmentObedience FollowedByChristians { get; set; }
         /// <summary>
         /// A short one-liner describing the commandment. Example: "Know that God exists."
         /// </summary>

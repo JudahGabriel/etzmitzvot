@@ -14,9 +14,9 @@ namespace CmdMents.God
             base.CanBeCarriedOutToday = true;
             base.Chapter = 22;
             base.CommandmentType = CommandmentType.Negative;
-            base.FollowedByChristians = true;
-            base.FollowedByMessianics = true;
-            base.FollowedByObservantJews = true;
+            base.FollowedByChristians = CommandmentObedience.Obeyed;
+            base.FollowedByMessianics = CommandmentObedience.Obeyed;
+            base.FollowedByObservantJews = CommandmentObedience.Obeyed;
             base.Number = 26;
             base.ShortSummary = "No blaspheming God.";
             base.Text = "Do not blaspheme God.";

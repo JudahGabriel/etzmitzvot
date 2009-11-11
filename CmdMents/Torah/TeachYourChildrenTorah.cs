@@ -13,9 +13,9 @@ namespace CmdMents.Torah
             base.CanBeCarriedOutToday = true;
             base.Chapter = 6;
             base.CommandmentType = CommandmentType.Positive;
-            base.FollowedByChristians = false;
-            base.FollowedByMessianics = true;
-            base.FollowedByObservantJews = true;
+            base.FollowedByChristians = CommandmentObedience.None;
+            base.FollowedByMessianics = CommandmentObedience.Obeyed;
+            base.FollowedByObservantJews = CommandmentObedience.Obeyed;
             base.Number = 22;
             base.ShortSummary = "Teach your children Torah.";
             base.Text = "Impress them on your children. Talk about them when you sit at home and when you walk along the road, when you lie down and when you get up.";
