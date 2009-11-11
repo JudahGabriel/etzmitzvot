@@ -8,7 +8,12 @@ namespace CmdMents.LoveAndBrotherhood
     /// <author>NET</author>
     /// <remarks>Derivation as conventionally stated should be LoveNeighborAsSelf; 
     /// the text, however, suggests deriving from LoveSojourners.</remarks>
-    class NoOppressingWeak : LoveSojourners
+    /// <remarks>
+    /// Nate, I've changed this to derive from LoveNeighborAsSelf, as there was
+    /// confusion between Jewish and Christian verse numbers. See my comment
+    /// below for more information.
+    /// </remarks>
+    class NoOppressingWeak : LoveNeighborAsSelf
     {
         public NoOppressingWeak()
         {
@@ -25,8 +30,13 @@ namespace CmdMents.LoveAndBrotherhood
             base.FollowedByObservantJews = true;
 
             base.Number = 18;
-            base.ShortSummary = "No oppressing or mistreating the weak.";
-            base.Text = @"""Do not mistreat an alien or oppress him, for you were aliens in Egypt.""";
+
+            // CHANGED BY JUDAH: Hey Nate. The reason over the confusion here is 
+            // the Jewish verse number is Ex 22:21, but in Christian Bibles, the
+            // verse number is Ex 22:22. I've updated the verse below to account
+            // for this.
+            base.ShortSummary = "No oppressing the weak.";
+            base.Text = "Do not take advantage of a widow or an orphan. If you do and they cry out to me, I will certainly hear their cry. My anger will be aroused, and I will kill you with the sword; your wives will become widows and your children fatherless.";
             base.Verse = 21;
         }
     }

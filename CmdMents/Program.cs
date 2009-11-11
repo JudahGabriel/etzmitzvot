@@ -62,7 +62,9 @@ namespace CmdMents
         /// </remarks>
         private static void PrintStatistics()
         {
+            const int totalCommandmentCount = 613;
             var totalCommandmentsMapped = commandments.Count();
+            var percentageCommandmentsMapped = Math.Round(((double)totalCommandmentsMapped / (double)totalCommandmentCount) * 100, 1);
             var percentageWithAlternateReadings = GetStatisticOfCommandmentsMatching(cmd => !string.IsNullOrEmpty(cmd.AlternateText));
             var percentageInExodus = GetStatisticOfCommandmentsMatching(cmd => cmd.Book == CommandmentBook.Exodus);
             var percentageInLeviticus = GetStatisticOfCommandmentsMatching(cmd => cmd.Book == CommandmentBook.Leviticus);
@@ -79,7 +81,7 @@ namespace CmdMents
 
             Console.WriteLine();
             Console.WriteLine("Commandment statistics:");
-            Console.WriteLine("\t{0} commandments have been mapped thus far.", totalCommandmentsMapped);
+            Console.WriteLine("\t{0} commandments have been mapped, the project is {1}% completed.", totalCommandmentsMapped, percentageCommandmentsMapped);
             Console.WriteLine("\t{0} have alternate readings.", percentageWithAlternateReadings);
             Console.WriteLine("\t{0} are from Exodus.", percentageInExodus);
             Console.WriteLine("\t{0} are from Leviticus.", percentageInLeviticus);
