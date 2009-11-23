@@ -40,13 +40,7 @@ namespace CmdMents
         /// </summary>
         private static void GenerateCommandmentsHierarchyImage()
         {
-            var builder = new StringBuilder();
-            foreach (var item in BuildCommandmentsHierarchy())
-            {
-                builder.AppendLine(item);
-            }
-
-            var imagePath = CreateImageFromDotInstructions(builder.ToString());
+            var imagePath = CreateImageFromDotInstructions(BuildCommandmentsHierarchy());
             Process.Start(imagePath);
         }
 
@@ -211,7 +205,7 @@ namespace CmdMents
         /// </summary>
         /// <param name="dotInstructions">The <see cref="string"/> containing the DOT instructions that generate the desired graph.</param>
         /// <returns>The name of the image file that was output.</returns>
-        private static string CreateImageFromDotInstructions(string dotInstructions)
+        private static string CreateImageFromDotInstructions(IEnumerable<string> dotInstructions)
         {
             using (var process = new Process())
             {
@@ -253,7 +247,10 @@ namespace CmdMents
                         }
                     };
                     asyncResult = standardOutput.BeginRead(buffer, 0, buffer.Length, callback, null);
-                    process.StandardInput.Write(dotInstructions);
+                    foreach (var item in dotInstructions)
+                    {
+                        process.StandardInput.WriteLine(item);
+                    }
                     process.StandardInput.Close();
                     standardOutput.Flush();
                     process.WaitForExit();
@@ -270,9 +267,10 @@ namespace CmdMents
         /// <returns>An <see cref="IEnumerable<string>"/> containing the emitted lines.</returns>
         private static IEnumerable<string> BuildCommandmentsHierarchy()
         {
-            yield return (" digraph Commandments {");
+            yield return " digraph Commandments {";
             yield return "ratio = fill";
-            yield return "node[style = filled]";
+            yield return "node[shape = rectangle, style = \"rounded, filled\", margin = \"0.05,0.05\"]";
+            yield return "pad = \"0.1,0.1\"";
 
             foreach (var line in BuildNodeTree(typeof(CommandmentBase)))
             {
@@ -348,10 +346,8 @@ namespace CmdMents
         /// <summary>
         /// Emits a single node definition.
         /// </summary>
-        /// <param name="type">The <see cref="Type"/> for which to generate a directed edge.</param>
-        /// <returns>The DOT instruction line corresponding to a parent -> descendant relationship.</returns>
-        /// <remarks>Does not emit the definition of either node.
-        /// Use <seealso cref="BuildNodeLineFrom"/> to emit node definitions.</remarks>
+        /// <param name="type">The <see cref="Type"/> for which to generate a node definition.</param>
+        /// <returns>The definition of the node.</returns>
         private static string BuildNodeLineFrom(Type type)
         {
             var instance = (CommandmentBase)Activator.CreateInstance(type);

@@ -133,7 +133,50 @@ namespace CmdMents
         /// <returns>A DOT label attribute string with the appropriate instructions.</returns>
         private string GetLabelString()
         {
-            return "label = " + this.ToString();
+            return "label = " + WrapDotLabelText(this.ToString());
+        }
+
+        /// <summary>
+        /// Wraps text for DOT label output at a default maximum line width.
+        /// </summary>
+        /// <param name="text">The text to wrap.</param>
+        /// <returns>The text, wrapped for DOT label output with centered newline escape sequences.</returns>
+        /// <remarks>Currently the default line width is 35 characters.</remarks>
+        private static string WrapDotLabelText(string text)
+        {
+            return WrapDotLabelText(text, 35);
+        }
+
+        /// <summary>
+        /// Wraps text for DOT label output at a given maximum line width.
+        /// </summary>
+        /// <param name="text">The text to wrap.</param>
+        /// <param name="width">The line width, in characters, at which to wrap.</param>
+        /// <returns>The text, wrapped for DOT label output with centered newline escape sequences.</returns>
+        private static string WrapDotLabelText(string text, int width)
+        {
+            const string newlineCentered = "\\n";
+            //var breaks = (int)Math.Ceiling((double)text.Length / width);
+            var lines = new List<string>();
+            var searchStrs = new string[] { newlineCentered, " ", string.Empty };
+            for (var start = 0; start < text.Length; )
+            {
+                // Find next word break opportunity, but not more than width characters away
+                int maxLength = Math.Min(width, text.Length - start);
+                foreach (var searchStr in searchStrs)
+                {
+                    var length = text.LastIndexOf(searchStr, start + maxLength, maxLength) - start;
+                    // If Empty was found, fall back to hard-wrapping at exact width
+                    if (length == 0 || maxLength < width) length = maxLength;
+                    if (length > 0)
+                    {
+                        lines.Add(text.Substring(start, length));
+                        start += length + searchStr.Length;
+                        break;
+                    }
+                }
+            }
+            return string.Join(newlineCentered, lines.ToArray());
         }
 
         /// <summary>
