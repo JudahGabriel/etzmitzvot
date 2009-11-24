@@ -65,6 +65,7 @@ namespace CmdMents
             var pctInNumbers = FormattedStatistic(Matching(cmd => cmd.Book == CommandmentBook.Numbers));
             var pctInDeuteronomy = FormattedStatistic(Matching(cmd => cmd.Book == CommandmentBook.Deuteronomy));
             var pctCanBeCarriedOutToday = FormattedStatistic(Matching(cmd => cmd.CanBeCarriedOutToday));
+            var pctCanBeCarriedOutOnlyInIsrael = FormattedStatistic(Matching(cmd => cmd.CanBeCarriedOutOnlyInIsrael));
             var pctPositiveCommandments = FormattedStatistic(Matching(cmd => cmd.CommandmentType == CommandmentType.Positive));
             var pctNegativeCommandments = FormattedStatistic(Matching(cmd => cmd.CommandmentType == CommandmentType.Negative));
 
@@ -92,6 +93,7 @@ namespace CmdMents
             Console.WriteLine("\t{0} are from Numbers.", pctInNumbers);
             Console.WriteLine("\t{0} are from Deuteronomy.", pctInDeuteronomy);
             Console.WriteLine("\t{0} can be carried out in modern times.", pctCanBeCarriedOutToday);
+            Console.WriteLine("\t{0} can be carried out only in Israel.", pctCanBeCarriedOutOnlyInIsrael);
             Console.WriteLine("\t{0} are positive commandments.", pctPositiveCommandments);
             Console.WriteLine("\t{0} are negative commandments.", pctNegativeCommandments);
 

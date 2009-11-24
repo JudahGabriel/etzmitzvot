@@ -39,10 +39,18 @@ namespace CmdMents
         /// Whether it is physically possible for the commandment to be be carried out in modern times.
         /// </summary>
         /// <value>
-        /// 	<c>true</c> if this instance can be carried out today; otherwise, <c>false</c>.
+        /// 	<c>true</c> if this commandment can be carried out today; otherwise, <c>false</c>.
         /// </value>
         /// <author>JGH</author>
         public bool CanBeCarriedOutToday { get; set; }
+        /// <summary>
+        /// Wwhether this commandment can be carried out only in israel.
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if this commandment can be carried out only in Israel; otherwise, <c>false</c>.
+        /// </value>
+        /// <author>JGH</author>
+        public bool CanBeCarriedOutOnlyInIsrael { get; set; }
         /// <summary>
         /// Whether the commandment generally is followed by Messianics.
         /// </summary>

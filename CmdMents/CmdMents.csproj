@@ -53,8 +53,13 @@
     <Compile Include="God\AcknowledgeGodAsHoly.cs" />
     <Compile Include="God\ClingToGod.cs" />
     <Compile Include="God\FearGod.cs" />
+    <Compile Include="Idolatry\NoBowingToIdols.cs" />
     <Compile Include="God\NoDestroyingObjectsAssociatedWithGodsName.cs" />
-    <Compile Include="God\NoIdolatry.cs" />
+    <Compile Include="Idolatry\NoGodsForDecoration.cs" />
+    <Compile Include="Idolatry\NoIdols.cs" />
+    <Compile Include="Idolatry\NoMakingIdolsForOthers.cs" />
+    <Compile Include="Idolatry\NoMakingIdolsForYourself.cs" />
+    <Compile Include="Idolatry\NoWorshippingIdols.cs" />
     <Compile Include="LoveAndBrotherhood\LoveSojourners.cs" />
     <Compile Include="LoveAndBrotherhood\NoGrudges.cs" />
     <Compile Include="LoveAndBrotherhood\NoRevenge.cs" />
@@ -80,7 +85,7 @@
     <Compile Include="God\NoTemptingGod.cs" />
     <Compile Include="LoveAndBrotherhood\LoveNeighborAsSelf.cs" />
     <Compile Include="God\NoBlaspheming.cs" />
-    <Compile Include="God\NoOtherGods.cs" />
+    <Compile Include="Idolatry\NoOtherGods.cs" />
     <Compile Include="God\NoProfaningGodsName.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

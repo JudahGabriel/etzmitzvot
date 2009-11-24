@@ -12,6 +12,7 @@ namespace CmdMents.SacrificesAndOfferings
         {
             base.Book = CommandmentBook.Numbers;
             base.CanBeCarriedOutToday = false;
+            base.CanBeCarriedOutOnlyInIsrael = true;
             base.Chapter = 29;
             base.CommandmentType = CommandmentType.Positive;
             base.FollowedByChristians = CommandmentObedience.None;

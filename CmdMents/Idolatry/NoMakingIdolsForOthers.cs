@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CmdMents.God
+namespace CmdMents.Idolatry
 {
-    class NoIdolatry : NoOtherGods
+    class NoMakingIdolsForOthers : NoIdols
     {
-        public NoIdolatry()
+        public NoMakingIdolsForOthers()
         {
             base.Book = CommandmentBook.Leviticus;
             base.CanBeCarriedOutToday = true;
@@ -16,8 +16,8 @@ namespace CmdMents.God
             base.FollowedByChristians = CommandmentObedience.Obeyed;
             base.FollowedByMessianics = CommandmentObedience.Obeyed;
             base.FollowedByObservantJews = CommandmentObedience.Obeyed;
-            base.Number = 24;
-            base.ShortSummary = "No idols.";
+            base.Number = 30;
+            base.ShortSummary = "No making idols for others.";
             base.Text = "Do not turn to idols or make gods of cast metal for yourselves. I am the LORD your God.";
             base.Verse = 4;
         }
