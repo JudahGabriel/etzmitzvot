@@ -154,7 +154,7 @@ namespace CmdMents
         }
         private static string GetFormattedPercentage(double ratio, int decimalPlaces)
         {
-            return GetFormattedPercentage(ratio, decimalPlaces, 6);
+            return GetFormattedPercentage(ratio, decimalPlaces, 5);
         }
         private static string GetFormattedPercentage(double ratio, int decimalPlaces, int width)
         {
