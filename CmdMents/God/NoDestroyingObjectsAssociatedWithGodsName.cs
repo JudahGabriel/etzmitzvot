@@ -9,8 +9,10 @@ namespace CmdMents.God
     {
         public NoDestroyingObjectsAssociatedWithGodsName()
         {
+            base.AlternateText = null;
             base.Book = CommandmentBook.Deuteronomy;
             base.CanBeCarriedOutToday = true;
+            base.CanBeCarriedOutOnlyInIsrael = false;
             base.Chapter = 12;
             base.CommandmentType = CommandmentType.Negative;
             base.FollowedByChristians = CommandmentObedience.None;  // Or perhaps more accurately, this interpretation is not widely held

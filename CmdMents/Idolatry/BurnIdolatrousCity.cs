@@ -9,11 +9,12 @@ namespace CmdMents.Idolatry
     /// Burn to the ground any city that has fallen into idolatry.
     /// </summary>
     /// <author>NET</author>
-    class BurnIdolatrousCity : NoIncitingToIdolatry
+    class BurnIdolatrousCity : NoIncitingACityToIdolatry
     {
 
         public BurnIdolatrousCity()
         {
+            base.AlternateText = null;
             base.Book = CommandmentBook.Deuteronomy;
             base.Chapter = 13;
             base.Verse = 16;
@@ -24,7 +25,8 @@ namespace CmdMents.Idolatry
             base.CanBeCarriedOutOnlyInIsrael = true;    // See above
             base.FollowedByChristians = CommandmentObedience.None;
             base.FollowedByMessianics = CommandmentObedience.Recognized;
-            base.FollowedByObservantJews = CommandmentObedience.Attempted;     // Not at all certain of this
+            base.FollowedByObservantJews = CommandmentObedience.Attempted;      // Not at all certain of this. 
+                                                                                // Judah's note: I agree that ultra-orthodox would like to follow this, and if they had sufficient political power, would actually carry this out. I agree with your labeling as Attempted.
 
             base.CommandmentType = CommandmentType.Positive;
             base.Number = 33;

@@ -99,7 +99,7 @@ namespace CmdMents
 
             Console.WriteLine("Christians observe {0} total (obey {1}, attempt {2}, recognize {3})", pctTotalObservedByChristians, pctObeyedByChristians, pctAttemptedByChristians, pctRecognizedByChristians);
             Console.WriteLine("Messianics observe {0} total (obey {1}, attempt {2}, recognize {3})", pctTotalObservedByMessianics, pctObeyedByMessianics, pctAttemptedByMessianics, pctRecognizedByMessianics);
-            Console.WriteLine("      Jews observe {0} total (obey {1}, attempt {2}, recognize {3})", pctTotalObservedByObservantJews, pctObeyedByObservantJews, pctAttemptedByObservantJews, pctRecognizedByObservantJews);
+            Console.WriteLine("Observant Jews observe {0} total (obey {1}, attempt {2}, recognize {3})", pctTotalObservedByObservantJews, pctObeyedByObservantJews, pctAttemptedByObservantJews, pctRecognizedByObservantJews);
 
             Console.WriteLine("\tThe average commandment length is {0} characters.", averageTextLengthInChars);
             Console.WriteLine("\tThe average summary length is {0} characters.", averageSummaryLengthInChars);

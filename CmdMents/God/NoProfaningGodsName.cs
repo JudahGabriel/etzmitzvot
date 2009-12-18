@@ -9,8 +9,10 @@ namespace CmdMents.God
     {
         public NoProfaningGodsName()
         {
+            base.AlternateText = null;
             base.Book = CommandmentBook.Leviticus;
             base.CanBeCarriedOutToday = true;
+            base.CanBeCarriedOutOnlyInIsrael = false;
             base.Chapter = 22;
             base.CommandmentType = CommandmentType.Negative;
             base.FollowedByChristians = CommandmentObedience.Attempted;

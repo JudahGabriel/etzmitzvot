@@ -44,7 +44,7 @@ namespace CmdMents
         /// <author>JGH</author>
         public bool CanBeCarriedOutToday { get; set; }
         /// <summary>
-        /// Wwhether this commandment can be carried out only in israel.
+        /// Whether this commandment can be carried out only in Israel. This defaults to false.
         /// </summary>
         /// <value>
         /// 	<c>true</c> if this commandment can be carried out only in Israel; otherwise, <c>false</c>.
@@ -121,7 +121,16 @@ namespace CmdMents
         /// <returns>A DOT color attribute string with the appropriate instructions.</returns>
         private string GetColorString()
         {
-            var color = this.CanBeCarriedOutToday ? NormalColor : NotFollowableColor;
+            string color;
+            var isGoldenCommandment = this.GetType() == typeof(LoveNeighborAsSelf) || this.GetType() == typeof(CmdMents.God.LoveGodWithHeartSoulStrength);
+            if (isGoldenCommandment)
+            {
+                color = GoldenCommandmentColor;
+            }
+            else
+            {
+                color = this.CanBeCarriedOutToday ? NormalColor : NotFollowableColor;
+            }
             return "color = \"" + color + "\"";
         }
 
@@ -133,6 +142,11 @@ namespace CmdMents
         private static string NotFollowableColor
         {
             get { return "0.000 1.000 1.000"; }
+        }
+
+        private static string GoldenCommandmentColor
+        {
+            get { return "gold"; }
         }
 
         /// <summary>

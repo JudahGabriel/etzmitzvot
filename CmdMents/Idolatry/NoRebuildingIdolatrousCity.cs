@@ -22,8 +22,8 @@ namespace CmdMents.Idolatry
 
             base.CanBeCarriedOutToday = true;
             base.CanBeCarriedOutOnlyInIsrael = true;
-            base.FollowedByChristians = CommandmentObedience.Recognized;
-            base.FollowedByMessianics = CommandmentObedience.Recognized;
+            base.FollowedByChristians = CommandmentObedience.None;
+            base.FollowedByMessianics = CommandmentObedience.None;
             base.FollowedByObservantJews = CommandmentObedience.Recognized;
 
             base.CommandmentType = CommandmentType.Negative;

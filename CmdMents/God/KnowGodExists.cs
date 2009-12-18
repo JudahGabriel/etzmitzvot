@@ -9,8 +9,10 @@ namespace CmdMents.God
     {
         public KnowGodExists()
         {
+            base.AlternateText = null;
             base.Book = CommandmentBook.Exodus;
             base.CanBeCarriedOutToday = true;
+            base.CanBeCarriedOutOnlyInIsrael = false;
             base.Chapter = 20;
             base.CommandmentType = CommandmentType.Positive;
             base.FollowedByChristians = CommandmentObedience.Obeyed;

@@ -9,8 +9,10 @@ namespace CmdMents.God
     {
         public FearGod()
         {
+            base.AlternateText = null;
             base.Book = CommandmentBook.Deuteronomy;
             base.CanBeCarriedOutToday = true;
+            base.CanBeCarriedOutOnlyInIsrael = false;
             base.Chapter = 10;
             base.CommandmentType = CommandmentType.Positive;
             base.FollowedByChristians = CommandmentObedience.Obeyed;    // Modulo occasional quirks

@@ -10,6 +10,7 @@ namespace CmdMents.Idolatry
     {
         public NoIdols()
         {
+            base.AlternateText = null;
             base.Book = CommandmentBook.Leviticus;
             base.CanBeCarriedOutToday = true;
             base.Chapter = 19;

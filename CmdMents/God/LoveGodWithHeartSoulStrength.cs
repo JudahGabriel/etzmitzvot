@@ -9,8 +9,10 @@ namespace CmdMents.God
     {
         public LoveGodWithHeartSoulStrength()
         {
+            base.AlternateText = null;
             base.Book = CommandmentBook.Deuteronomy;
             base.CanBeCarriedOutToday = true;
+            base.CanBeCarriedOutOnlyInIsrael = false;
             base.Chapter = 6;
             base.CommandmentType = CommandmentType.Positive;
             base.FollowedByChristians = CommandmentObedience.Attempted;

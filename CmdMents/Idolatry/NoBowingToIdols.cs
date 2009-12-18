@@ -5,12 +5,18 @@ using System.Text;
 
 namespace CmdMents.Idolatry
 {
+    /// <summary>
+    /// Commandment not to bow to idols.
+    /// </summary>
+    /// <author>JGH</author>
     class NoBowingToIdols : NoWorshippingIdols
     {
         public NoBowingToIdols()
         {
+            base.AlternateText = null;
             base.Book = CommandmentBook.Exodus;
             base.CanBeCarriedOutToday = true;
+            base.CanBeCarriedOutOnlyInIsrael = false;
             base.Chapter = 20;
             base.CommandmentType = CommandmentType.Negative;
             base.FollowedByChristians = CommandmentObedience.Obeyed;

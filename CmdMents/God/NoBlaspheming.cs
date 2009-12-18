@@ -12,6 +12,7 @@ namespace CmdMents.God
             base.AlternateText = "Do not revile the judges.";
             base.Book = CommandmentBook.Exodus;
             base.CanBeCarriedOutToday = true;
+            base.CanBeCarriedOutOnlyInIsrael = false;
             base.Chapter = 22;
             base.CommandmentType = CommandmentType.Negative;
             base.FollowedByChristians = CommandmentObedience.Obeyed;

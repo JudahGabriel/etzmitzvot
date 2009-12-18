@@ -6,13 +6,12 @@ using System.Text;
 namespace CmdMents.Idolatry
 {
     /// <summary>
-    /// No inciting a city (and by extension, any group of people) to idolatry.
+    /// No inciting a city to idolatry.
     /// </summary>
     /// <author>NET</author>
-    class NoIncitingToIdolatry : NoWorshippingIdols
+    class NoIncitingACityToIdolatry : NoEnticingOthersToIdolatry
     {
-
-        public NoIncitingToIdolatry()
+        public NoIncitingACityToIdolatry()
         {
             base.Book = CommandmentBook.Deuteronomy;
             base.Chapter = 13;
