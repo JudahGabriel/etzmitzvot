@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{3CD93CF7-B6DA-49A3-8DEF-36885194C21F}</ProjectGuid>
     <OutputType>Exe</OutputType>
@@ -51,8 +51,10 @@
     <Compile Include="CommandmentObedience.cs" />
     <Compile Include="CommandmentType.cs" />
     <Compile Include="God\AcknowledgeGodAsHoly.cs" />
+    <Compile Include="God\BlessGodAfterEating.cs" />
     <Compile Include="God\ClingToGod.cs" />
     <Compile Include="God\FearGod.cs" />
+    <Compile Include="God\NoProphesyingFalselyInGodsName.cs" />
     <Compile Include="Idolatry\BurnIdolatrousCity.cs" />
     <Compile Include="Idolatry\NoBenefitingFromBurningIdolatrousCity.cs" />
     <Compile Include="Idolatry\NoBowingToIdols.cs" />
@@ -85,7 +87,7 @@
     <Compile Include="SacrificesAndOfferings\BringAdditionalOfferingsOnYomKippur.cs" />
     <Compile Include="TimesAndSeasons\FastOnYomKippur.cs" />
     <Compile Include="TimesAndSeasons\NoWorkingOnYomKippur.cs" />
-    <Compile Include="Torah\ListenToProphet.cs" />
+    <Compile Include="God\ListenToProphet.cs" />
     <Compile Include="LoveAndBrotherhood\HonorTheElderly.cs" />
     <Compile Include="Torah\NoAddingCommandments.cs" />
     <Compile Include="Torah\NoRemovingCommandments.cs" />
@@ -102,6 +104,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Torah\RememberCommandmentsThroughTassels.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="dot.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

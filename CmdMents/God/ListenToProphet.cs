@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CmdMents.God;
 
 namespace CmdMents.Torah
 {
     /// <author>NET</author>
-    class ListenToProphet : KeepGodsCommandments
+    class ListenToProphet : FearGod // Changed by Judah: changed base calls from KeepAllGodsCommandments to FearGod.
     {
         public ListenToProphet()
         {

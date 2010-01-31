@@ -215,7 +215,7 @@ namespace CmdMents
 
                 var programFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
                 if (isX64) programFiles += " (x86)";                // Always grab the 32-bit version
-                var graphVizPath = Path.Combine(programFiles, @"Graphviz2.24\bin\dot.exe");
+                var graphVizPath = Path.Combine(programFiles, @"Graphviz2.27\bin\dot.exe");
 
                 process.StartInfo.FileName = graphVizPath;
                 process.StartInfo.Arguments = "-Tpng -Gcharset=latin1";
@@ -225,41 +225,46 @@ namespace CmdMents
                 process.StartInfo.UseShellExecute = false;
                 process.Start();
 
-                byte[] buffer = new byte[4096];
-                var standardOutput = process.StandardOutput.BaseStream;
-                using (var imageOutputStream = File.Open("CmdMents.png", FileMode.Create))
-                {
-                    AsyncCallback callback = null;
-                    IAsyncResult asyncResult = null;
-                    var evt = new System.Threading.AutoResetEvent(false);
-                    callback = result =>
-                    {
-                        int numberOfBytesRead = standardOutput.EndRead(result);
-                        imageOutputStream.Write(buffer, 0, numberOfBytesRead);
-
-                        if (numberOfBytesRead > 0)
-                        {
-                            // Read next bytes.   
-                            asyncResult = standardOutput.BeginRead(buffer, 0, buffer.Length, callback, null);
-                        }
-                        else
-                        {
-                            // Signal that we're done.
-                            evt.Set();
-                        }
-                    };
-                    asyncResult = standardOutput.BeginRead(buffer, 0, buffer.Length, callback, null);
-                    foreach (var item in dotInstructions)
-                    {
-                        process.StandardInput.WriteLine(item);
-                    }
-                    process.StandardInput.Close();
-                    standardOutput.Flush();
-                    process.WaitForExit();
-                    evt.WaitOne();
-                }
+                PipeDotProcessOutputToImageFile(dotInstructions, process);
             }
             return "CmdMents.png";
+        }
+
+        private static void PipeDotProcessOutputToImageFile(IEnumerable<string> dotInstructions, Process process)
+        {
+            byte[] buffer = new byte[4096];
+            var standardOutput = process.StandardOutput.BaseStream;
+            using (var imageOutputStream = File.Open("CmdMents.png", FileMode.Create))
+            {
+                AsyncCallback callback = null;
+                IAsyncResult asyncResult = null;
+                var evt = new System.Threading.AutoResetEvent(false);
+                callback = result =>
+                {
+                    int numberOfBytesRead = standardOutput.EndRead(result);
+                    imageOutputStream.Write(buffer, 0, numberOfBytesRead);
+
+                    if (numberOfBytesRead > 0)
+                    {
+                        // Read next bytes.   
+                        asyncResult = standardOutput.BeginRead(buffer, 0, buffer.Length, callback, null);
+                    }
+                    else
+                    {
+                        // Signal that we're done.
+                        evt.Set();
+                    }
+                };
+                asyncResult = standardOutput.BeginRead(buffer, 0, buffer.Length, callback, null);
+                foreach (var item in dotInstructions)
+                {
+                    process.StandardInput.WriteLine(item);
+                }
+                process.StandardInput.Close();
+                standardOutput.Flush();
+                process.WaitForExit();
+                evt.WaitOne();
+            }
         }
 
         /// <summary>
