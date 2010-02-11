@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using CmdMents.God;
 
-namespace CmdMents.Torah
+namespace CmdMents.God
 {
     /// <author>NET</author>
     class ListenToProphet : FearGod // Changed by Judah: changed base calls from KeepAllGodsCommandments to FearGod.

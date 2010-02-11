@@ -5,6 +5,7 @@ using System.Text;
 using System.Drawing;
 using System.IO;
 using System.Diagnostics;
+using CmdMents.God;
 
 namespace CmdMents
 {
@@ -60,6 +61,8 @@ namespace CmdMents
             var totalCommandmentsMapped = commandments.Count();
             var pctCommandmentsMapped = (double)totalCommandmentsMapped / (double)totalCommandmentCount;
             var pctWithAlternateReadings = FormattedStatistic(Matching(cmd => !string.IsNullOrEmpty(cmd.AlternateText)));
+            var pctConcernedWithLovingGod = FormattedStatistic(Matching(cmd => typeof(LoveGodWithHeartSoulStrength).IsAssignableFrom(cmd.GetType())));
+            var pctConcernedWithLovingOthers = FormattedStatistic(Matching(cmd => typeof(LoveNeighborAsSelf).IsAssignableFrom(cmd.GetType())));
             var pctInExodus = FormattedStatistic(Matching(cmd => cmd.Book == CommandmentBook.Exodus));
             var pctInLeviticus = FormattedStatistic(Matching(cmd => cmd.Book == CommandmentBook.Leviticus));
             var pctInNumbers = FormattedStatistic(Matching(cmd => cmd.Book == CommandmentBook.Numbers));
@@ -87,15 +90,17 @@ namespace CmdMents
 
             Console.WriteLine("Commandment statistics:");
             Console.WriteLine("\t{0} commandments have been mapped; the project is {1} completed.", totalCommandmentsMapped, GetFormattedPercentage(pctCommandmentsMapped, 3, 5));
+            Console.WriteLine("\t{0} are concerned with loving God.", pctConcernedWithLovingGod);
+            Console.WriteLine("\t{0} are concerned with loving others.", pctConcernedWithLovingOthers);
+            Console.WriteLine("\t{0} can be carried out in modern times.", pctCanBeCarriedOutToday);
+            Console.WriteLine("\t{0} can be carried out only in Israel.", pctCanBeCarriedOutOnlyInIsrael);
+            Console.WriteLine("\t{0} are positive commandments.", pctPositiveCommandments);
+            Console.WriteLine("\t{0} are negative commandments.", pctNegativeCommandments);
             Console.WriteLine("\t{0} have alternate readings.", pctWithAlternateReadings);
             Console.WriteLine("\t{0} are from Exodus.", pctInExodus);
             Console.WriteLine("\t{0} are from Leviticus.", pctInLeviticus);
             Console.WriteLine("\t{0} are from Numbers.", pctInNumbers);
             Console.WriteLine("\t{0} are from Deuteronomy.", pctInDeuteronomy);
-            Console.WriteLine("\t{0} can be carried out in modern times.", pctCanBeCarriedOutToday);
-            Console.WriteLine("\t{0} can be carried out only in Israel.", pctCanBeCarriedOutOnlyInIsrael);
-            Console.WriteLine("\t{0} are positive commandments.", pctPositiveCommandments);
-            Console.WriteLine("\t{0} are negative commandments.", pctNegativeCommandments);
 
             Console.WriteLine("Christians observe {0} total (obey {1}, attempt {2}, recognize {3})", pctTotalObservedByChristians, pctObeyedByChristians, pctAttemptedByChristians, pctRecognizedByChristians);
             Console.WriteLine("Messianics observe {0} total (obey {1}, attempt {2}, recognize {3})", pctTotalObservedByMessianics, pctObeyedByMessianics, pctAttemptedByMessianics, pctRecognizedByMessianics);

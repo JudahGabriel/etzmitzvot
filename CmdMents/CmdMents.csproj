@@ -54,11 +54,15 @@
     <Compile Include="God\BlessGodAfterEating.cs" />
     <Compile Include="God\ClingToGod.cs" />
     <Compile Include="God\FearGod.cs" />
+    <Compile Include="God\NoFearingFalseProphet.cs" />
     <Compile Include="God\NoProphesyingFalselyInGodsName.cs" />
     <Compile Include="Idolatry\BurnIdolatrousCity.cs" />
     <Compile Include="Idolatry\NoBenefitingFromBurningIdolatrousCity.cs" />
     <Compile Include="Idolatry\NoBowingToIdols.cs" />
     <Compile Include="God\NoDestroyingObjectsAssociatedWithGodsName.cs" />
+    <Compile Include="Idolatry\NoConsultingMediums.cs" />
+    <Compile Include="Idolatry\NoConsultingSpiritists.cs" />
+    <Compile Include="Idolatry\NoInvokingNamesOfOtherGods.cs" />
     <Compile Include="Idolatry\NoYieldingToIdolators.cs" />
     <Compile Include="Idolatry\NoDefendingIdolators.cs" />
     <Compile Include="Idolatry\NoGodsForDecoration.cs" />
