@@ -93,6 +93,7 @@
     <Compile Include="TimesAndSeasons\NoWorkingOnYomKippur.cs" />
     <Compile Include="God\ListenToProphet.cs" />
     <Compile Include="LoveAndBrotherhood\HonorTheElderly.cs" />
+    <Compile Include="TimesAndSeasons\ObserveNewYearInFirstMonth.cs" />
     <Compile Include="Torah\NoAddingCommandments.cs" />
     <Compile Include="Torah\NoRemovingCommandments.cs" />
     <Compile Include="Torah\TeachYourChildrenTorah.cs" />
