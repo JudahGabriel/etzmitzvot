@@ -220,7 +220,14 @@ namespace CmdMents
 
                 var programFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
                 if (isX64) programFiles += " (x86)";                // Always grab the 32-bit version
-                var graphVizPath = Path.Combine(programFiles, @"Graphviz2.27\bin\dot.exe");
+                var graphVizFolder = Directory.GetDirectories(programFiles).FirstOrDefault(dir => dir.Contains("Graphviz"));
+                if (graphVizFolder == null)
+                {
+                    throw new InvalidOperationException("Couldn't find GraphViz. Make sure you've installed GraphViz, and make sure it's installed in the program files directory.");
+                }
+
+                var dotRelativePath = Path.Combine(graphVizFolder, "bin\\dot.exe");
+                var graphVizPath = Path.Combine(programFiles, dotRelativePath);
 
                 process.StartInfo.FileName = graphVizPath;
                 process.StartInfo.Arguments = "-Tpng -Gcharset=latin1";
