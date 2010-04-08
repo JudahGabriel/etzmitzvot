@@ -5,23 +5,23 @@ using System.Text;
 
 namespace CmdMents.TimesAndSeasons
 {
-    class RestOnLastDayOfPassover : ObserveNewYearInFirstMonth
+    class RemoveLeavenFromHomeOnPassover : NoLeavenedBreadDuringPassover
     {
-        public RestOnLastDayOfPassover()
+        public RemoveLeavenFromHomeOnPassover()
         {
             base.AlternateText = null;
-            base.Book = CommandmentBook.Leviticus;
+            base.Book = CommandmentBook.Exodus;
             base.CanBeCarriedOutOnlyInIsrael = false;
             base.CanBeCarriedOutToday = true;
-            base.Chapter = 23;
+            base.Chapter = 12;
             base.CommandmentType = CmdMents.CommandmentType.Positive;
             base.FollowedByChristians = CommandmentObedience.None;
             base.FollowedByMessianics = CommandmentObedience.Obeyed;
             base.FollowedByObservantJews = CommandmentObedience.Obeyed;
-            base.Number = 98;
-            base.ShortSummary = "Rest on the last day of Passover.";
-            base.Text = "And on the seventh day hold a sacred assembly and do no regular work.";
-            base.Verse = 8;
+            base.Number = 109;
+            base.ShortSummary = "Remove leaven from your home on Passover.";
+            base.Text = "On the first day remove the yeast from your houses, for whoever eats anything with yeast in it from the first day through the seventh must be cut off from Israel.";
+            base.Verse = 15;
         }
     }
 }

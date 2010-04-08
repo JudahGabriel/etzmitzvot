@@ -5,22 +5,22 @@ using System.Text;
 
 namespace CmdMents.TimesAndSeasons
 {
-    class NoLeavenedBreadDuringPassover : EatUnleavenedBreadDuringPassover
+    class NoEatingLeavenDuringPassover : NoLeavenedBreadDuringPassover
     {
-        public NoLeavenedBreadDuringPassover()
+        public NoEatingLeavenDuringPassover()
         {
             base.AlternateText = null;
-            base.Book = CommandmentBook.Deuteronomy;
+            base.Book = CommandmentBook.Exodus;
             base.CanBeCarriedOutOnlyInIsrael = false;
             base.CanBeCarriedOutToday = true;
-            base.Chapter = 16;
+            base.Chapter = 13;
             base.CommandmentType = CmdMents.CommandmentType.Negative;
             base.FollowedByChristians = CommandmentObedience.None;
             base.FollowedByMessianics = CommandmentObedience.Obeyed;
             base.FollowedByObservantJews = CommandmentObedience.Obeyed;
-            base.Number = 108;
-            base.ShortSummary = "No eating leavened bread during Passover and Unleavened Bread.";
-            base.Text = "Do not eat it with bread made with yeast, but for seven days eat unleavened bread, the bread of affliction, because you left Egypt in haste—so that all the days of your life you may remember the time of your departure from Egypt.";
+            base.Number = 110;
+            base.ShortSummary = "No eating leaven during Passover and Unleavened Bread.";
+            base.Text = "Then Moses said to the people, \"Commemorate this day, the day you came out of Egypt, out of the land of slavery, because the LORD brought you out of it with a mighty hand. Eat nothing containing yeast.\"";
             base.Verse = 3;
         }
     }

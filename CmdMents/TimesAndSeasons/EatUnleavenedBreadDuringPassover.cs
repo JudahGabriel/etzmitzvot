@@ -5,23 +5,23 @@ using System.Text;
 
 namespace CmdMents.TimesAndSeasons
 {
-    class RestOnLastDayOfPassover : ObserveNewYearInFirstMonth
+    class EatUnleavenedBreadDuringPassover : ObserveNewYearInFirstMonth
     {
-        public RestOnLastDayOfPassover()
+        public EatUnleavenedBreadDuringPassover()
         {
             base.AlternateText = null;
-            base.Book = CommandmentBook.Leviticus;
+            base.Book = CommandmentBook.Exodus;
             base.CanBeCarriedOutOnlyInIsrael = false;
             base.CanBeCarriedOutToday = true;
-            base.Chapter = 23;
+            base.Chapter = 12;
             base.CommandmentType = CmdMents.CommandmentType.Positive;
             base.FollowedByChristians = CommandmentObedience.None;
             base.FollowedByMessianics = CommandmentObedience.Obeyed;
             base.FollowedByObservantJews = CommandmentObedience.Obeyed;
-            base.Number = 98;
-            base.ShortSummary = "Rest on the last day of Passover.";
-            base.Text = "And on the seventh day hold a sacred assembly and do no regular work.";
-            base.Verse = 8;
+            base.Number = 114;
+            base.ShortSummary = "Eat unleavened bread during Passover and Unleavened Bread.";
+            base.Text = "On the first month you are to eat bread made without yeast, from the evening of the fourteenth day until the evening of the twenty-first day.";
+            base.Verse = 18;
         }
     }
 }
