@@ -5,9 +5,9 @@ using System.Text;
 
 namespace CmdMents.Idolatry
 {
-    class NoGodsForDecoration : NoIdols
+    class NoIdolsForDecoration : NoIdols
     {
-        public NoGodsForDecoration()
+        public NoIdolsForDecoration()
         {
             base.Book = CommandmentBook.Exodus;
             base.CanBeCarriedOutToday = true;
