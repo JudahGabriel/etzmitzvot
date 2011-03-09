@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CmdMents.Torah
 {
-    class NoRemovingCommandments : KeepGodsCommandments
+    class NoRemovingCommandments : NoAddingCommandments
     {
         public NoRemovingCommandments()
         {

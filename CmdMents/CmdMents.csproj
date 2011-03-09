@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CmdMents</RootNamespace>
     <AssemblyName>CmdMents</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -31,6 +31,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -80,18 +81,25 @@
     <Compile Include="Idolatry\BurnIdolatrousCity.cs" />
     <Compile Include="Idolatry\DestroyIdolatryPlacesInIsrael.cs" />
     <Compile Include="Idolatry\NoBenefitingFromBurningIdolatrousCity.cs" />
+    <Compile Include="Idolatry\DetestIdolatry.cs" />
+    <Compile Include="Idolatry\NoBenefittingFromIdols.cs" />
     <Compile Include="Idolatry\NoBowingToSacredStoneCarvings.cs" />
     <Compile Include="Idolatry\NoBowingToIdols.cs" />
     <Compile Include="God\NoDestroyingObjectsAssociatedWithGodsName.cs" />
     <Compile Include="Idolatry\NoConsultingMediums.cs" />
     <Compile Include="Idolatry\NoConsultingSpiritists.cs" />
+    <Compile Include="Idolatry\NoDivination.cs" />
+    <Compile Include="Idolatry\NoIdolatersLivingInIsrael.cs" />
+    <Compile Include="Idolatry\NoLivingLikeTheIdolatrousNations.cs" />
+    <Compile Include="Idolatry\NoMakingCovenantsWithIdolaters.cs" />
     <Compile Include="Idolatry\NoSacredStoneCarvings.cs" />
     <Compile Include="Idolatry\NoInvokingNamesOfOtherGods.cs" />
     <Compile Include="Idolatry\NoSacrificesToMolech.cs" />
+    <Compile Include="Idolatry\NoShowingFavorToIdolaters.cs" />
     <Compile Include="Idolatry\NoTreeShrinesNearAltar.cs" />
     <Compile Include="Idolatry\NoYieldingToIdolators.cs" />
     <Compile Include="Idolatry\NoDefendingIdolators.cs" />
-    <Compile Include="Idolatry\NoIdolsForDecoration.cs" />
+    <Compile Include="Idolatry\NoMakingIdolsForDecoration.cs" />
     <Compile Include="Idolatry\NoIdolatrousProphesying.cs" />
     <Compile Include="Idolatry\NoEnticingOthersToIdolatry.cs" />
     <Compile Include="Idolatry\NoIdols.cs" />
@@ -115,6 +123,7 @@
     <Compile Include="SacrificesAndOfferings\LevitesMustFollowYomKippurProcedures.cs" />
     <Compile Include="TimesAndSeasons\AfflictYourselfOnYomKippur.cs" />
     <Compile Include="SacrificesAndOfferings\BringAdditionalOfferingsOnYomKippur.cs" />
+    <Compile Include="TimesAndSeasons\BringAdditionalOfferingsOnYomTeruah.cs" />
     <Compile Include="TimesAndSeasons\EatUnleavenedBreadDuringPassover.cs" />
     <Compile Include="TimesAndSeasons\FastOnYomKippur.cs" />
     <Compile Include="TimesAndSeasons\NoEatingLeavenDuringPassover.cs" />
@@ -123,6 +132,7 @@
     <Compile Include="TimesAndSeasons\NoLeavenMixturesDuringPassover.cs" />
     <Compile Include="TimesAndSeasons\NoRegularWorkOnFirstDayOfPassover.cs" />
     <Compile Include="TimesAndSeasons\NoRegularWorkOnLastDayOfPassover.cs" />
+    <Compile Include="TimesAndSeasons\NoRegularWorkOnYomTeruah.cs" />
     <Compile Include="TimesAndSeasons\NoSeeingLeavenInHomeDuringUnleavenedBread.cs" />
     <Compile Include="TimesAndSeasons\NoWorkingOnYomKippur.cs" />
     <Compile Include="God\ListenToProphet.cs" />
@@ -131,6 +141,8 @@
     <Compile Include="TimesAndSeasons\RemoveLeavenFromHomeOnPassover.cs" />
     <Compile Include="TimesAndSeasons\RestOnFirstDayOfPassover.cs" />
     <Compile Include="TimesAndSeasons\RestOnLastDayOfPassover.cs" />
+    <Compile Include="TimesAndSeasons\RestOnYomTeruah.cs" />
+    <Compile Include="TimesAndSeasons\SoundTheShofarOnYomTeruah.cs" />
     <Compile Include="Torah\NoAddingCommandments.cs" />
     <Compile Include="Torah\NoRemovingCommandments.cs" />
     <Compile Include="Torah\TeachYourChildrenTorah.cs" />
@@ -168,6 +180,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

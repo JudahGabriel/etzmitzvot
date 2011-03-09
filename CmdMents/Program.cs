@@ -196,14 +196,16 @@ namespace CmdMents
         /// </summary>
         private static void EnsureNoDuplicates()
         {
-            foreach (var cmd in commandments)
+            var duplicateCommandments = from cmd in commandments
+                                        let duplicate = commandments.FirstOrDefault(i => i.Number == cmd.Number && i.GetType() != cmd.GetType())
+                                        where duplicate != null
+                                        select Tuple.Create(cmd, duplicate);
+
+            var duplicates = duplicateCommandments.FirstOrDefault();
+            if (duplicates != null)
             {
-                var commandmentsWithSameNumber = commandments.Where(input => input.Number == cmd.Number && input.GetType() != cmd.GetType());
-                if (commandmentsWithSameNumber.Count() > 1)
-                {
-                    var errorMessage = string.Format("Duplicate commandment detected: {0} and {1} are both commandment #{2}.", commandmentsWithSameNumber.First(), commandmentsWithSameNumber.Last(), cmd.Number);
-                    throw new ApplicationException(errorMessage);
-                }
+                var errorMessage = string.Format("Duplicate commandment detected: {0} and {1} are both commandment #{2}.", duplicates.Item1, duplicates.Item2, duplicates.Item1.Number);
+                throw new ApplicationException(errorMessage);
             }
         }
 
@@ -214,12 +216,16 @@ namespace CmdMents
         /// <returns>The name of the image file that was output.</returns>
         private static string CreateImageFromDotInstructions(IEnumerable<string> dotInstructions)
         {
+            var str = dotInstructions.Aggregate(new StringBuilder(), (builder, dotInstruction) => builder.AppendLine(dotInstruction)).ToString();
             using (var process = new Process())
             {
                 var isX64 = IntPtr.Size == 8;
 
                 var programFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-                if (isX64) programFiles += " (x86)";                // Always grab the 32-bit version
+                if (isX64)
+                {
+                    programFiles += " (x86)";                // Always grab the 32-bit version
+                }
                 var graphVizFolder = Directory.GetDirectories(programFiles).FirstOrDefault(dir => dir.Contains("Graphviz"));
                 if (graphVizFolder == null)
                 {

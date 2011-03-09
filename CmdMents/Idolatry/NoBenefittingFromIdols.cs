@@ -5,23 +5,23 @@ using System.Text;
 
 namespace CmdMents.Idolatry
 {
-    class NoTreeShrinesNearAltar : NoIdols
+    class NoBenefittingFromIdols : NoBenefitingFromBurningIdolatrousCity
     {
-        public NoTreeShrinesNearAltar()
+        public NoBenefittingFromIdols()
         {
-            base.AlternateText = "Do not plant any tree dedicated to Asherah beside the altar you build to the LORD your God...";
+            base.AlternateText = null;
             base.Book = CommandmentBook.Deuteronomy;
             base.CanBeCarriedOutOnlyInIsrael = false;
             base.CanBeCarriedOutToday = true;
-            base.Chapter = 16;
+            base.Chapter = 7;
             base.CommandmentType = CmdMents.CommandmentType.Negative;
             base.FollowedByChristians = CommandmentObedience.Obeyed;
             base.FollowedByMessianics = CommandmentObedience.Obeyed;
             base.FollowedByObservantJews = CommandmentObedience.Obeyed;
-            base.Number = 52;
-            base.ShortSummary = "No Asherah tree shrines next to God's altar.";
-            base.Text = "Do not set up any wooden Asherah pole beside the altar you build to the LORD your God...";
-            base.Verse = 21;
+            base.Number = 55;
+            base.ShortSummary = "No benefitting from idols.";
+            base.Text = "The images of their gods you are to burn in the fire. Do not covet the silver and gold on them, and do not take it for yourselves, or you will be ensnared by it, for it is detestable to the LORD your God.";
+            base.Verse = 25;
         }
     }
 }
