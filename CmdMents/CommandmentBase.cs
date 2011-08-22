@@ -127,6 +127,10 @@ namespace CmdMents
             {
                 color = GoldenCommandmentColor;
             }
+            else if (this.Book == CommandmentBook.Leviticus && Chapter == 27)
+            {
+                return "color = \"goldenrod\"";
+            }
             else
             {
                 color = this.CanBeCarriedOutToday ? NormalColor : NotFollowableColor;

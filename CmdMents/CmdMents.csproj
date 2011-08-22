@@ -120,7 +120,14 @@
     <Compile Include="LoveAndBrotherhood\NoHatingYourBrother.cs" />
     <Compile Include="LoveAndBrotherhood\NoOppressingWeak.cs" />
     <Compile Include="LoveAndBrotherhood\ReproveTheSinner.cs" />
+    <Compile Include="SacrificesAndOfferings\EstimateValueOfConsecratedFields.cs" />
+    <Compile Include="SacrificesAndOfferings\EstimateValueOfConsecratedHouses.cs" />
+    <Compile Include="SacrificesAndOfferings\NoRedeemingObjectsConsecratedToGod.cs" />
+    <Compile Include="SacrificesAndOfferings\NoSellingObjectsConsecratedToGod.cs" />
+    <Compile Include="SacrificesAndOfferings\PricePersonsVowsByAgeAndGender.cs" />
     <Compile Include="SacrificesAndOfferings\LevitesMustFollowYomKippurProcedures.cs" />
+    <Compile Include="SacrificesAndOfferings\EstimateValueOfConsecratedAnimals.cs" />
+    <Compile Include="SacrificesAndOfferings\TreatAsHolyEverythingConsecratedToGod.cs" />
     <Compile Include="TimesAndSeasons\AfflictYourselfOnYomKippur.cs" />
     <Compile Include="SacrificesAndOfferings\BringAdditionalOfferingsOnYomKippur.cs" />
     <Compile Include="TimesAndSeasons\BringAdditionalOfferingsOnYomTeruah.cs" />
