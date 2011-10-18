@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CmdMents.TimesAndSeasons
 {
-    class RestOnFirstDayOfPassover : ObserveNewYearInFirstMonth
+    class RestOnFirstDayOfPassover : EatUnleavenedBreadDuringPassover
     {
         public RestOnFirstDayOfPassover()
         {

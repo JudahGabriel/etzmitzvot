@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Diagnostics;
 using CmdMents.God;
+using CmdMents.Idolatry;
 
 namespace CmdMents
 {
@@ -61,8 +62,9 @@ namespace CmdMents
             var totalCommandmentsMapped = commandments.Count();
             var pctCommandmentsMapped = (double)totalCommandmentsMapped / (double)totalCommandmentCount;
             var pctWithAlternateReadings = FormattedStatistic(Matching(cmd => !string.IsNullOrEmpty(cmd.AlternateText)));
-            var pctConcernedWithLovingGod = FormattedStatistic(Matching(cmd => typeof(LoveGodWithHeartSoulStrength).IsAssignableFrom(cmd.GetType())));
-            var pctConcernedWithLovingOthers = FormattedStatistic(Matching(cmd => typeof(LoveNeighborAsSelf).IsAssignableFrom(cmd.GetType())));
+            var pctConcernedWithLovingGod = FormattedStatistic(Matching(cmd => cmd is LoveGodWithHeartSoulStrength));
+            var pctConcernedWithLovingOthers = FormattedStatistic(Matching(cmd => cmd is LoveNeighborAsSelf));
+            var pctConcernedWithIdolatry = FormattedStatistic(Matching(cmd => cmd is NoIdols));
             var pctInExodus = FormattedStatistic(Matching(cmd => cmd.Book == CommandmentBook.Exodus));
             var pctInLeviticus = FormattedStatistic(Matching(cmd => cmd.Book == CommandmentBook.Leviticus));
             var pctInNumbers = FormattedStatistic(Matching(cmd => cmd.Book == CommandmentBook.Numbers));
@@ -92,6 +94,7 @@ namespace CmdMents
             Console.WriteLine("\t{0} commandments have been mapped; the project is {1} completed.", totalCommandmentsMapped, GetFormattedPercentage(pctCommandmentsMapped, 3, 5));
             Console.WriteLine("\t{0} are concerned with loving God.", pctConcernedWithLovingGod);
             Console.WriteLine("\t{0} are concerned with loving others.", pctConcernedWithLovingOthers);
+            Console.WriteLine("\t{0} are relating to idolatry.", pctConcernedWithIdolatry);
             Console.WriteLine("\t{0} can be carried out in modern times.", pctCanBeCarriedOutToday);
             Console.WriteLine("\t{0} can be carried out only in Israel.", pctCanBeCarriedOutOnlyInIsrael);
             Console.WriteLine("\t{0} are positive commandments.", pctPositiveCommandments);

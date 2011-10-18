@@ -6,7 +6,7 @@ using System.Drawing;
 
 namespace CmdMents
 {
-    abstract class CommandmentBase
+    public abstract class CommandmentBase
     {
         const string quote = "\"";
         const string centeredLineSeparator = "\\n", rightJustifiedLineSeparator = "\\r", leftJustifiedLineSeparator = "\\l";
@@ -123,13 +123,14 @@ namespace CmdMents
         {
             string color;
             var isGoldenCommandment = this.GetType() == typeof(LoveNeighborAsSelf) || this.GetType() == typeof(CmdMents.God.LoveGodWithHeartSoulStrength);
+            var isSukkotCommandment = new[] { 104, 105, 106, 107, 117, 118, 390, 391, 420, 421, 422, 423, 425 }.Any(n => this.Number == n);
             if (isGoldenCommandment)
             {
                 color = GoldenCommandmentColor;
             }
-            else if (this.Book == CommandmentBook.Leviticus && Chapter == 27)
+            else if (isSukkotCommandment)
             {
-                return "color = \"goldenrod\"";
+                return "color = \"purple\"";
             }
             else
             {

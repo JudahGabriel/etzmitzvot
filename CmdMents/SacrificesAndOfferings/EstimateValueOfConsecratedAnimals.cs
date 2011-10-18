@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CmdMents.SacrificesAndOfferings
 {
-    class EstimateValueOfConsecratedAnimals : PricePersonsVowsByAgeAndGender
+    class EstimateValueOfConsecratedAnimals : ConsecrateEveryTenthAnimalToTheLord
     {
         public EstimateValueOfConsecratedAnimals()
         {

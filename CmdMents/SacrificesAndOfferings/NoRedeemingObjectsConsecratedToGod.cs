@@ -12,7 +12,7 @@ namespace CmdMents.SacrificesAndOfferings
             base.AlternateText = null;
             base.Book = CommandmentBook.Leviticus;
             base.CanBeCarriedOutOnlyInIsrael = true;
-            base.CanBeCarriedOutToday = false;
+            base.CanBeCarriedOutToday = true;
             base.Chapter = 27;
             base.CommandmentType = CmdMents.CommandmentType.Negative;
             base.FollowedByChristians = CommandmentObedience.None;

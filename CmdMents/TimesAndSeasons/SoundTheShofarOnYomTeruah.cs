@@ -6,7 +6,7 @@ using CmdMents.Torah;
 
 namespace CmdMents.TimesAndSeasons
 {
-    class SoundTheShofarOnYomTeruah : KeepGodsCommandments
+    class SoundTheShofarOnYomTeruah : ObserveNewYearInFirstMonth
     {
         public SoundTheShofarOnYomTeruah()
         {

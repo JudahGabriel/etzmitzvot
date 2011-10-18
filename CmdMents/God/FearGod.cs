@@ -19,7 +19,7 @@ namespace CmdMents.God
             base.FollowedByMessianics = CommandmentObedience.Obeyed;
             base.FollowedByObservantJews = CommandmentObedience.Obeyed;
             base.Number = 5;
-            base.ShortSummary = "Fear the LORD your God";
+            base.ShortSummary = "Fear the LORD your God.";
             base.Text = "Fear the LORD your God.";
             base.Verse = 20;
         }
