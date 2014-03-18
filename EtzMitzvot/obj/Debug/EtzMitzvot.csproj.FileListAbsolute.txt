@@ -1,0 +1,6 @@
+c:\users\jhimango\documents\visual studio 2013\Projects\EtzMitzvot\EtzMitzvot\bin\EtzMitzvot.dll.config
+c:\users\jhimango\documents\visual studio 2013\Projects\EtzMitzvot\EtzMitzvot\bin\EtzMitzvot.dll
+c:\users\jhimango\documents\visual studio 2013\Projects\EtzMitzvot\EtzMitzvot\bin\EtzMitzvot.pdb
+c:\users\jhimango\documents\visual studio 2013\Projects\EtzMitzvot\EtzMitzvot\obj\Debug\EtzMitzvot.csprojResolveAssemblyReference.cache
+c:\users\jhimango\documents\visual studio 2013\Projects\EtzMitzvot\EtzMitzvot\obj\Debug\EtzMitzvot.dll
+c:\users\jhimango\documents\visual studio 2013\Projects\EtzMitzvot\EtzMitzvot\obj\Debug\EtzMitzvot.pdb
