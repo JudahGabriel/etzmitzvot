@@ -13,4 +13,12 @@
     canBeCarriedOutToday: boolean;
     requiresLivingInIsrael: boolean;
     requiresTemple: boolean;
+
+    getBookChapterVerse() {
+        var bookName = this.book === TorahBook.Deuteronomy ? "Deut." :
+            this.book === TorahBook.Exodus ? "Ex." :
+            this.book === TorahBook.Leviticus ? "Lev." :
+            "Num.";
+        return bookName + " " + this.chapter + ":" + this.verse;
+    }
 }

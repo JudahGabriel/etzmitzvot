@@ -1,0 +1,6 @@
+E:\Dev\Projs\GitHub\commandments\EtzMitzvot\bin\EtzMitzvot.dll.config
+E:\Dev\Projs\GitHub\commandments\EtzMitzvot\bin\EtzMitzvot.dll
+E:\Dev\Projs\GitHub\commandments\EtzMitzvot\bin\EtzMitzvot.pdb
+E:\Dev\Projs\GitHub\commandments\EtzMitzvot\obj\Release\EtzMitzvot.csprojResolveAssemblyReference.cache
+E:\Dev\Projs\GitHub\commandments\EtzMitzvot\obj\Release\EtzMitzvot.dll
+E:\Dev\Projs\GitHub\commandments\EtzMitzvot\obj\Release\EtzMitzvot.pdb

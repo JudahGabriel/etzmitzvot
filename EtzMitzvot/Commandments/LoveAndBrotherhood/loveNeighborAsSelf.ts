@@ -14,9 +14,9 @@ class LoveNeighborAsSelf extends CommandmentBase {
         this.requiresLivingInIsrael = false;
 
         this.type = CommandmentType.Positive;
-        this.christianObservance = CommandmentObedience.Attempted;
-        this.messianicObservance = CommandmentObedience.Attempted;
-        this.jewishObservance = CommandmentObedience.Attempted;
+        this.christianObservance = CommandmentObedience.Binding;
+        this.messianicObservance = CommandmentObedience.Binding;
+        this.jewishObservance = CommandmentObedience.Binding;
         this.number = 13;
 
         this.children = [
