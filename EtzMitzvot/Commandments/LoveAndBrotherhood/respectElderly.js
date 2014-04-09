@@ -4,12 +4,12 @@
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-var HonorTheElderly = (function (_super) {
-    __extends(HonorTheElderly, _super);
-    function HonorTheElderly() {
+var RespectTheElderly = (function (_super) {
+    __extends(RespectTheElderly, _super);
+    function RespectTheElderly() {
         _super.call(this);
 
-        this.shortSummary = "Honor the elderly.";
+        this.shortSummary = "Respect the elderly.";
         this.text = "Rise in the presence of the aged, show respect for the elderly and revere your God. I am the LORD.";
         this.book = 1 /* Leviticus */;
         this.chapter = 19;
@@ -25,7 +25,9 @@ var HonorTheElderly = (function (_super) {
         this.jewishObservance = 1 /* Recognized */;
         this.number = 23;
 
-        this.children = [];
+        this.children = [
+            new RespectYourParents()
+        ];
     }
-    return HonorTheElderly;
+    return RespectTheElderly;
 })(CommandmentBase);

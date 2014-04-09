@@ -25,7 +25,7 @@ var LoveNeighborAsSelf = (function (_super) {
         this.number = 13;
 
         this.children = [
-            new HonorTheElderly(), new LoveSojourners(), new DontHateBrother()
+            new RespectTheElderly(), new LoveSojourners(), new DontHateBrother()
         ];
     }
     return LoveNeighborAsSelf;

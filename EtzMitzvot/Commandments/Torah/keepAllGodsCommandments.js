@@ -23,6 +23,8 @@ var KeepAllGodsCommandments = (function (_super) {
         this.messianicObservance = 2 /* Binding */;
         this.jewishObservance = 2 /* Binding */;
         this.number = 11;
+
+        this.children = [new TeachYourChildrenCommandments(), new RememberCommandmentsThroughTassels(), new DontAddCommandments()];
     }
     return KeepAllGodsCommandments;
 })(CommandmentBase);

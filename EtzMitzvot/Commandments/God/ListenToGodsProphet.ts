@@ -4,7 +4,7 @@ class ListenToGodsProphet extends CommandmentBase {
     constructor() {
         super();
 
-        this.shortSummary = "Listen to the prophet that God sends.";
+        this.shortSummary = "Listen to God's prophet.";
         this.text = "The LORD your God will raise up for you a prophet like me from among your own brothers. You must listen to him.";
         this.book = TorahBook.Deuteronomy;
         this.chapter = 18;

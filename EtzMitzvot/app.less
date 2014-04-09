@@ -4,9 +4,8 @@
 }
 
 svg {
-    width: 2000px;
+    width: 2700px;
     height: 1000px;
-    overflow: auto;
 }
 
 .node {
@@ -16,18 +15,17 @@ svg {
         fill: #fff;
         stroke: steelblue;
         stroke-width: 3px;
-    }
 
-    circle.negative {
-        stroke: crimson;
+        &.negative {
+            stroke: crimson;
+        }
     }
 
     .commandment-text {
         font: 16px sans-serif;
-        -webkit-text-shadow: 0 0 5px white;
-        text-shadow: 0 0 5px white;
         width: 20px;
         fill: black;
+        -webkit-text-shadow: 1px 1px 2px silver;
         text-shadow: 1px 1px 2px gray;
 
         &.verse {
@@ -35,6 +33,17 @@ svg {
             font-style: italic;
         }
     }
+
+    &.golden-command .commandment-text {
+        fill: darkgoldenrod;
+        -webkit-text-shadow: 1px 1px 1px silver;
+        text-shadow: 1px 1px 1px silver;
+        font: 17px sans-serif;
+    }
+}
+
+.popover {
+    min-width: 400px;
 }
 
 .link {

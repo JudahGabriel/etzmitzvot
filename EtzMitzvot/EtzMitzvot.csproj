@@ -9,7 +9,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <TypeScriptToolsVersion>0.9</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -23,7 +23,26 @@
     <Content Include="app.min.css">
       <DependentUpon>app.css</DependentUpon>
     </Content>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="index.html" />
+    <Content Include="LICENSE.txt" />
+    <Content Include="mitzvotmash.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\d3.js" />
+    <Content Include="Scripts\d3.min.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <None Include="Scripts\jquery-1.9.0.intellisense.js" />
+    <Content Include="Scripts\jquery-1.9.0.js" />
+    <Content Include="Scripts\jquery-1.9.0.min.js" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -47,16 +66,26 @@
     <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\dontOppressWeak.ts" />
     <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\dontSpeakEvil.ts" />
     <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\dontTakeRevenge.ts" />
-    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\honorElderly.ts" />
+    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\respectElderly.ts" />
     <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\loveSojourners.ts" />
     <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\loveNeighborAsSelf.ts" />
     <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\rebukeFrankly.ts" />
+    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\honorYourParents.ts" />
+    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\respectYourParents.ts" />
+    <TypeScriptCompile Include="Commandments\Torah\dontAddCommandments.ts" />
+    <TypeScriptCompile Include="Commandments\Torah\dontRemoveCommandments.ts" />
     <TypeScriptCompile Include="Commandments\Torah\keepAllGodsCommandments.ts" />
+    <TypeScriptCompile Include="Commandments\Torah\RememberCommandmentsThroughTassels.ts" />
+    <TypeScriptCompile Include="Commandments\Torah\teachYourChildrenCommandments.ts" />
     <TypeScriptCompile Include="Common\commandmentType.ts" />
     <TypeScriptCompile Include="Common\obedienceLevel.ts" />
     <TypeScriptCompile Include="Common\torahBook.ts" />
     <TypeScriptCompile Include="Commandments\commandmentBase.ts" />
     <TypeScriptCompile Include="Commandments\God\loveGodWithAllYourBeing.ts" />
+    <TypeScriptCompile Include="Scripts\typings\bootstrap\bootstrap.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\d3\d3.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\d3\plugins\d3.superformula.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.less" />
@@ -64,6 +93,8 @@
       <DependentUpon>app.css</DependentUpon>
     </Content>
     <None Include="EtzMitzvot on BitShuva.pubxml" />
+    <Content Include="packages.config" />
+    <Content Include="Scripts\jquery-1.9.0.min.map" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -110,6 +141,7 @@
     <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
     <TypeScriptOutFile>mitzvotmash.js</TypeScriptOutFile>
     <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <TypeScriptTarget>ES5</TypeScriptTarget>

@@ -1,10 +1,10 @@
 ﻿///<reference path='../commandmentBase.ts' />
 
-class HonorTheElderly extends CommandmentBase {
+class RespectTheElderly extends CommandmentBase {
     constructor() {
         super();
 
-        this.shortSummary = "Honor the elderly.";
+        this.shortSummary = "Respect the elderly.";
         this.text = "Rise in the presence of the aged, show respect for the elderly and revere your God. I am the LORD.";
         this.book = TorahBook.Leviticus;
         this.chapter = 19;
@@ -21,6 +21,7 @@ class HonorTheElderly extends CommandmentBase {
         this.number = 23;
 
         this.children = [
+            new RespectYourParents()
         ];
     }
 } 
