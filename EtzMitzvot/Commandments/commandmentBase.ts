@@ -13,10 +13,13 @@
     canBeCarriedOutToday: boolean;
     requiresLivingInIsrael: boolean;
     requiresTemple: boolean;
+    commentary: string;
+
     x: number;
     y: number;
     x0: number;
     y0: number;
+    widthMultiplier = 1;
 
     private hiddenChildren: CommandmentBase[] = null;
 

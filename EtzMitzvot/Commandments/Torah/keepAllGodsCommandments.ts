@@ -19,6 +19,6 @@ class KeepAllGodsCommandments extends CommandmentBase {
         this.jewishObservance = CommandmentObedience.Binding;
         this.number = 11;
 
-        this.children = [new TeachYourChildrenCommandments(), new RememberCommandmentsThroughTassels(), new DontAddCommandments()];
+        this.children = [new TeachYourChildrenCommandments(), new RememberCommandmentsThroughTassels(), new DontAddCommandments(), new AppearsBeforeGodAtPilgrimFeasts(), new AfflictYourselfOnYomKippur()];
     }
 } 

@@ -72,6 +72,9 @@
     <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\rebukeFrankly.ts" />
     <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\honorYourParents.ts" />
     <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\respectYourParents.ts" />
+    <TypeScriptCompile Include="Commandments\TimesAndSeasons\afflictYourselfOnYomKippur.ts" />
+    <TypeScriptCompile Include="Commandments\TimesAndSeasons\appearBeforeGodAtPilgrimFeasts.ts" />
+    <TypeScriptCompile Include="Commandments\TimesAndSeasons\bringSukkotOfferingsFirstDay.ts" />
     <TypeScriptCompile Include="Commandments\Torah\dontAddCommandments.ts" />
     <TypeScriptCompile Include="Commandments\Torah\dontRemoveCommandments.ts" />
     <TypeScriptCompile Include="Commandments\Torah\keepAllGodsCommandments.ts" />
@@ -105,7 +108,6 @@
   <ItemGroup>
     <Folder Include="Commandments\Idolatry\" />
     <Folder Include="Commandments\SacrificesAndOfferings\" />
-    <Folder Include="Commandments\TimesAndSeasons\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
