@@ -9,7 +9,7 @@ var ListenToGodsProphet = (function (_super) {
     function ListenToGodsProphet() {
         _super.call(this);
 
-        this.shortSummary = "Listen to the prophet that God sends.";
+        this.shortSummary = "Listen to God's prophet.";
         this.text = "The LORD your God will raise up for you a prophet like me from among your own brothers. You must listen to him.";
         this.book = 3 /* Deuteronomy */;
         this.chapter = 18;
@@ -19,9 +19,9 @@ var ListenToGodsProphet = (function (_super) {
         this.requiresLivingInIsrael = false;
 
         this.type = 0 /* Positive */;
-        this.christianObservance = 2 /* Binding */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 9;
 
         this.children = [

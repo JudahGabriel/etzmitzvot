@@ -21,7 +21,7 @@ var BlessGodAfterEating = (function (_super) {
         this.type = 0 /* Positive */;
         this.christianObservance = 0 /* None */;
         this.messianicObservance = 1 /* Recognized */;
-        this.jewishObservance = 2 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 85;
 
         this.children = [];

@@ -4,14 +4,29 @@
         this.duration = 750;
         this.widthPerNode = 250;
         this.heightPerNode = 100;
+        this.commandmentsDoneCount = ko.observable(0);
+        this.commandmentsRemainingCount = ko.computed(function () {
+            return 613 - _this.commandmentsDoneCount();
+        });
+        this.commandmentsDonePercent = ko.computed(function () {
+            return Math.round(_this.commandmentsDoneCount() / 613 * 100) + "%";
+        });
+        this.commandmentsRemainingPercent = ko.computed(function () {
+            return Math.round(_this.commandmentsRemainingCount() / 613 * 100) + "%";
+        });
         this.createTree();
-        setTimeout(function () {
-            return _this.createHoverTips();
-        }, 500);
+
+        //setTimeout(() => this.createHoverTips(), 500);
         this.recenterView();
         window.onresize = function () {
             return _this.recenterView();
         };
+
+        this.commandmentsList = this.getCommandmentsList();
+        this.commandmentsDoneCount(this.commandmentsList.length);
+
+        ko.applyBindings(this, document.querySelector("#headerContainer"));
+        console.info("applied bindings", this.commandmentsDonePercent());
     }
     app.prototype.createTree = function () {
         this.root = new CommandmentBase();
@@ -23,7 +38,7 @@
 
         var treeData = [this.root];
 
-        var margin = { top: 50, right: 120, bottom: 20, left: 1250 }, width = 960 - margin.right - margin.left, height = 500 - margin.top - margin.bottom;
+        var margin = { top: 50, right: 120, bottom: 20, left: 1550 }, width = 960 - margin.right - margin.left, height = 500 - margin.top - margin.bottom;
 
         this.tree = d3.layout.tree().size([height, width]);
 
@@ -39,46 +54,21 @@
         this.update(this.root);
     };
 
-    app.prototype.createHoverTips = function () {
+    app.prototype.createHoverTip = function (node, commandment) {
         var self = this;
         var template = $("#mitzvotPopoverTemplate").clone().css("display", "normal").html();
 
-        $(".mitzvah").popover({
+        $(node).popover({
             container: 'body',
             placement: 'auto top',
             trigger: 'hover',
             html: true,
             delay: 100,
-            title: function () {
-                var node = this;
-                var mitzvotNumber = parseInt(node.attributes['data-mitzvot-number'].value, 10);
-                var commandment = self.findCommandmentByNumber(mitzvotNumber);
-                return commandment.shortSummary;
-            },
+            title: commandment.shortSummary,
             content: function () {
-                var node = this;
-                var mitzvotNumber = parseInt(node.attributes['data-mitzvot-number'].value, 10);
-                var commandment = self.findCommandmentByNumber(mitzvotNumber);
                 return template.replace("{{text}}", commandment.text).replace("{{book}}", commandment.getBookString()).replace("{{chapter}}", commandment.chapter.toString()).replace("{{verse}}", commandment.verse.toString());
             }
         });
-    };
-
-    app.prototype.findCommandmentByNumber = function (commandmentNumber) {
-        var nodesToCheck = [this.root];
-        while (nodesToCheck.length > 0) {
-            var lastIndex = nodesToCheck.length - 1;
-            var current = nodesToCheck[lastIndex];
-            if (current.number === commandmentNumber) {
-                return current;
-            }
-            nodesToCheck.splice(lastIndex, 1);
-            if (current.children && current.children.length) {
-                nodesToCheck = nodesToCheck.concat(current.children);
-            }
-        }
-
-        return null;
     };
 
     app.prototype.update = function (source) {
@@ -116,8 +106,6 @@
         // Enter any new nodes at the parent's previous position.
         var nodeEnter = node.enter().append("g").attr("class", function (c) {
             return _this.getNodeClass(c);
-        }).attr("data-mitzvot-number", function (c) {
-            return c.number;
         }).attr("transform", function (d) {
             return "translate(" + source.x0 + "," + source.y0 + ")";
         }).on("click", function (cmd) {
@@ -130,13 +118,27 @@
             return d.isExpanded ? "#fff" : "lightsteelblue";
         });
 
-        nodeEnter.append("text").attr("y", -20).attr("dy", ".35em").attr("text-anchor", "middle").text(function (d) {
-            return d.shortSummary;
-        }).style("fill-oopacity", 1).attr("class", "commandment-text");
+        nodeEnter.append("text").attr("y", function (d) {
+            return d.shortSummary.indexOf("<br />") === -1 ? -20 : -40;
+        }).attr("dy", ".35em").attr("text-anchor", "middle").text(function (d) {
+            return d.getShortSummaryParts()[0];
+        }).style("fill-opacity", 1).attr("class", "commandment-text");
+
+        // Append the 2nd half of the summary if it contains a line break.
+        nodeEnter.filter(function (d) {
+            return d.getShortSummaryParts().length === 2;
+        }).append("text").attr("y", -20).attr("dy", ".35em").attr("text-anchor", "middle").text(function (d) {
+            return d.getShortSummaryParts()[1];
+        }).style("fill-opacity", 1).attr("class", "commandment-text");
 
         nodeEnter.append("text").attr("y", 25).attr("dy", ".35em").attr("text-anchor", "middle").text(function (d) {
             return d.getBookChapterVerse();
         }).style("fill-opacity", 1).attr("class", "commandment-text verse");
+
+        var self = this;
+        node.each(function (commandment) {
+            self.createHoverTip(this, commandment);
+        });
 
         // Transition nodes to their new position.
         var nodeUpdate = node.transition().duration(this.duration).attr("transform", function (d) {
@@ -194,6 +196,8 @@
     app.prototype.recenterView = function () {
         var body = document.body;
         body.scrollLeft = (body.scrollWidth / 2) - (body.clientWidth / 2);
+
+        $("#headerContainer").width($("svg").width());
     };
 
     app.prototype.getNodeClass = function (cmd) {
@@ -207,6 +211,25 @@
         }
 
         return "node mitzvah";
+    };
+
+    app.prototype.getCommandmentsList = function () {
+        var list = [];
+        var nodesToCheck = [].concat(this.root.getChildrenOrHidden());
+        while (nodesToCheck.length > 0) {
+            var currentNode = nodesToCheck.splice(0, 1)[0];
+            list.push(currentNode);
+            currentNode.getChildrenOrHidden().forEach(function (c) {
+                return nodesToCheck.push(c);
+            });
+        }
+
+        return list;
+    };
+
+    app.prototype.scrollToTreeTop = function () {
+        console.log($("#headerContainer").height());
+        document.body.scrollTop = $("#headerContainer").height();
     };
     return app;
 })();
@@ -222,6 +245,22 @@ var CommandmentBase = (function () {
 
     CommandmentBase.prototype.getBookString = function () {
         return this.book === 3 /* Deuteronomy */ ? "Deuteronomy" : this.book === 0 /* Exodus */ ? "Exodus" : this.book === 1 /* Leviticus */ ? "Leviticus" : "Numbers";
+    };
+
+    CommandmentBase.prototype.getShortSummaryParts = function () {
+        return this.shortSummary.split("<br />");
+    };
+
+    CommandmentBase.prototype.getChildrenOrHidden = function () {
+        if (this.hiddenChildren) {
+            return this.hiddenChildren;
+        }
+
+        if (this.children) {
+            return this.children;
+        }
+
+        return [];
     };
 
     Object.defineProperty(CommandmentBase.prototype, "isExpanded", {
@@ -265,9 +304,9 @@ var AcknowledgeGodAsHoly = (function (_super) {
         this.requiresLivingInIsrael = false;
 
         this.type = 0 /* Positive */;
-        this.christianObservance = 2 /* Binding */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 6;
 
         this.children = [
@@ -294,7 +333,7 @@ var BlessGodAfterEating = (function (_super) {
         this.type = 0 /* Positive */;
         this.christianObservance = 0 /* None */;
         this.messianicObservance = 1 /* Recognized */;
-        this.jewishObservance = 2 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 85;
 
         this.children = [];
@@ -317,9 +356,9 @@ var ClingToGod = (function (_super) {
         this.requiresLivingInIsrael = false;
 
         this.type = 0 /* Positive */;
-        this.christianObservance = 2 /* Binding */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 5;
 
         this.children = [];
@@ -342,9 +381,9 @@ var DontCurseGod = (function (_super) {
         this.requiresLivingInIsrael = false;
 
         this.type = 1 /* Negative */;
-        this.christianObservance = 2 /* Binding */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 26;
 
         this.children = [
@@ -371,7 +410,7 @@ var DontDestroyHolyObjects = (function (_super) {
         this.type = 1 /* Negative */;
         this.christianObservance = 1 /* Recognized */;
         this.messianicObservance = 1 /* Recognized */;
-        this.jewishObservance = 2 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 8;
 
         this.children = [];
@@ -395,9 +434,9 @@ var DontFearFalseProphet = (function (_super) {
         this.requiresTemple = false;
 
         this.type = 1 /* Negative */;
-        this.christianObservance = 2 /* Binding */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 45;
 
         this.children = [];
@@ -421,9 +460,9 @@ var DontProfaneGodsName = (function (_super) {
         this.requiresTemple = false;
 
         this.type = 1 /* Negative */;
-        this.christianObservance = 2 /* Binding */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 7;
 
         this.children = [
@@ -449,9 +488,9 @@ var DontProphesyFalsely = (function (_super) {
         this.requiresTemple = false;
 
         this.type = 1 /* Negative */;
-        this.christianObservance = 2 /* Binding */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 44;
 
         this.children = [
@@ -477,9 +516,9 @@ var DontTemptGod = (function (_super) {
         this.requiresTemple = false;
 
         this.type = 1 /* Negative */;
-        this.christianObservance = 2 /* Binding */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 10;
 
         this.children = [];
@@ -502,9 +541,9 @@ var FearGod = (function (_super) {
         this.requiresLivingInIsrael = false;
 
         this.type = 0 /* Positive */;
-        this.christianObservance = 2 /* Binding */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 5;
 
         this.children = [
@@ -529,9 +568,9 @@ var KnowGodExists = (function (_super) {
         this.requiresLivingInIsrael = false;
 
         this.type = 0 /* Positive */;
-        this.christianObservance = 2 /* Binding */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 1;
 
         this.children = [
@@ -556,9 +595,9 @@ var KnowGodIsOne = (function (_super) {
         this.requiresLivingInIsrael = false;
 
         this.type = 0 /* Positive */;
-        this.christianObservance = 2 /* Binding */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 3;
 
         this.children = [];
@@ -571,7 +610,7 @@ var ListenToGodsProphet = (function (_super) {
     function ListenToGodsProphet() {
         _super.call(this);
 
-        this.shortSummary = "Listen to the prophet that God sends.";
+        this.shortSummary = "Listen to God's prophet.";
         this.text = "The LORD your God will raise up for you a prophet like me from among your own brothers. You must listen to him.";
         this.book = 3 /* Deuteronomy */;
         this.chapter = 18;
@@ -581,9 +620,9 @@ var ListenToGodsProphet = (function (_super) {
         this.requiresLivingInIsrael = false;
 
         this.type = 0 /* Positive */;
-        this.christianObservance = 2 /* Binding */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 9;
 
         this.children = [
@@ -609,9 +648,9 @@ var LoveGodWithHeartSoulStrength = (function (_super) {
         this.requiresTemple = false;
 
         this.type = 0 /* Positive */;
-        this.christianObservance = 2 /* Binding */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 4;
 
         this.children = [
@@ -637,9 +676,9 @@ var DontBearGrudges = (function (_super) {
         this.requiresTemple = false;
 
         this.type = 1 /* Negative */;
-        this.christianObservance = 2 /* Binding */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 21;
 
         this.children = [
@@ -665,9 +704,9 @@ var DontEmbarrassOthers = (function (_super) {
         this.requiresTemple = false;
 
         this.type = 1 /* Negative */;
-        this.christianObservance = 2 /* Binding */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 17;
 
         this.children = [];
@@ -691,9 +730,9 @@ var DontHateBrother = (function (_super) {
         this.requiresTemple = false;
 
         this.type = 1 /* Negative */;
-        this.christianObservance = 2 /* Binding */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 15;
 
         this.children = [
@@ -719,9 +758,9 @@ var DontOppressWeak = (function (_super) {
         this.requiresTemple = false;
 
         this.type = 1 /* Negative */;
-        this.christianObservance = 2 /* Binding */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 18;
 
         this.children = [];
@@ -745,9 +784,9 @@ var DontSpeakEvil = (function (_super) {
         this.requiresTemple = false;
 
         this.type = 1 /* Negative */;
-        this.christianObservance = 2 /* Binding */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 19;
 
         this.children = [];
@@ -771,9 +810,9 @@ var DontTakeRevenge = (function (_super) {
         this.requiresTemple = false;
 
         this.type = 1 /* Negative */;
-        this.christianObservance = 2 /* Binding */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 20;
 
         this.children = [];
@@ -796,9 +835,9 @@ var HonorYourParents = (function (_super) {
         this.requiresLivingInIsrael = false;
 
         this.type = 0 /* Positive */;
-        this.christianObservance = 2 /* Binding */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 584;
     }
     return HonorYourParents;
@@ -819,9 +858,9 @@ var LoveNeighborAsSelf = (function (_super) {
         this.requiresLivingInIsrael = false;
 
         this.type = 0 /* Positive */;
-        this.christianObservance = 2 /* Binding */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 13;
 
         this.children = [
@@ -848,9 +887,9 @@ var LoveSojourners = (function (_super) {
         this.requiresTemple = false;
 
         this.type = 0 /* Positive */;
-        this.christianObservance = 2 /* Binding */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 14;
 
         this.children = [];
@@ -874,9 +913,9 @@ var RebukeFrankly = (function (_super) {
         this.requiresTemple = false;
 
         this.type = 0 /* Positive */;
-        this.christianObservance = 2 /* Binding */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 16;
 
         this.children = [];
@@ -927,14 +966,94 @@ var RespectYourParents = (function (_super) {
         this.requiresLivingInIsrael = false;
 
         this.type = 0 /* Positive */;
-        this.christianObservance = 2 /* Binding */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 585;
 
         this.children = [new HonorYourParents()];
     }
     return RespectYourParents;
+})(CommandmentBase);
+///<reference path='../commandmentBase.ts' />
+var AfflictYourselfOnYomKippur = (function (_super) {
+    __extends(AfflictYourselfOnYomKippur, _super);
+    function AfflictYourselfOnYomKippur() {
+        _super.call(this);
+
+        this.shortSummary = "Afflict yourself on Yom Kippur";
+        this.text = "This is to be a lasting ordinance for you: On the tenth day of the seventh month you must deny yourselves and fast.";
+        this.book = 1 /* Leviticus */;
+        this.chapter = 16;
+        this.verse = 29;
+
+        this.canBeCarriedOutToday = true;
+        this.requiresLivingInIsrael = false;
+
+        this.type = 0 /* Positive */;
+        this.christianObservance = 0 /* None */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
+        this.number = 94;
+
+        this.children = [];
+    }
+    return AfflictYourselfOnYomKippur;
+})(CommandmentBase);
+///<reference path='../commandmentBase.ts' />
+var AppearsBeforeGodAtPilgrimFeasts = (function (_super) {
+    __extends(AppearsBeforeGodAtPilgrimFeasts, _super);
+    function AppearsBeforeGodAtPilgrimFeasts() {
+        _super.call(this);
+
+        this.shortSummary = "Appear at God's chosen place <br />each year for the 3 pilgrimage feasts.";
+        this.text = "Three times a year all your men must appear before the Lord your God at the place he will choose: at the Festival of Unleavened Bread, the Festival of Weeks and the Festival of Tabernacles.";
+        this.book = 3 /* Deuteronomy */;
+        this.chapter = 16;
+        this.verse = 16;
+
+        this.canBeCarriedOutToday = false;
+        this.requiresLivingInIsrael = false;
+        this.requiresTemple = true;
+
+        this.type = 0 /* Positive */;
+        this.christianObservance = 0 /* None */;
+        this.messianicObservance = 1 /* Recognized */;
+        this.jewishObservance = 3 /* Binding */;
+        this.number = 420;
+
+        this.children = [
+            new BringSukkotOfferingsFirstDay()
+        ];
+    }
+    return AppearsBeforeGodAtPilgrimFeasts;
+})(CommandmentBase);
+///<reference path='../commandmentBase.ts' />
+var BringSukkotOfferingsFirstDay = (function (_super) {
+    __extends(BringSukkotOfferingsFirstDay, _super);
+    function BringSukkotOfferingsFirstDay() {
+        _super.call(this);
+
+        this.shortSummary = "Bring additional offerings on Sukkot.";
+        this.text = "‘On the fifteenth day of the seventh month, hold a sacred assembly and do no regular work. Celebrate a festival to the Lord for seven days. Present as an aroma pleasing to the Lord a food offering consisting of a burnt offering of thirteen young bulls, two rams and fourteen male lambs a year old, all without defect. With each of the thirteen bulls offer a grain offering of three-tenths of an ephah of the finest flour mixed with oil; with each of the two rams, two-tenths; and with each of the fourteen lambs, one-tenth. Include one male goat as a sin offering, in addition to the regular burnt offering with its grain offering and drink offering.";
+        this.book = 2 /* Numbers */;
+        this.chapter = 29;
+        this.verse = 12;
+
+        this.canBeCarriedOutToday = false;
+        this.requiresLivingInIsrael = true;
+        this.requiresTemple = true;
+        this.commentary = "The additional offerings to be brought on the first day of Sukkot consist of animal sacrifices and food offerings. This requires the presence of a Temple or tabernacle in which to offfer these sacrifices, as well as a priesthood to serve in God's house. Since neither exists, I've deemed this commandment as requiring living in Israel, requiring a Temple, and thus cannot be carried out today.";
+
+        this.type = 0 /* Positive */;
+        this.christianObservance = 0 /* None */;
+        this.messianicObservance = 2 /* RecognizedButPrevented */;
+        this.jewishObservance = 2 /* RecognizedButPrevented */;
+        this.number = 390;
+
+        this.children = [];
+    }
+    return BringSukkotOfferingsFirstDay;
 })(CommandmentBase);
 ///<reference path='../commandmentBase.ts' />
 var DontAddCommandments = (function (_super) {
@@ -952,9 +1071,9 @@ var DontAddCommandments = (function (_super) {
         this.requiresLivingInIsrael = false;
 
         this.type = 1 /* Negative */;
-        this.christianObservance = 2 /* Binding */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 580;
 
         this.children = [new DontRemoveCommandments()];
@@ -978,8 +1097,8 @@ var DontRemoveCommandments = (function (_super) {
 
         this.type = 1 /* Negative */;
         this.christianObservance = 1 /* Recognized */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 581;
     }
     return DontRemoveCommandments;
@@ -1001,11 +1120,11 @@ var KeepAllGodsCommandments = (function (_super) {
 
         this.type = 0 /* Positive */;
         this.christianObservance = 1 /* Recognized */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 11;
 
-        this.children = [new TeachYourChildrenCommandments(), new RememberCommandmentsThroughTassels(), new DontAddCommandments()];
+        this.children = [new TeachYourChildrenCommandments(), new RememberCommandmentsThroughTassels(), new DontAddCommandments(), new AppearsBeforeGodAtPilgrimFeasts(), new AfflictYourselfOnYomKippur()];
     }
     return KeepAllGodsCommandments;
 })(CommandmentBase);
@@ -1028,8 +1147,8 @@ var RememberCommandmentsThroughTassels = (function (_super) {
     function RememberCommandmentsThroughTassels() {
         _super.call(this);
 
-        this.shortSummary = "Remember them through tassels.";
-        this.text = "The Lord said to Moses, “Speak to the Israelites and say to them: ‘Throughout the generations to come you are to make tassels on the corners of your garments, with a blue cord on each tassel. You will have these tassels to look at and so you will remember all the commands of the Lord, that you may obey them and not prostitute yourselves by chasing after the lusts of your own hearts and eyes. Then you will remember to obey all my commands and will be consecrated to your God.";
+        this.shortSummary = "Remember the commandments <br /> through tassels on your clothes.";
+        this.text = "Throughout the generations to come you are to make tassels on the corners of your garments, with a blue cord on each tassel. You will have these tassels to look at and so you will remember all the commands of the Lord, that you may obey them and not prostitute yourselves by chasing after the lusts of your own hearts and eyes. Then you will remember to obey all my commands and will be consecrated to your God.";
         this.book = 2 /* Numbers */;
         this.chapter = 15;
         this.verse = 37;
@@ -1040,7 +1159,7 @@ var RememberCommandmentsThroughTassels = (function (_super) {
         this.type = 0 /* Positive */;
         this.christianObservance = 0 /* None */;
         this.messianicObservance = 1 /* Recognized */;
-        this.jewishObservance = 2 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 25;
 
         this.children = [];
@@ -1053,7 +1172,7 @@ var TeachYourChildrenCommandments = (function (_super) {
     function TeachYourChildrenCommandments() {
         _super.call(this);
 
-        this.shortSummary = "Teach them to your children.";
+        this.shortSummary = "Teach your children <br /> the commandments.";
         this.text = "These commanmdents that I give to you this day are to be on your hearts. Impress them on your children. Talk about them when you sit at home and when you walk along the road, when you lie down and when you get up.";
         this.book = 3 /* Deuteronomy */;
         this.chapter = 6;
@@ -1064,8 +1183,8 @@ var TeachYourChildrenCommandments = (function (_super) {
 
         this.type = 0 /* Positive */;
         this.christianObservance = 1 /* Recognized */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 22;
     }
     return TeachYourChildrenCommandments;
@@ -1088,9 +1207,14 @@ var CommandmentObedience;
     CommandmentObedience[CommandmentObedience["Recognized"] = 1] = "Recognized";
 
     /*
-    * The commandment is recognized is binding and applicable.
+    * The commandment is generally recognized as binding, but the commandment is unable to be practiced for external reasons. For example, because the lack of a Temple.
     */
-    CommandmentObedience[CommandmentObedience["Binding"] = 2] = "Binding";
+    CommandmentObedience[CommandmentObedience["RecognizedButPrevented"] = 2] = "RecognizedButPrevented";
+
+    /*
+    * The commandment is recognized is binding and widely applied.
+    */
+    CommandmentObedience[CommandmentObedience["Binding"] = 3] = "Binding";
 })(CommandmentObedience || (CommandmentObedience = {}));
 var TorahBook;
 (function (TorahBook) {

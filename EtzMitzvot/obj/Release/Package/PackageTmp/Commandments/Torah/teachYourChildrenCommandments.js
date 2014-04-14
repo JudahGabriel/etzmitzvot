@@ -9,7 +9,7 @@ var TeachYourChildrenCommandments = (function (_super) {
     function TeachYourChildrenCommandments() {
         _super.call(this);
 
-        this.shortSummary = "Teach them to your children.";
+        this.shortSummary = "Teach your children <br /> the commandments.";
         this.text = "These commanmdents that I give to you this day are to be on your hearts. Impress them on your children. Talk about them when you sit at home and when you walk along the road, when you lie down and when you get up.";
         this.book = 3 /* Deuteronomy */;
         this.chapter = 6;
@@ -20,8 +20,8 @@ var TeachYourChildrenCommandments = (function (_super) {
 
         this.type = 0 /* Positive */;
         this.christianObservance = 1 /* Recognized */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 22;
     }
     return TeachYourChildrenCommandments;

@@ -20,8 +20,8 @@ var DontRemoveCommandments = (function (_super) {
 
         this.type = 1 /* Negative */;
         this.christianObservance = 1 /* Recognized */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 581;
     }
     return DontRemoveCommandments;

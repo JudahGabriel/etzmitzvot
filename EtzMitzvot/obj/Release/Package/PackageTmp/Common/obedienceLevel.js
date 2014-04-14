@@ -4,5 +4,7 @@
 
     CommandmentObedience[CommandmentObedience["Recognized"] = 1] = "Recognized";
 
-    CommandmentObedience[CommandmentObedience["Binding"] = 2] = "Binding";
+    CommandmentObedience[CommandmentObedience["RecognizedButPrevented"] = 2] = "RecognizedButPrevented";
+
+    CommandmentObedience[CommandmentObedience["Binding"] = 3] = "Binding";
 })(CommandmentObedience || (CommandmentObedience = {}));

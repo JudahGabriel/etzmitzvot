@@ -20,11 +20,11 @@ var KeepAllGodsCommandments = (function (_super) {
 
         this.type = 0 /* Positive */;
         this.christianObservance = 1 /* Recognized */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 11;
 
-        this.children = [new TeachYourChildrenCommandments(), new RememberCommandmentsThroughTassels(), new DontAddCommandments()];
+        this.children = [new TeachYourChildrenCommandments(), new RememberCommandmentsThroughTassels(), new DontAddCommandments(), new AppearsBeforeGodAtPilgrimFeasts(), new AfflictYourselfOnYomKippur()];
     }
     return KeepAllGodsCommandments;
 })(CommandmentBase);

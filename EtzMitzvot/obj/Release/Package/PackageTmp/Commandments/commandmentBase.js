@@ -12,6 +12,22 @@
         return this.book === 3 /* Deuteronomy */ ? "Deuteronomy" : this.book === 0 /* Exodus */ ? "Exodus" : this.book === 1 /* Leviticus */ ? "Leviticus" : "Numbers";
     };
 
+    CommandmentBase.prototype.getShortSummaryParts = function () {
+        return this.shortSummary.split("<br />");
+    };
+
+    CommandmentBase.prototype.getChildrenOrHidden = function () {
+        if (this.hiddenChildren) {
+            return this.hiddenChildren;
+        }
+
+        if (this.children) {
+            return this.children;
+        }
+
+        return [];
+    };
+
     Object.defineProperty(CommandmentBase.prototype, "isExpanded", {
         get: function () {
             return this.hiddenChildren === null;

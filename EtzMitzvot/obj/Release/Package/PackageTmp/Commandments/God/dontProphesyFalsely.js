@@ -20,9 +20,9 @@ var DontProphesyFalsely = (function (_super) {
         this.requiresTemple = false;
 
         this.type = 1 /* Negative */;
-        this.christianObservance = 2 /* Binding */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 44;
 
         this.children = [

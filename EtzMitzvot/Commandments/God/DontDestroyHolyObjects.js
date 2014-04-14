@@ -21,7 +21,7 @@ var DontDestroyHolyObjects = (function (_super) {
         this.type = 1 /* Negative */;
         this.christianObservance = 1 /* Recognized */;
         this.messianicObservance = 1 /* Recognized */;
-        this.jewishObservance = 2 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 8;
 
         this.children = [];

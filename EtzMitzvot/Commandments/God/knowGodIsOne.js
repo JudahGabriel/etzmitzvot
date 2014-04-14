@@ -19,9 +19,9 @@ var KnowGodIsOne = (function (_super) {
         this.requiresLivingInIsrael = false;
 
         this.type = 0 /* Positive */;
-        this.christianObservance = 2 /* Binding */;
-        this.messianicObservance = 2 /* Binding */;
-        this.jewishObservance = 2 /* Binding */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
         this.number = 3;
 
         this.children = [];

@@ -19,7 +19,6 @@
     y: number;
     x0: number;
     y0: number;
-    widthMultiplier = 1;
 
     private hiddenChildren: CommandmentBase[] = null;
 
@@ -31,11 +30,27 @@
         return bookName + " " + this.chapter + ":" + this.verse;
     }
 
-    getBookString() {
+    getBookString(): string {
         return this.book === TorahBook.Deuteronomy ? "Deuteronomy" :
             this.book === TorahBook.Exodus ? "Exodus" :
             this.book === TorahBook.Leviticus ? "Leviticus" :
             "Numbers";
+    }
+
+    getShortSummaryParts(): string[]{
+        return this.shortSummary.split("<br />");
+    }
+
+    getChildrenOrHidden(): CommandmentBase[] {
+        if (this.hiddenChildren) {
+            return this.hiddenChildren;
+        } 
+
+        if (this.children) {
+            return this.children;
+        }
+
+        return [];
     }
 
     get isExpanded(): boolean {
