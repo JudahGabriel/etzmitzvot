@@ -24,7 +24,9 @@ var AfflictYourselfOnYomKippur = (function (_super) {
         this.jewishObservance = 3 /* Binding */;
         this.number = 94;
 
-        this.children = [];
+        this.children = [
+            new FastOnYomKippur()
+        ];
     }
     return AfflictYourselfOnYomKippur;
 })(CommandmentBase);

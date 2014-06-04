@@ -20,6 +20,7 @@ class AfflictYourselfOnYomKippur extends CommandmentBase {
         this.number = 94;
 
         this.children = [
+            new FastOnYomKippur()
         ];
     }
 } 

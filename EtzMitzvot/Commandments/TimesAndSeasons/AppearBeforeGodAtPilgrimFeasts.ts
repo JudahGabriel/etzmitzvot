@@ -21,7 +21,7 @@ class AppearsBeforeGodAtPilgrimFeasts extends CommandmentBase {
         this.number = 420;
 
         this.children = [
-            new BringSukkotOfferingsFirstDay()
+            new CelebrateOnPilgrimFeasts()
         ];
     }
 }  

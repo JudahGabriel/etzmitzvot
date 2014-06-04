@@ -26,7 +26,7 @@ var AppearsBeforeGodAtPilgrimFeasts = (function (_super) {
         this.number = 420;
 
         this.children = [
-            new BringSukkotOfferingsFirstDay()
+            new CelebrateOnPilgrimFeasts()
         ];
     }
     return AppearsBeforeGodAtPilgrimFeasts;

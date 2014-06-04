@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sitemanifest>
-  <IisApp path="E:\Dev\Projs\GitHub\commandments\EtzMitzvot\obj\Release\Package\PackageTmp" managedRuntimeVersion="v4.0" />
-  <setAcl path="E:\Dev\Projs\GitHub\commandments\EtzMitzvot\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
-  <setAcl path="E:\Dev\Projs\GitHub\commandments\EtzMitzvot\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
+  <IisApp path="C:\Users\Judah\Documents\Dev\commandments\EtzMitzvot\obj\Release\Package\PackageTmp" managedRuntimeVersion="v4.0" />
+  <setAcl path="C:\Users\Judah\Documents\Dev\commandments\EtzMitzvot\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
+  <setAcl path="C:\Users\Judah\Documents\Dev\commandments\EtzMitzvot\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
 </sitemanifest>

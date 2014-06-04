@@ -10,3 +10,9 @@ E:\Dev\Projs\GitHub\commandments\EtzMitzvot\obj\Debug\EtzMitzvot.pdb
 E:\Dev\Projs\GitHub\commandments\EtzMitzvot\bin\EtzMitzvot.dll.config
 E:\Dev\Projs\GitHub\commandments\EtzMitzvot\bin\EtzMitzvot.dll
 E:\Dev\Projs\GitHub\commandments\EtzMitzvot\bin\EtzMitzvot.pdb
+C:\Users\Judah\Documents\Dev\commandments\EtzMitzvot\bin\EtzMitzvot.dll.config
+C:\Users\Judah\Documents\Dev\commandments\EtzMitzvot\bin\EtzMitzvot.dll
+C:\Users\Judah\Documents\Dev\commandments\EtzMitzvot\bin\EtzMitzvot.pdb
+C:\Users\Judah\Documents\Dev\commandments\EtzMitzvot\obj\Debug\EtzMitzvot.csprojResolveAssemblyReference.cache
+C:\Users\Judah\Documents\Dev\commandments\EtzMitzvot\obj\Debug\EtzMitzvot.dll
+C:\Users\Judah\Documents\Dev\commandments\EtzMitzvot\obj\Debug\EtzMitzvot.pdb
