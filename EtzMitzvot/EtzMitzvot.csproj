@@ -29,7 +29,6 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="index.html" />
-    <Content Include="LICENSE.txt" />
     <Content Include="mitzvotmash.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -83,11 +82,14 @@
     <TypeScriptCompile Include="Commandments\TimesAndSeasons\bringYomTeruahOfferings.ts" />
     <TypeScriptCompile Include="Commandments\TimesAndSeasons\celebrateOnPilgrimFeasts.ts" />
     <TypeScriptCompile Include="Commandments\TimesAndSeasons\dontWorkOnShavuot.ts" />
+    <TypeScriptCompile Include="Commandments\TimesAndSeasons\dontWorkOnYomTeruah.ts" />
     <TypeScriptCompile Include="Commandments\TimesAndSeasons\eatUnleavenedBreadDuringPassover.ts" />
     <TypeScriptCompile Include="Commandments\TimesAndSeasons\fastOnYomKippur.ts" />
     <TypeScriptCompile Include="Commandments\TimesAndSeasons\hearTorahAtEndOf7YearsDuringSukkot.ts" />
     <TypeScriptCompile Include="Commandments\TimesAndSeasons\liveInSukkahDuringSukkot.ts" />
     <TypeScriptCompile Include="Commandments\TimesAndSeasons\restOnShavuot.ts" />
+    <TypeScriptCompile Include="Commandments\TimesAndSeasons\restOnYomTeruah.ts" />
+    <TypeScriptCompile Include="Commandments\TimesAndSeasons\soundShofarOnYomTeruah.ts" />
     <TypeScriptCompile Include="Commandments\Torah\dontAddCommandments.ts" />
     <TypeScriptCompile Include="Commandments\Torah\dontRemoveCommandments.ts" />
     <TypeScriptCompile Include="Commandments\Torah\keepAllGodsCommandments.ts" />

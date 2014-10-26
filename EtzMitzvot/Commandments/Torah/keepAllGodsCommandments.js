@@ -24,7 +24,14 @@ var KeepAllGodsCommandments = (function (_super) {
         this.jewishObservance = 3 /* Binding */;
         this.number = 11;
 
-        this.children = [new TeachYourChildrenCommandments(), new RememberCommandmentsThroughTassels(), new DontAddCommandments(), new AppearsBeforeGodAtPilgrimFeasts(), new AfflictYourselfOnYomKippur()];
+        this.children = [
+            new TeachYourChildrenCommandments(),
+            new RememberCommandmentsThroughTassels(),
+            new DontAddCommandments(),
+            new AppearsBeforeGodAtPilgrimFeasts(),
+            new AfflictYourselfOnYomKippur(),
+            new SoundShofarOnYomTeruah()
+        ];
     }
     return KeepAllGodsCommandments;
 })(CommandmentBase);

@@ -38,7 +38,9 @@
 
         var treeData = [this.root];
 
-        var margin = { top: 50, right: 120, bottom: 20, left: 1550 }, width = 960 - margin.right - margin.left, height = 500 - margin.top - margin.bottom;
+        var margin = { top: 50, right: 120, bottom: 20, left: 1750 };
+        var width = 960 - margin.right - margin.left;
+        var height = 500 - margin.top - margin.bottom;
 
         this.tree = d3.layout.tree().size([height, width]);
 
@@ -366,6 +368,33 @@ var ClingToGod = (function (_super) {
     return ClingToGod;
 })(CommandmentBase);
 ///<reference path='../commandmentBase.ts' />
+var DontCurseGod = (function (_super) {
+    __extends(DontCurseGod, _super);
+    function DontCurseGod() {
+        _super.call(this);
+
+        this.shortSummary = "Don't curse God.";
+        this.text = "You are not to curse God, and you are not to curse a leader of your people.";
+        this.book = 0 /* Exodus */;
+        this.chapter = 22;
+        this.verse = 27;
+
+        this.canBeCarriedOutToday = true;
+        this.requiresLivingInIsrael = false;
+
+        this.type = 1 /* Negative */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
+        this.number = 26;
+
+        this.children = [
+            new DontProfaneGodsName()
+        ];
+    }
+    return DontCurseGod;
+})(CommandmentBase);
+///<reference path='../commandmentBase.ts' />
 var DontDestroyHolyObjects = (function (_super) {
     __extends(DontDestroyHolyObjects, _super);
     function DontDestroyHolyObjects() {
@@ -471,6 +500,32 @@ var DontProphesyFalsely = (function (_super) {
         ];
     }
     return DontProphesyFalsely;
+})(CommandmentBase);
+///<reference path='../commandmentBase.ts' />
+var DontTemptGod = (function (_super) {
+    __extends(DontTemptGod, _super);
+    function DontTemptGod() {
+        _super.call(this);
+
+        this.shortSummary = "Don't tempt God.";
+        this.text = "You shall not tempt the LORD your God.";
+        this.book = 3 /* Deuteronomy */;
+        this.chapter = 6;
+        this.verse = 16;
+
+        this.canBeCarriedOutToday = true;
+        this.requiresLivingInIsrael = false;
+        this.requiresTemple = false;
+
+        this.type = 1 /* Negative */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
+        this.number = 10;
+
+        this.children = [];
+    }
+    return DontTemptGod;
 })(CommandmentBase);
 ///<reference path='../commandmentBase.ts' />
 var FearGod = (function (_super) {
@@ -579,57 +634,32 @@ var ListenToGodsProphet = (function (_super) {
     return ListenToGodsProphet;
 })(CommandmentBase);
 ///<reference path='../commandmentBase.ts' />
-var DontCurseGod = (function (_super) {
-    __extends(DontCurseGod, _super);
-    function DontCurseGod() {
+var LoveGodWithHeartSoulStrength = (function (_super) {
+    __extends(LoveGodWithHeartSoulStrength, _super);
+    function LoveGodWithHeartSoulStrength() {
         _super.call(this);
 
-        this.shortSummary = "Don't curse God.";
-        this.text = "You are not to curse God, and you are not to curse a leader of your people.";
-        this.book = 0 /* Exodus */;
-        this.chapter = 22;
-        this.verse = 27;
-
-        this.canBeCarriedOutToday = true;
-        this.requiresLivingInIsrael = false;
-
-        this.type = 1 /* Negative */;
-        this.christianObservance = 3 /* Binding */;
-        this.messianicObservance = 3 /* Binding */;
-        this.jewishObservance = 3 /* Binding */;
-        this.number = 26;
-
-        this.children = [
-            new DontProfaneGodsName()
-        ];
-    }
-    return DontCurseGod;
-})(CommandmentBase);
-///<reference path='../commandmentBase.ts' />
-var DontTemptGod = (function (_super) {
-    __extends(DontTemptGod, _super);
-    function DontTemptGod() {
-        _super.call(this);
-
-        this.shortSummary = "Don't tempt God.";
-        this.text = "You shall not tempt the LORD your God.";
+        this.shortSummary = "Love God with all your being.";
+        this.text = "Love the LORD your God with all your heart and with all your soul and with all your strength.";
         this.book = 3 /* Deuteronomy */;
         this.chapter = 6;
-        this.verse = 16;
+        this.verse = 5;
 
         this.canBeCarriedOutToday = true;
         this.requiresLivingInIsrael = false;
         this.requiresTemple = false;
 
-        this.type = 1 /* Negative */;
+        this.type = 0 /* Positive */;
         this.christianObservance = 3 /* Binding */;
         this.messianicObservance = 3 /* Binding */;
         this.jewishObservance = 3 /* Binding */;
-        this.number = 10;
+        this.number = 4;
 
-        this.children = [];
+        this.children = [
+            new KeepAllGodsCommandments(), new KnowGodExists()
+        ];
     }
-    return DontTemptGod;
+    return LoveGodWithHeartSoulStrength;
 })(CommandmentBase);
 ///<reference path='../commandmentBase.ts' />
 var DontBearGrudges = (function (_super) {
@@ -792,59 +822,27 @@ var DontTakeRevenge = (function (_super) {
     return DontTakeRevenge;
 })(CommandmentBase);
 ///<reference path='../commandmentBase.ts' />
-var RespectTheElderly = (function (_super) {
-    __extends(RespectTheElderly, _super);
-    function RespectTheElderly() {
+var HonorYourParents = (function (_super) {
+    __extends(HonorYourParents, _super);
+    function HonorYourParents() {
         _super.call(this);
 
-        this.shortSummary = "Respect the elderly.";
-        this.text = "Rise in the presence of the aged, show respect for the elderly and revere your God. I am the LORD.";
-        this.book = 1 /* Leviticus */;
-        this.chapter = 19;
-        this.verse = 32;
+        this.shortSummary = "Honor your parents.";
+        this.text = "Honor your father and your mother, so that you may live long in the land the Lord your God is giving you.";
+        this.book = 0 /* Exodus */;
+        this.chapter = 20;
+        this.verse = 12;
 
         this.canBeCarriedOutToday = true;
         this.requiresLivingInIsrael = false;
-        this.requiresTemple = false;
-
-        this.type = 0 /* Positive */;
-        this.christianObservance = 1 /* Recognized */; // Recognized, because the majority of Jews, Messianics, and Christians don't actually rise in the presence of the aged, but do respect and honor the elderly, or at the very least teach it.
-        this.messianicObservance = 1 /* Recognized */;
-        this.jewishObservance = 1 /* Recognized */;
-        this.number = 23;
-
-        this.children = [
-            new RespectYourParents()
-        ];
-    }
-    return RespectTheElderly;
-})(CommandmentBase);
-///<reference path='../commandmentBase.ts' />
-// Big discussion on this here: http://judahgabriel.blogspot.com/2009/10/judaisms-alien-conversion-program.html
-var LoveSojourners = (function (_super) {
-    __extends(LoveSojourners, _super);
-    function LoveSojourners() {
-        _super.call(this);
-
-        this.shortSummary = "Love the sojourner among you.";
-        this.text = "And you are to love those who are aliens, for you yourselves were aliens in Egypt.";
-        this.book = 3 /* Deuteronomy */;
-        this.chapter = 10;
-        this.verse = 19;
-
-        this.canBeCarriedOutToday = true;
-        this.requiresLivingInIsrael = false; // Tough to say. It's intended for Israel's citizens, directing them to treat foreigners kindly.
-        this.requiresTemple = false;
 
         this.type = 0 /* Positive */;
         this.christianObservance = 3 /* Binding */;
         this.messianicObservance = 3 /* Binding */;
         this.jewishObservance = 3 /* Binding */;
-        this.number = 14;
-
-        this.children = [];
+        this.number = 584;
     }
-    return LoveSojourners;
+    return HonorYourParents;
 })(CommandmentBase);
 ///<reference path='../commandmentBase.ts' />
 var LoveNeighborAsSelf = (function (_super) {
@@ -874,6 +872,33 @@ var LoveNeighborAsSelf = (function (_super) {
     return LoveNeighborAsSelf;
 })(CommandmentBase);
 ///<reference path='../commandmentBase.ts' />
+// Big discussion on this here: http://judahgabriel.blogspot.com/2009/10/judaisms-alien-conversion-program.html
+var LoveSojourners = (function (_super) {
+    __extends(LoveSojourners, _super);
+    function LoveSojourners() {
+        _super.call(this);
+
+        this.shortSummary = "Love the sojourner among you.";
+        this.text = "And you are to love those who are aliens, for you yourselves were aliens in Egypt.";
+        this.book = 3 /* Deuteronomy */;
+        this.chapter = 10;
+        this.verse = 19;
+
+        this.canBeCarriedOutToday = true;
+        this.requiresLivingInIsrael = false; // Tough to say. It's intended for Israel's citizens, directing them to treat foreigners kindly.
+        this.requiresTemple = false;
+
+        this.type = 0 /* Positive */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
+        this.number = 14;
+
+        this.children = [];
+    }
+    return LoveSojourners;
+})(CommandmentBase);
+///<reference path='../commandmentBase.ts' />
 var RebukeFrankly = (function (_super) {
     __extends(RebukeFrankly, _super);
     function RebukeFrankly() {
@@ -900,27 +925,32 @@ var RebukeFrankly = (function (_super) {
     return RebukeFrankly;
 })(CommandmentBase);
 ///<reference path='../commandmentBase.ts' />
-var HonorYourParents = (function (_super) {
-    __extends(HonorYourParents, _super);
-    function HonorYourParents() {
+var RespectTheElderly = (function (_super) {
+    __extends(RespectTheElderly, _super);
+    function RespectTheElderly() {
         _super.call(this);
 
-        this.shortSummary = "Honor your parents.";
-        this.text = "Honor your father and your mother, so that you may live long in the land the Lord your God is giving you.";
-        this.book = 0 /* Exodus */;
-        this.chapter = 20;
-        this.verse = 12;
+        this.shortSummary = "Respect the elderly.";
+        this.text = "Rise in the presence of the aged, show respect for the elderly and revere your God. I am the LORD.";
+        this.book = 1 /* Leviticus */;
+        this.chapter = 19;
+        this.verse = 32;
 
         this.canBeCarriedOutToday = true;
         this.requiresLivingInIsrael = false;
+        this.requiresTemple = false;
 
         this.type = 0 /* Positive */;
-        this.christianObservance = 3 /* Binding */;
-        this.messianicObservance = 3 /* Binding */;
-        this.jewishObservance = 3 /* Binding */;
-        this.number = 584;
+        this.christianObservance = 1 /* Recognized */; // Recognized, because the majority of Jews, Messianics, and Christians don't actually rise in the presence of the aged, but do respect and honor the elderly, or at the very least teach it.
+        this.messianicObservance = 1 /* Recognized */;
+        this.jewishObservance = 1 /* Recognized */;
+        this.number = 23;
+
+        this.children = [
+            new RespectYourParents()
+        ];
     }
-    return HonorYourParents;
+    return RespectTheElderly;
 })(CommandmentBase);
 ///<reference path='../commandmentBase.ts' />
 var RespectYourParents = (function (_super) {
@@ -1199,6 +1229,32 @@ var DontWorkOnShavuot = (function (_super) {
     return DontWorkOnShavuot;
 })(CommandmentBase);
 ///<reference path='../commandmentBase.ts' />
+var DontWorkOnYomTeruah = (function (_super) {
+    __extends(DontWorkOnYomTeruah, _super);
+    function DontWorkOnYomTeruah() {
+        _super.call(this);
+
+        this.shortSummary = "Don't work on Yom Teruah";
+        this.text = "Tell the people of Israel, ‘In the seventh month, the first of the month is to be for you a day of complete rest for remembering, a holy convocation announced with blasts on the shofar. Do not do any kind of ordinary work, and bring an offering made by fire to the LORD.’";
+        this.book = 1 /* Leviticus */;
+        this.chapter = 23;
+        this.verse = 25;
+
+        this.canBeCarriedOutToday = true;
+        this.requiresLivingInIsrael = false;
+        this.requiresTemple = false;
+
+        this.type = 1 /* Negative */;
+        this.christianObservance = 0 /* None */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
+        this.number = 103;
+
+        this.children = [];
+    }
+    return DontWorkOnYomTeruah;
+})(CommandmentBase);
+///<reference path='../commandmentBase.ts' />
 var EatUnleavenedBreadDuringPassover = (function (_super) {
     __extends(EatUnleavenedBreadDuringPassover, _super);
     function EatUnleavenedBreadDuringPassover() {
@@ -1338,6 +1394,63 @@ var RestOnShavuot = (function (_super) {
     return RestOnShavuot;
 })(CommandmentBase);
 ///<reference path='../commandmentBase.ts' />
+var RestOnYomTeruah = (function (_super) {
+    __extends(RestOnYomTeruah, _super);
+    function RestOnYomTeruah() {
+        _super.call(this);
+
+        this.shortSummary = "Rest on Yom Teruah";
+        this.text = "On the first day of the seventh month you are to have a day of rest, a sacred assembly commemorated with trumpet blasts.";
+        this.book = 1 /* Leviticus */;
+        this.chapter = 23;
+        this.verse = 24;
+
+        this.canBeCarriedOutToday = true;
+        this.requiresLivingInIsrael = false;
+        this.requiresTemple = false;
+
+        this.type = 0 /* Positive */;
+        this.christianObservance = 0 /* None */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
+        this.number = 102;
+
+        this.children = [
+            new DontWorkOnYomTeruah()
+        ];
+    }
+    return RestOnYomTeruah;
+})(CommandmentBase);
+///<reference path='../commandmentBase.ts' />
+var SoundShofarOnYomTeruah = (function (_super) {
+    __extends(SoundShofarOnYomTeruah, _super);
+    function SoundShofarOnYomTeruah() {
+        _super.call(this);
+
+        this.shortSummary = "Sound the shofar on Yom Teruah";
+        this.text = "In the seventh month, on the first day of the month, you are to have a holy convocation; do not do any kind of ordinary work; it is a day of blowing the shofar for you.";
+        this.book = 2 /* Numbers */;
+        this.chapter = 29;
+        this.verse = 1;
+
+        this.canBeCarriedOutToday = true;
+        this.requiresLivingInIsrael = false;
+        this.requiresTemple = false;
+
+        this.type = 0 /* Positive */;
+        this.christianObservance = 0 /* None */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
+        this.number = 116;
+
+        this.children = [
+            new RestOnYomTeruah(),
+            new BringYomTeruahOfferings()
+        ];
+    }
+    return SoundShofarOnYomTeruah;
+})(CommandmentBase);
+///<reference path='../commandmentBase.ts' />
 var DontAddCommandments = (function (_super) {
     __extends(DontAddCommandments, _super);
     function DontAddCommandments() {
@@ -1406,7 +1519,14 @@ var KeepAllGodsCommandments = (function (_super) {
         this.jewishObservance = 3 /* Binding */;
         this.number = 11;
 
-        this.children = [new TeachYourChildrenCommandments(), new RememberCommandmentsThroughTassels(), new DontAddCommandments(), new AppearsBeforeGodAtPilgrimFeasts(), new AfflictYourselfOnYomKippur()];
+        this.children = [
+            new TeachYourChildrenCommandments(),
+            new RememberCommandmentsThroughTassels(),
+            new DontAddCommandments(),
+            new AppearsBeforeGodAtPilgrimFeasts(),
+            new AfflictYourselfOnYomKippur(),
+            new SoundShofarOnYomTeruah()
+        ];
     }
     return KeepAllGodsCommandments;
 })(CommandmentBase);
@@ -1505,32 +1625,4 @@ var TorahBook;
     TorahBook[TorahBook["Numbers"] = 2] = "Numbers";
     TorahBook[TorahBook["Deuteronomy"] = 3] = "Deuteronomy";
 })(TorahBook || (TorahBook = {}));
-///<reference path='../commandmentBase.ts' />
-var LoveGodWithHeartSoulStrength = (function (_super) {
-    __extends(LoveGodWithHeartSoulStrength, _super);
-    function LoveGodWithHeartSoulStrength() {
-        _super.call(this);
-
-        this.shortSummary = "Love God with all your being.";
-        this.text = "Love the LORD your God with all your heart and with all your soul and with all your strength.";
-        this.book = 3 /* Deuteronomy */;
-        this.chapter = 6;
-        this.verse = 5;
-
-        this.canBeCarriedOutToday = true;
-        this.requiresLivingInIsrael = false;
-        this.requiresTemple = false;
-
-        this.type = 0 /* Positive */;
-        this.christianObservance = 3 /* Binding */;
-        this.messianicObservance = 3 /* Binding */;
-        this.jewishObservance = 3 /* Binding */;
-        this.number = 4;
-
-        this.children = [
-            new KeepAllGodsCommandments(), new KnowGodExists()
-        ];
-    }
-    return LoveGodWithHeartSoulStrength;
-})(CommandmentBase);
 //# sourceMappingURL=mitzvotmash.js.map

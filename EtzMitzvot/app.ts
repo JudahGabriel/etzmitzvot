@@ -35,9 +35,9 @@
 
         var treeData = [this.root];
 
-        var margin = { top: 50, right: 120, bottom: 20, left: 1550 },
-            width = 960 - margin.right - margin.left,
-            height = 500 - margin.top - margin.bottom;
+        var margin = { top: 50, right: 120, bottom: 20, left: 1750 };
+        var width = 960 - margin.right - margin.left;
+        var height = 500 - margin.top - margin.bottom;
 
         this.tree = d3.layout.tree()
             .size([height, width]);
