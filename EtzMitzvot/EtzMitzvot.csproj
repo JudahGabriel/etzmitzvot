@@ -9,12 +9,13 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.4</TypeScriptToolsVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app.css">
@@ -27,18 +28,25 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\Christianity.png" />
+    <Content Include="Content\images\Judaism.png" />
+    <Content Include="Content\images\LandOfIsrael.png" />
+    <Content Include="Content\images\MessianicJudaism.png" />
+    <Content Include="Content\images\Temple.jpg" />
+    <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="index.html" />
     <Content Include="mitzvotmash.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\d3.js" />
-    <Content Include="Scripts\d3.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Scripts\d3\d3.js" />
+    <Content Include="Scripts\d3\d3.min.js" />
+    <Content Include="Scripts\d3\LICENSE" />
     <None Include="Scripts\jquery-1.9.0.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.0.js" />
     <Content Include="Scripts\jquery-1.9.0.min.js" />
@@ -48,31 +56,45 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
-    <TypeScriptCompile Include="Commandments\God\acknowledgeGodAsHoly.ts" />
-    <TypeScriptCompile Include="Commandments\God\blessGodAfterEating.ts" />
-    <TypeScriptCompile Include="Commandments\God\clingToGod.ts" />
+    <TypeScriptCompile Include="Commandments\God\AcknowledgeGodAsHoly.ts" />
+    <TypeScriptCompile Include="Commandments\God\BlessGodAfterEating.ts" />
+    <TypeScriptCompile Include="Commandments\God\ClingToGod.ts" />
     <TypeScriptCompile Include="Commandments\God\dontDestroyHolyObjects.ts" />
-    <TypeScriptCompile Include="Commandments\God\dontFearFalseProphet.ts" />
-    <TypeScriptCompile Include="Commandments\God\dontProfaneGodsName.ts" />
-    <TypeScriptCompile Include="Commandments\God\dontProphesyFalsely.ts" />
-    <TypeScriptCompile Include="Commandments\God\fearGod.ts" />
-    <TypeScriptCompile Include="Commandments\God\knowGodExists.ts" />
-    <TypeScriptCompile Include="Commandments\God\knowGodIsOne.ts" />
+    <TypeScriptCompile Include="Commandments\God\DontFearFalseProphet.ts" />
+    <TypeScriptCompile Include="Commandments\God\DontProfaneGodsName.ts" />
+    <TypeScriptCompile Include="Commandments\God\DontProphesyFalsely.ts" />
+    <TypeScriptCompile Include="Commandments\God\FearGod.ts" />
+    <TypeScriptCompile Include="Commandments\God\KnowGodExists.ts" />
+    <TypeScriptCompile Include="Commandments\God\KnowGodIsOne.ts" />
     <TypeScriptCompile Include="Commandments\God\listenToGodsProphet.ts" />
-    <TypeScriptCompile Include="Commandments\God\dontCurseGod.ts" />
-    <TypeScriptCompile Include="Commandments\God\dontTemptGod.ts" />
-    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\dontBearGrudges.ts" />
-    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\dontEmbarrassOthers.ts" />
-    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\dontHateBrother.ts" />
-    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\dontOppressWeak.ts" />
-    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\dontSpeakEvil.ts" />
-    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\dontTakeRevenge.ts" />
-    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\respectElderly.ts" />
-    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\loveSojourners.ts" />
-    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\loveNeighborAsSelf.ts" />
-    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\rebukeFrankly.ts" />
-    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\honorYourParents.ts" />
-    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\respectYourParents.ts" />
+    <TypeScriptCompile Include="Commandments\God\DontCurseGod.ts" />
+    <TypeScriptCompile Include="Commandments\God\DontTemptGod.ts" />
+    <TypeScriptCompile Include="Commandments\Idolatry\BurnIdolatrousCity.ts" />
+    <TypeScriptCompile Include="Commandments\Idolatry\DestroyIdolatrousWorshipPlaces.ts" />
+    <TypeScriptCompile Include="Commandments\Idolatry\DetestIdolatry.ts" />
+    <TypeScriptCompile Include="Commandments\Idolatry\DontBenefitFromIdolatryCity.ts" />
+    <TypeScriptCompile Include="Commandments\Idolatry\DontBowToIdols.ts" />
+    <TypeScriptCompile Include="Commandments\Idolatry\DontEnticeOthersToIdolatry.ts" />
+    <TypeScriptCompile Include="Commandments\Idolatry\DontInquireIntoIdolatry.ts" />
+    <TypeScriptCompile Include="Commandments\Idolatry\DontSetupStatuesForWorship.ts" />
+    <TypeScriptCompile Include="Commandments\Idolatry\DontTurnCitiesToIdolatry.ts" />
+    <TypeScriptCompile Include="Commandments\Idolatry\DontHaveOtherGods.ts" />
+    <TypeScriptCompile Include="Commandments\Idolatry\DontWorshipIdols.ts" />
+    <TypeScriptCompile Include="Commandments\Idolatry\DontBenefitFromIdols.ts" />
+    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\DontEngageInHomosexuality.ts" />
+    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\DontBearGrudges.ts" />
+    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\DontEmbarrassOthers.ts" />
+    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\DontHateBrother.ts" />
+    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\DontOppressWeak.ts" />
+    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\DontSpeakEvil.ts" />
+    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\DontTakeRevenge.ts" />
+    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\MarryAWife.ts" />
+    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\RespectElderly.ts" />
+    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\LoveSojourners.ts" />
+    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\LoveNeighborAsSelf.ts" />
+    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\RebukeFrankly.ts" />
+    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\HonorYourParents.ts" />
+    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\RespectYourParents.ts" />
     <TypeScriptCompile Include="Commandments\TimesAndSeasons\afflictYourselfOnYomKippur.ts" />
     <TypeScriptCompile Include="Commandments\TimesAndSeasons\appearBeforeGodAtPilgrimFeasts.ts" />
     <TypeScriptCompile Include="Commandments\TimesAndSeasons\bringShavuotOfferings.ts" />
@@ -99,7 +121,7 @@
     <TypeScriptCompile Include="Common\obedienceLevel.ts" />
     <TypeScriptCompile Include="Common\torahBook.ts" />
     <TypeScriptCompile Include="Commandments\commandmentBase.ts" />
-    <TypeScriptCompile Include="Commandments\God\loveGodWithAllYourBeing.ts" />
+    <TypeScriptCompile Include="Commandments\God\LoveGodWithAllYourBeing.ts" />
     <TypeScriptCompile Include="Scripts\typings\bootstrap\bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\d3\d3.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\d3\plugins\d3.superformula.d.ts" />
@@ -122,7 +144,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Commandments\Idolatry\" />
     <Folder Include="Commandments\SacrificesAndOfferings\" />
   </ItemGroup>
   <PropertyGroup>

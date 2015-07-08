@@ -2,25 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-
     <title>The Greatest Commandments Project</title>
-
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="content/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="app.css" />
 </head>
 
 <body>
-    <script src="scripts/d3.min.js"></script>
+    <script src="scripts/d3/d3.min.js"></script>
     <script src="scripts/jquery-1.9.0.min.js"></script>
     <script src="scripts/bootstrap.min.js"></script>
     <script src="Scripts/knockout-3.1.0.js"></script>
-    <script src="mitzvotmash.js"></script>
-    <link type="text/css" rel="stylesheet" href="content/bootstrap.min.css" />
-    <link type="text/css" rel="stylesheet" href="app.css" />
+    <script src="mitzvotmash.js?cacheBust=June30th2015"></script>
 
     <div id="mitzvotPopoverTemplate" style="display: none;">
-        <blockquote>
-            <p>{{text}}</p>
-            <footer>{{book}} {{chapter}}:{{verse}}</footer>
-        </blockquote>
+        <div class="mitzvot-popover">
+            <blockquote>
+                <p>{{text}}</p>
+                <footer>{{book}} {{chapter}}:{{verse}}</footer>
+            </blockquote>
+            <h5>Observance</h5>
+            <ul class="list-unstyled">
+                <li><img class="img-circle religion-icon" src="Content/images/Judaism.png" /> - {{observanceJudaism}}</li>
+                <li><img class="img-circle religion-icon" src="Content/images/Christianity.png" /> - {{observanceChristianity}}</li>
+                <li><img class="img-circle religion-icon" src="Content/images/MessianicJudaism.png" /> - {{observanceMessianic}}</li>
+            </ul>
+        </div>
     </div>
 
     <div id="headerContainer" class="container" style="text-align: center; padding-left: 50px;">

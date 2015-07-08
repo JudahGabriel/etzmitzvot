@@ -1,4 +1,4 @@
-﻿var TorahBook;
+var TorahBook;
 (function (TorahBook) {
     TorahBook[TorahBook["Exodus"] = 0] = "Exodus";
     TorahBook[TorahBook["Leviticus"] = 1] = "Leviticus";

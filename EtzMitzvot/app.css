@@ -3,8 +3,8 @@
   height: 100%;
 }
 svg {
-  width: 3600px;
-  height: 1000px;
+  width: 3800px;
+  height: 1200px;
 }
 .node {
   cursor: pointer;
@@ -35,8 +35,19 @@ svg {
   font: 17px sans-serif;
 }
 .popover {
-  min-width: 400px;
+  min-width: 600px;
 }
+.popover blockquote {
+    font-size: 14px;
+}
+.popover .religion-icon {
+	max-width: 32px;
+    max-height: 32px;
+    padding: 1px;
+	box-shadow: 0 0 5px 1px silver;
+	margin-top: 3px;
+}
+
 .link {
   fill: none;
   stroke: #ccc;

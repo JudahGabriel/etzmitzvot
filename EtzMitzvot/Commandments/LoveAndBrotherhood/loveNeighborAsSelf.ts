@@ -20,7 +20,7 @@ class LoveNeighborAsSelf extends CommandmentBase {
         this.number = 13;
 
         this.children = [
-            new RespectTheElderly(), new LoveSojourners(), new DontHateBrother()
+            new RespectTheElderly(), new LoveSojourners(), new DontHateBrother(), new MarryAWife()
         ];
     }
 } 

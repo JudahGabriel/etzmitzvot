@@ -1,7 +1,7 @@
 ﻿class app {
     root: CommandmentBase;
-    tree: any;
-    svg: D3.Selection;
+    tree: d3.layout.Tree<d3.layout.tree.Node>;
+    svg: d3.Selection<any>;
     duration = 750;
     diagonal: any;
     widthPerNode = 250;
@@ -21,9 +21,20 @@
 
         this.commandmentsList = this.getCommandmentsList();
         this.commandmentsDoneCount(this.commandmentsList.length);
+        
+        this.printNextCommandmentsToMap();
 
         ko.applyBindings(this, document.querySelector("#headerContainer"));
-        console.info("applied bindings", this.commandmentsDonePercent());
+    }
+
+    printNextCommandmentsToMap() {
+        var orderedMitzvot = this.commandmentsList.sort((a: CommandmentBase, b: CommandmentBase) => a.number > b.number ? 1 : a.number === b.number ? 0 : -1);
+        for (var i = 0; i <= 613; i++) {
+            if (!orderedMitzvot[i] || orderedMitzvot[i].number !== (i + 1)) {
+                console.log("Next commandment to map is", i + 1);
+                break;
+            }
+        }
     }
 
     createTree() {
@@ -65,50 +76,53 @@
 
         $(node).popover({
             container: 'body',
-            placement: 'auto top',
+            placement: 'auto right',
             trigger: 'hover',
             html: true,
             delay: 100,
-            title: commandment.shortSummary,
+            title: commandment.shortSummary.replace("<br />", ""),
             content: function () {
                 return template
                     .replace("{{text}}", commandment.text)
                     .replace("{{book}}", commandment.getBookString())
                     .replace("{{chapter}}", commandment.chapter.toString())
-                    .replace("{{verse}}", commandment.verse.toString());
+                    .replace("{{verse}}", commandment.verse.toString())
+                    .replace("{{observanceJudaism}}", commandment.getObservanceText("Jews", commandment.jewishObservance))
+                    .replace("{{observanceChristianity}}", commandment.getObservanceText("Christians", commandment.christianObservance))
+                    .replace("{{observanceMessianic}}", commandment.getObservanceText("Messianics", commandment.messianicObservance))
             }
         });
     }
     
     update(source) {
         // Compute the new tree layout.
-        var nodes = this.tree.nodes(this.root).reverse();
+        var nodes = this.tree.nodes(<any>this.root).reverse();
         var links = this.tree.links(nodes);
 
-        var nodesByDepth = [];
+        var byDepthNodes = [];
         nodes.forEach((d) => {
             d.y = d.depth * this.heightPerNode;
 
-            var depthNodes = nodesByDepth[d.depth];
+            var depthNodes = byDepthNodes[d.depth];
             if (!depthNodes) {
-                nodesByDepth[d.depth] = [d];
+                byDepthNodes[d.depth] = [d];
             } else {
                 depthNodes.push(d);
             }
         });
 
-        nodesByDepth.forEach((nodesAtDepth) => {
-            nodesAtDepth.forEach((n, index: number) => {
-                var totalRange = this.widthPerNode * nodesAtDepth.length;
+        byDepthNodes.forEach((atDepthNodes) => {
+            atDepthNodes.forEach((n, index: number) => {
+                var totalRange = this.widthPerNode * atDepthNodes.length;
                 var maxRange = totalRange / 2;
                 n.x = maxRange - (this.widthPerNode * index);
             });
         });
 
-        // Update the nodes…
+        // Update the nodes
         var i = 0;
         var node = this.svg.selectAll("g.node")
-            .data(nodes, (d) => d.id || (d.id = ++i));
+            .data(nodes, (d: any) => d.id || (d.id = ++i));
 
         // Enter any new nodes at the parent's previous position.
         var nodeEnter = node.enter()
@@ -182,7 +196,7 @@
 
         // Update the links…
         var link = this.svg.selectAll("path.link")
-            .data(links, (d) => d.target.id);
+            .data(links, (d: any) => d.target.id);
 
         // Enter any new links at the parent's previous position.
         link.enter().insert("path", "g")

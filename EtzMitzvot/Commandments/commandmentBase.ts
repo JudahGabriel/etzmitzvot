@@ -14,6 +14,7 @@
     requiresLivingInIsrael: boolean;
     requiresTemple: boolean;
     commentary: string;
+    commentaryUrl: string;
 
     x: number;
     y: number;
@@ -39,6 +40,13 @@
 
     getShortSummaryParts(): string[]{
         return this.shortSummary.split("<br />");
+    }
+
+    getObservanceText(group: string, observance: CommandmentObedience): string {
+        return observance === CommandmentObedience.None ? `<span class="text-danger">Disregarded. ${group} do not keep it.</span>` :
+               observance === CommandmentObedience.Recognized ? `<span class="text-warning">Recognized. ${group} recognize it as binding, but do not widely practice it.</span>` :
+               observance === CommandmentObedience.RecognizedButPrevented ? `<span class="text-warning">Accepted. ${group} consider it binding, but can't practice it for external reasons.</span>` :
+               `<span class="text-success">Binding. ${group} consider it binding and widely practice it.</span>`;
     }
 
     getChildrenOrHidden(): CommandmentBase[] {

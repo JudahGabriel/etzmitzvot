@@ -21,7 +21,9 @@ class LoveGodWithHeartSoulStrength extends CommandmentBase {
         this.number = 4;
 
         this.children = [
-            new KeepAllGodsCommandments(), new KnowGodExists()
+            new KeepAllGodsCommandments(),
+            new KnowGodExists(),
+            new DontHaveOtherGods()
         ];
     }
 }
