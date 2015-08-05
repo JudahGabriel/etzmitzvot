@@ -3,7 +3,7 @@
   height: 100%;
 }
 svg {
-  width: 3800px;
+  width: 4000px;
   height: 1200px;
 }
 .node {
@@ -21,7 +21,6 @@ svg {
   font: 16px sans-serif;
   width: 20px;
   fill: black;
-  -webkit-text-shadow: 1px 1px 2px silver;
   text-shadow: 1px 1px 2px gray;
 }
 .node .commandment-text.verse {

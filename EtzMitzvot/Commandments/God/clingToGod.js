@@ -19,8 +19,9 @@ var ClingToGod = (function (_super) {
         this.christianObservance = 3 /* Binding */;
         this.messianicObservance = 3 /* Binding */;
         this.jewishObservance = 3 /* Binding */;
-        this.number = 5;
+        this.number = 12;
         this.children = [
+            new CarryOutRedHeifer()
         ];
     }
     return ClingToGod;

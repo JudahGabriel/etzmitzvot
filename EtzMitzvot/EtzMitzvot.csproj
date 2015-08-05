@@ -76,25 +76,31 @@
     <TypeScriptCompile Include="Commandments\Idolatry\DontBowToIdols.ts" />
     <TypeScriptCompile Include="Commandments\Idolatry\DontEnticeOthersToIdolatry.ts" />
     <TypeScriptCompile Include="Commandments\Idolatry\DontInquireIntoIdolatry.ts" />
+    <TypeScriptCompile Include="Commandments\Idolatry\DontMakeIdolsForYourself.ts" />
     <TypeScriptCompile Include="Commandments\Idolatry\DontSetupStatuesForWorship.ts" />
     <TypeScriptCompile Include="Commandments\Idolatry\DontTurnCitiesToIdolatry.ts" />
     <TypeScriptCompile Include="Commandments\Idolatry\DontHaveOtherGods.ts" />
     <TypeScriptCompile Include="Commandments\Idolatry\DontWorshipIdols.ts" />
     <TypeScriptCompile Include="Commandments\Idolatry\DontBenefitFromIdols.ts" />
+    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\DontCommitAdultery.ts" />
     <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\DontEngageInHomosexuality.ts" />
     <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\DontBearGrudges.ts" />
     <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\DontEmbarrassOthers.ts" />
     <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\DontHateBrother.ts" />
+    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\DontMurder.ts" />
     <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\DontOppressWeak.ts" />
     <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\DontSpeakEvil.ts" />
     <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\DontTakeRevenge.ts" />
-    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\MarryAWife.ts" />
+    <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\MarrySpouse.ts" />
     <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\RespectElderly.ts" />
     <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\LoveSojourners.ts" />
     <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\LoveNeighborAsSelf.ts" />
     <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\RebukeFrankly.ts" />
     <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\HonorYourParents.ts" />
     <TypeScriptCompile Include="Commandments\LoveAndBrotherhood\RespectYourParents.ts" />
+    <TypeScriptCompile Include="Commandments\SacrificesAndOfferings\CarryOutRedHeifer.ts" />
+    <TypeScriptCompile Include="Commandments\SacrificesAndOfferings\PurifyDeathContamination.ts" />
+    <TypeScriptCompile Include="Commandments\SacrificesAndOfferings\RegardDeathAsUnclean.ts" />
     <TypeScriptCompile Include="Commandments\TimesAndSeasons\afflictYourselfOnYomKippur.ts" />
     <TypeScriptCompile Include="Commandments\TimesAndSeasons\appearBeforeGodAtPilgrimFeasts.ts" />
     <TypeScriptCompile Include="Commandments\TimesAndSeasons\bringShavuotOfferings.ts" />
@@ -143,9 +149,7 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commandments\SacrificesAndOfferings\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

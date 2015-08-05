@@ -22,7 +22,7 @@ class DontInquireIntoIdolatry extends CommandmentBase {
         this.number = 24;
 
         this.children = [
-            new DontWorshipIdols()
+            new DontMakeIdolsForYourself()
         ];
     }
 }

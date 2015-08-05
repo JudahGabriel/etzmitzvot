@@ -18,10 +18,13 @@ var app = (function () {
         ko.applyBindings(this, document.querySelector("#headerContainer"));
     }
     app.prototype.printNextCommandmentsToMap = function () {
-        var orderedMitzvot = this.commandmentsList.sort(function (a, b) { return a.number > b.number ? 1 : a.number === b.number ? 0 : -1; });
-        for (var i = 0; i <= 613; i++) {
-            if (!orderedMitzvot[i] || orderedMitzvot[i].number !== (i + 1)) {
-                console.log("Next commandment to map is", i + 1);
+        for (var i = 1; i <= 613; i++) {
+            var existing = this.commandmentsList.filter(function (c) { return c.number === i; });
+            if (existing.length > 1) {
+                console.error("" + existing.length + " commandments have the same number, " + existing[0].number + ".", existing);
+            }
+            if (existing.length === 0) {
+                console.log("Next commandment to map is " + i);
                 break;
             }
         }
@@ -32,7 +35,7 @@ var app = (function () {
         this.root.children = [new LoveGodWithHeartSoulStrength(), new LoveNeighborAsSelf()];
         this.root.getBookChapterVerse = function () { return ""; };
         var treeData = [this.root];
-        var margin = { top: 50, right: 120, bottom: 20, left: 1750 };
+        var margin = { top: 50, right: 120, bottom: 20, left: 1850 };
         var width = 960 - margin.right - margin.left;
         var height = 500 - margin.top - margin.bottom;
         this.tree = d3.layout.tree().size([height, width]);
@@ -155,7 +158,6 @@ var app = (function () {
         return list;
     };
     app.prototype.scrollToTreeTop = function () {
-        console.log($("#headerContainer").height());
         document.body.scrollTop = $("#headerContainer").height();
     };
     return app;
@@ -276,8 +278,9 @@ var ClingToGod = (function (_super) {
         this.christianObservance = 3 /* Binding */;
         this.messianicObservance = 3 /* Binding */;
         this.jewishObservance = 3 /* Binding */;
-        this.number = 5;
+        this.number = 12;
         this.children = [
+            new CarryOutRedHeifer()
         ];
     }
     return ClingToGod;
@@ -541,31 +544,6 @@ var LoveGodWithHeartSoulStrength = (function (_super) {
     return LoveGodWithHeartSoulStrength;
 })(CommandmentBase);
 ///<reference path='../commandmentBase.ts' />
-var SanctifyHisName = (function (_super) {
-    __extends(SanctifyHisName, _super);
-    function SanctifyHisName() {
-        _super.call(this);
-        this.shortSummary = "Sanctify God's name";
-        this.text = "Do not profane my holy name, for I must be acknowledged as holy by the Israelites.";
-        this.book = 1 /* Leviticus */;
-        this.chapter = 22;
-        this.verse = 32;
-        this.canBeCarriedOutToday = true;
-        this.requiresLivingInIsrael = false;
-        this.requiresTemple = false;
-        this.commentary = null;
-        this.type = 0 /* Positive */;
-        this.christianObservance = 3 /* Binding */;
-        this.messianicObservance = 3 /* Binding */;
-        this.jewishObservance = 3 /* Binding */;
-        this.number = 6;
-        this.children = [
-            new DontDestroyHolyObjects()
-        ];
-    }
-    return SanctifyHisName;
-})(CommandmentBase);
-///<reference path='../commandmentBase.ts' />
 var BurnIdolatrousCity = (function (_super) {
     __extends(BurnIdolatrousCity, _super);
     function BurnIdolatrousCity() {
@@ -682,7 +660,7 @@ var DontBenefitFromIdols = (function (_super) {
         this.christianObservance = 3 /* Binding */;
         this.messianicObservance = 3 /* Binding */;
         this.jewishObservance = 3 /* Binding */;
-        this.number = 25;
+        this.number = 54;
         this.children = [
             new DontBenefitFromBurnedIdolatrousCity()
         ];
@@ -782,10 +760,36 @@ var DontInquireIntoIdolatry = (function (_super) {
         this.jewishObservance = 3 /* Binding */;
         this.number = 24;
         this.children = [
-            new DontWorshipIdols()
+            new DontMakeIdolsForYourself()
         ];
     }
     return DontInquireIntoIdolatry;
+})(CommandmentBase);
+///<reference path='../commandmentBase.ts' />
+var DontMakeIdolsForYourself = (function (_super) {
+    __extends(DontMakeIdolsForYourself, _super);
+    function DontMakeIdolsForYourself() {
+        _super.call(this);
+        this.shortSummary = "Don't make idols for yourself.";
+        this.text = "You shall not make for yourself an image in the form of anything in heaven above or on the earth beneath or in the waters below.";
+        this.book = 0 /* Exodus */;
+        this.chapter = 20;
+        this.verse = 4;
+        this.canBeCarriedOutToday = true;
+        this.requiresLivingInIsrael = false;
+        this.requiresTemple = false;
+        this.commentary = null;
+        this.commentaryUrl = null;
+        this.type = 1 /* Negative */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
+        this.number = 29;
+        this.children = [
+            new DontWorshipIdols()
+        ];
+    }
+    return DontMakeIdolsForYourself;
 })(CommandmentBase);
 ///<reference path='../commandmentBase.ts' />
 var DontSetupStatuesForWorship = (function (_super) {
@@ -885,6 +889,30 @@ var DontBearGrudges = (function (_super) {
         ];
     }
     return DontBearGrudges;
+})(CommandmentBase);
+///<reference path='../commandmentBase.ts' />
+var DontCommitAdultery = (function (_super) {
+    __extends(DontCommitAdultery, _super);
+    function DontCommitAdultery() {
+        _super.call(this);
+        this.shortSummary = "Don't commit adultery.";
+        this.text = "Don't have sex with your neighbor's wife and defile yourself with her.";
+        this.book = 1 /* Leviticus */;
+        this.chapter = 18;
+        this.verse = 20;
+        this.canBeCarriedOutToday = true;
+        this.requiresLivingInIsrael = false;
+        this.requiresTemple = false;
+        this.commentaryUrl = null;
+        this.type = 1 /* Negative */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
+        this.jewishObservance = 3 /* Binding */;
+        this.number = 160;
+        this.children = [
+        ];
+    }
+    return DontCommitAdultery;
 })(CommandmentBase);
 ///<reference path='../commandmentBase.ts' />
 var DontEmbarrassOthers = (function (_super) {
@@ -1071,7 +1099,7 @@ var LoveNeighborAsSelf = (function (_super) {
             new RespectTheElderly(),
             new LoveSojourners(),
             new DontHateBrother(),
-            new MarryAWife()
+            new MarrySpouse()
         ];
     }
     return LoveNeighborAsSelf;
@@ -1101,11 +1129,11 @@ var LoveSojourners = (function (_super) {
     return LoveSojourners;
 })(CommandmentBase);
 ///<reference path='../commandmentBase.ts' />
-var MarryAWife = (function (_super) {
-    __extends(MarryAWife, _super);
-    function MarryAWife() {
+var MarrySpouse = (function (_super) {
+    __extends(MarrySpouse, _super);
+    function MarrySpouse() {
         _super.call(this);
-        this.shortSummary = "Marry a wife through <br /> betrothal and wedding contract.";
+        this.shortSummary = "Marry a spouse.";
         this.text = "If any man takes a wife and goes in to her...";
         this.book = 3 /* Deuteronomy */;
         this.chapter = 22;
@@ -1113,16 +1141,18 @@ var MarryAWife = (function (_super) {
         this.canBeCarriedOutToday = true;
         this.requiresLivingInIsrael = false;
         this.requiresTemple = false;
+        this.commentaryUrl = "http://judahgabriel.blogspot.com/2015/07/torah-tuesdays-get-hitched.html";
         this.type = 0 /* Positive */;
-        this.christianObservance = 0 /* None */;
-        this.messianicObservance = 0 /* None */;
+        this.christianObservance = 3 /* Binding */;
+        this.messianicObservance = 3 /* Binding */;
         this.jewishObservance = 3 /* Binding */;
         this.number = 122;
         this.children = [
-            new DontEngageInHomosexuality()
+            new DontEngageInHomosexuality(),
+            new DontCommitAdultery()
         ];
     }
-    return MarryAWife;
+    return MarrySpouse;
 })(CommandmentBase);
 ///<reference path='../commandmentBase.ts' />
 var RebukeFrankly = (function (_super) {
@@ -1191,6 +1221,83 @@ var RespectYourParents = (function (_super) {
         this.children = [new HonorYourParents()];
     }
     return RespectYourParents;
+})(CommandmentBase);
+///<reference path='../commandmentBase.ts' />
+var CarryOutRedHeifer = (function (_super) {
+    __extends(CarryOutRedHeifer, _super);
+    function CarryOutRedHeifer() {
+        _super.call(this);
+        this.shortSummary = "The priest must carry out <br /> the Red Heifer procedure.";
+        this.text = "Tell the people of Israel to bring you a red heifer without defect, in which there is no blemish, and on which a yoke has never come. And you shall give it to Eleazar the priest, and it shall be taken outside the camp and slaughtered before him. And Eleazar the priest shall take some of its blood with his finger, and sprinkle some of its blood toward the front of the tent of meeting seven times. And the heifer shall be burned in his sight. Its skin, its flesh, and its blood, with its dung, shall be burned. And the priest shall take cedarwood and hyssop and scarlet yarn, and throw them into the fire burning the heifer. Then the priest shall wash his clothes and bathe his body in water, and afterward he may come into the camp. But the priest shall be unclean until evening. The one who burns the heifer shall wash his clothes in water and bathe his body in water and shall be unclean until evening. And a man who is clean shall gather up the ashes of the heifer and deposit them outside the camp in a clean place. And they shall be kept for the water for impurity for the congregation of the people of Israel; it is a sin offering. And the one who gathers the ashes of the heifer shall wash his clothes and be unclean until evening. And this shall be a perpetual statute for the people of Israel, and for the stranger who sojourns among them.";
+        this.book = 2 /* Numbers */;
+        this.chapter = 19;
+        this.verse = 2;
+        this.canBeCarriedOutToday = false;
+        this.requiresLivingInIsrael = true;
+        this.requiresTemple = true;
+        this.commentaryUrl = "http://judahgabriel.blogspot.com/2015/07/torah-tuesdays-everything-there-is-to.html";
+        this.commentary = null;
+        this.type = 0 /* Positive */;
+        this.christianObservance = 0 /* None */;
+        this.messianicObservance = 2 /* RecognizedButPrevented */;
+        this.jewishObservance = 2 /* RecognizedButPrevented */;
+        this.number = 390;
+        this.children = [
+            new RegardDeathAsUnclean()
+        ];
+    }
+    return CarryOutRedHeifer;
+})(CommandmentBase);
+///<reference path='../commandmentBase.ts' />
+var PurifyDeathContamination = (function (_super) {
+    __extends(PurifyDeathContamination, _super);
+    function PurifyDeathContamination() {
+        _super.call(this);
+        this.shortSummary = "Purify the person contaminated by death.";
+        this.text = "For the unclean they shall take some ashes of the burnt sin offering, and fresh[ water shall be added in a vessel. Then a clean person shall take hyssop and dip it in the water and sprinkle it on the tent and on all the furnishings and on the persons who were there and on whoever touched the bone, or the slain or the dead or the grave. And the clean person shall sprinkle it on the unclean on the third day and on the seventh day. Thus on the seventh day he shall cleanse him, and he shall wash his clothes and bathe himself in water, and at evening he shall be clean. “If the man who is unclean does not cleanse himself, that person shall be cut off from the midst of the assembly, since he has defiled the sanctuary of the Lord. Because the water for impurity has not been thrown on him, he is unclean. And it shall be a statute forever for them.";
+        this.book = 2 /* Numbers */;
+        this.chapter = 19;
+        this.verse = 18;
+        this.canBeCarriedOutToday = false;
+        this.requiresLivingInIsrael = true;
+        this.requiresTemple = true;
+        this.commentaryUrl = "http://judahgabriel.blogspot.com/2015/07/torah-tuesdays-everything-there-is-to.html";
+        this.commentary = null;
+        this.type = 0 /* Positive */;
+        this.christianObservance = 0 /* None */;
+        this.messianicObservance = 2 /* RecognizedButPrevented */;
+        this.jewishObservance = 2 /* RecognizedButPrevented */;
+        this.number = 392;
+        this.children = [
+        ];
+    }
+    return PurifyDeathContamination;
+})(CommandmentBase);
+///<reference path='../commandmentBase.ts' />
+var RegardDeathAsUnclean = (function (_super) {
+    __extends(RegardDeathAsUnclean, _super);
+    function RegardDeathAsUnclean() {
+        _super.call(this);
+        this.shortSummary = "Regard as impure the person <br /> contaminated by death.";
+        this.text = "This is the law when someone dies in a tent: everyone who comes into the tent and everyone who is in the tent shall be unclean seven days. And every open vessel that has no cover fastened on it is unclean. Whoever in the open field touches someone who was killed with a sword or who died naturally, or touches a human bone or a grave, shall be unclean seven days.";
+        this.book = 2 /* Numbers */;
+        this.chapter = 19;
+        this.verse = 14;
+        this.canBeCarriedOutToday = false;
+        this.requiresLivingInIsrael = true;
+        this.requiresTemple = true;
+        this.commentaryUrl = "http://judahgabriel.blogspot.com/2015/07/torah-tuesdays-everything-there-is-to.html";
+        this.commentary = null;
+        this.type = 0 /* Positive */;
+        this.christianObservance = 0 /* None */;
+        this.messianicObservance = 2 /* RecognizedButPrevented */;
+        this.jewishObservance = 2 /* RecognizedButPrevented */;
+        this.number = 391;
+        this.children = [
+            new PurifyDeathContamination()
+        ];
+    }
+    return RegardDeathAsUnclean;
 })(CommandmentBase);
 ///<reference path='../commandmentBase.ts' />
 var AfflictYourselfOnYomKippur = (function (_super) {

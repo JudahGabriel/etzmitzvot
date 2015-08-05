@@ -28,10 +28,13 @@
     }
 
     printNextCommandmentsToMap() {
-        var orderedMitzvot = this.commandmentsList.sort((a: CommandmentBase, b: CommandmentBase) => a.number > b.number ? 1 : a.number === b.number ? 0 : -1);
-        for (var i = 0; i <= 613; i++) {
-            if (!orderedMitzvot[i] || orderedMitzvot[i].number !== (i + 1)) {
-                console.log("Next commandment to map is", i + 1);
+        for (var i = 1; i <= 613; i++) {
+            var existing = this.commandmentsList.filter(c => c.number === i);
+            if (existing.length > 1) {
+                console.error(`${existing.length} commandments have the same number, ${existing[0].number}.`, existing);
+            }
+            if (existing.length === 0) {
+                console.log(`Next commandment to map is ${i}`);
                 break;
             }
         }
@@ -46,7 +49,7 @@
 
         var treeData = [this.root];
 
-        var margin = { top: 50, right: 120, bottom: 20, left: 1750 };
+        var margin = { top: 50, right: 120, bottom: 20, left: 1850 };
         var width = 960 - margin.right - margin.left;
         var height = 500 - margin.top - margin.bottom;
 
@@ -266,7 +269,6 @@
     }
 
     scrollToTreeTop() {
-        console.log($("#headerContainer").height());
         document.body.scrollTop = $("#headerContainer").height();
     }
 }

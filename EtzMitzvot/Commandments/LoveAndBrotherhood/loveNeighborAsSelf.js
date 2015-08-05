@@ -24,7 +24,7 @@ var LoveNeighborAsSelf = (function (_super) {
             new RespectTheElderly(),
             new LoveSojourners(),
             new DontHateBrother(),
-            new MarryAWife()
+            new MarrySpouse()
         ];
     }
     return LoveNeighborAsSelf;
