@@ -1,4 +1,0 @@
-﻿enum CommandmentType {
-    Positive,
-    Negative
-}

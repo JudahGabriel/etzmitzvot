@@ -1,0 +1,1 @@
+﻿export type TorahBook = "Genesis" | "Exodus" | "Leviticus" | "Numbers" | "Deuteronomy";
