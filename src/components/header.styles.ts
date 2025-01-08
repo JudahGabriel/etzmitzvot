@@ -3,37 +3,44 @@ import { css } from "lit";
 export const headerStyles = css`
     :host {
         font-family: var(--body-font);
+        background-color: var(--sl-color-neutral-0);
     }
 
     header {
-        padding: 24px;
+        padding: 4px 12px;
+        border-bottom: 1px solid silver;
+        height: 60px;
         display: flex;
-        flex-direction: column;
+        align-items: center;
     }
 
-    .info {
-        display: flex;
-        border: 1px solid silver;
-        padding: 24px;
-        justify-content: space-between;
-        & > div {
-            flex: 1;
-        }
+    img {
+        max-height: 50px;
+        width: auto;
     }
 
     h1 {
-        font-size: 3em;
-        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        height: fit-content;
+        font-size: 28px;
+        margin-bottom: 4px;
         margin-top: 0;
-        border-left: 5px solid var(--manuscript-gold);
         padding-left: 12px;
     }
 
     .subtitle {
-        font-size: 1.2em;
+        font-size: 1em;
+        margin: 8px;
     }
 
     sl-progress-ring {
-        --size: 100px;
+        --size: 20px;
+
+        @media (max-width: 768px) {
+            /** On mobile, move the progress ring up a bit to take up less vertical space from the text */
+            margin-top: -250px;
+        }
     }
 `;

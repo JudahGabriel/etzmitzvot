@@ -2,22 +2,19 @@
 
 import { LitElement, TemplateResult, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import { repeat } from 'lit/directives/repeat.js';
 
-import '@shoelace-style/shoelace/dist/components/card/card.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
-import '@shoelace-style/shoelace/dist/components/drawer/drawer.js';
 import '@shoelace-style/shoelace/dist/components/icon/icon.js';
 import '@shoelace-style/shoelace/dist/components/button-group/button-group.js';
 import '@shoelace-style/shoelace/dist/components/tooltip/tooltip.js';
-import '@shoelace-style/shoelace/dist/components/tree/tree.js';
-import '@shoelace-style/shoelace/dist/components/tree-item/tree-item.js';
+
+import '../components/commandment-detail';
 import { Commandment } from '../models/commandment';
 import { cmdMap } from '../models/commandmentHierarchy';
 import { homeStyles } from './app-home.styles';
 import { sharedStyles } from '../styles/shared-styles';
 import { ZoomEvent } from 'd3';
-import { CommandmentObedience } from '../models/obedienceLevel';
+import { alertService } from '../services/alert-service';
 
 @customElement('app-home')
 export class AppHome extends LitElement {
@@ -28,6 +25,8 @@ export class AppHome extends LitElement {
   svgRootG: d3.Selection<Commandment> | null = null;
   diagonalLayout: d3.svg.Diagonal<d3.svg.diagonal.Link<Commandment>, Commandment> | null = null;
   zoom: d3.behavior.Zoom<Commandment> | null = null;
+  isIOS = /iPad|iPhone/.test(navigator.userAgent);
+  isMobile = matchMedia("(max-width: 760px)").matches;
   commandmentHoverTimeoutHandle = 0;
   duration = 750;
   nodeWidth = 250;
@@ -49,15 +48,23 @@ export class AppHome extends LitElement {
 
   render(): TemplateResult {
     return html`
-      ${this.renderToolbar()}
-      ${this.renderSelectedCommandmentDetails()}
+      <div class="svg-container">
+        ${this.renderToolbar()}
+        <svg></svg>
+      </div>
+      <cmd-detail .commandment="${this.selectedCommandment}"></cmd-detail>>
     `;
   }
 
   renderToolbar(): TemplateResult {
+    // Unfortunately iOS doesn't support the full screen API even though the API is present. Hide it.
+    const viewFullScreenClass = this.isIOS ? "d-none" : "";
+
+    // On mobile, we can get a bit stuck on scrolling because the SVG takes over panning. So, we'll add a scroll to top button.
+    const scrollToTopClass = this.isMobile ? "" : "d-none";
     return html`
       <sl-button-group class="graph-toolbar" label="Graph options">
-        <sl-tooltip content="View full screen">
+        <sl-tooltip content="View full screen" class="${viewFullScreenClass}">
           <sl-button @click="${this.viewFullscreen}">
             <sl-icon name="arrows-fullscreen" label="View full screen"></sl-icon>
           </sl-button>
@@ -77,179 +84,30 @@ export class AppHome extends LitElement {
             <sl-icon name="zoom-out" label="Zoom out the tree"></sl-icon>
           </sl-button>
         </sl-tooltip>
+        <sl-tooltip content="Scroll to top" class="${scrollToTopClass}">
+          <sl-button @click="${this.scrollToTop}">
+            <sl-icon name="arrow-up-square" label="Zoom out the tree"></sl-icon>
+          </sl-button>
+        </sl-tooltip>
       </sl-button-group>
     `;
   }
 
-  renderSelectedCommandmentDetails(): TemplateResult {
-    const title = this.selectedCommandment ? this.selectedCommandment.shortSummary : "";
-    const text = this.selectedCommandment ? this.selectedCommandment.text : "";
-    const chapterVerse = this.selectedCommandment ? this.selectedCommandment.getBookChapterVerse() : "";
-    const ancientRequirement = this.selectedCommandment?.canBeCarriedOutToday ? "Can be carried out today" : "Can't be carried out today"
-    const templeRequirement = this.selectedCommandment?.requiresTemple ? "Can't be carried out without the Temple" : "Can be carried out without the Temple";
-    const israelRequirement = this.selectedCommandment?.requiresLivingInIsrael ? "Can't be observed outside of Israel" : "Can be carried out anywhere";
-    const jewishObservance = this.selectedCommandment?.jewishObservance !== "none" ? "Observed in Orthodox Judaism" : "Not observed in Orthodox Judaism";
-    const christianObservance = this.selectedCommandment?.christianObservance !== "none" ? "Observed in Christianity" : "Not observed in Christianity";
-    const messianicObservance = this.selectedCommandment?.messianicObservance !== "none" ? "Observed in Messianic Judaism" : "Not observed in Messianic Judaism";
-    return html`
-      <sl-drawer label="${title}" class="selected-commandment-details">
-          <blockquote>
-              ${text}
-              <footer>${chapterVerse}</footer>
-          </blockquote>
-          <div class="commandment-attributes-group d-flex flex-column">
-            <div class="commandment-attribute">
-              <sl-tooltip content="${this.selectedCommandment?.canBeCarriedOutToday ? "This commandment can be carried out in modern times" : "This commandment cannot be carried out in modern times"}" placement="left" hoist>
-                ${this.renderCommandmentAttributeIcon(this.selectedCommandment?.canBeCarriedOutToday)}
-                ${ancientRequirement}
-              </sl-tooltip>
-            </div>
-            <div class="commandment-attribute">
-              <sl-tooltip content="${this.selectedCommandment?.requiresLivingInIsrael ? "This commandment can only be carried out while living in the land of Israel" : "This commandment can be carried out anywhere"}" placement="left" hoist>
-                ${this.renderCommandmentAttributeIcon(this.selectedCommandment?.requiresLivingInIsrael === false)}
-                ${israelRequirement}
-              </sl-tooltip>
-            </div>
-            <div class="commandment-attribute">
-              <sl-tooltip content="${this.selectedCommandment?.requiresTemple ? "This commandment requires a temple or tabernacle with a functioning Levitical system" : "This commandment can be carried out without a temple, tabernacle, or functioning Levitical system"}" placement="left" hoist>
-                ${this.renderCommandmentAttributeIcon(this.selectedCommandment?.requiresTemple === false)}
-                ${templeRequirement}
-              </sl-tooltip>
-            </div>
-            <div class="commandment-attribute">
-              <sl-tooltip content="${this.getCommandmentObedienceDescription(this.selectedCommandment?.jewishObservance, "Orthodox Judaism")}" placement="left" hoist>
-                ${this.renderCommandmentAttributeIcon(this.selectedCommandment?.jewishObservance)}
-                ${jewishObservance}
-                ${this.renderObservanceLevel(this.selectedCommandment?.jewishObservance)}
-              </sl-tooltip>
-            </div>
-            <div class="commandment-attribute">
-              <sl-tooltip content="${this.getCommandmentObedienceDescription(this.selectedCommandment?.christianObservance, "Mainstream Christianity")}" placement="left" hoist>
-                ${this.renderCommandmentAttributeIcon(this.selectedCommandment?.christianObservance)}
-                ${christianObservance}
-                ${this.renderObservanceLevel(this.selectedCommandment?.christianObservance)}
-              </sl-tooltip>
-            </div>
-            <div class="commandment-attribute">
-              <sl-tooltip content="${this.getCommandmentObedienceDescription(this.selectedCommandment?.messianicObservance, "Messianic Judaism")}" placement="left" hoist>
-                ${this.renderCommandmentAttributeIcon(this.selectedCommandment?.messianicObservance)}
-                ${messianicObservance}
-                ${this.renderObservanceLevel(this.selectedCommandment?.messianicObservance)}
-              </sl-tooltip>
-            </div>
-          </div>
-
-          <h3>Hierarchy</h3>
-          ${this.renderCommandmentParentAndChildren()}
-
-        <sl-button slot="footer" variant="primary" @click="${this.closeDrawer}">Close</sl-button>
-      </sl-drawer>
-    `;
-  }
-
-  renderCommandmentAttributeIcon(attrValue?: true | false | null | CommandmentObedience): TemplateResult {
-    const isGreenCheck = attrValue === true || attrValue === "binding";
-    const isRedX = attrValue === false || attrValue === "none";
-    const iconName = isGreenCheck ? "check2-circle" : isRedX ? "x-circle" : "circle-half";
-    const colorClass = isGreenCheck ? "text-success" : isRedX ? "text-danger" : "text-warning";
-    return html`
-      <sl-icon name="${iconName}" class="${colorClass}"></sl-icon>
-    `;
-  }
-
-  renderObservanceLevel(level?: CommandmentObedience) {
-    const starCount = this.getStarLevel(level);
-    const icons = [
-      starCount > 0 ? "star-fill" : "star",
-      starCount >= 1 ? "star-fill" : "star",
-      starCount >= 2 ? "star-fill" : "star",
-      starCount >= 3 ? "star-fill" : "star",
-      starCount >= 4 ? "star-fill" : "star",
-    ]
-    return html`
-      <div class="d-flex">
-        <sl-icon name="${icons[0]}"></sl-icon>
-        <sl-icon name="${icons[1]}"></sl-icon>
-        <sl-icon name="${icons[2]}"></sl-icon>
-        <sl-icon name="${icons[3]}"></sl-icon>
-        <sl-icon name="${icons[4]}"></sl-icon>
-      </div>
-    `;
-  }
-
-  renderCommandmentParentAndChildren(): TemplateResult {
-    if (!this.selectedCommandment) {
-      return html``;
-    }
-
-    return html`
-      <sl-tree selection="single" @sl-selection-change="${this.commandmentHierarchyTreeNodeSelected}">
-        ${this.renderCommandmentTreeItem(this.selectedCommandment.parent, this.selectedCommandment, 2)}
-      </sl-tree>
-    `;
-  }
-
-  renderCommandmentTreeItem(cmd: Commandment | null | undefined, selected: Commandment, childGenerationsToRender: number): TemplateResult {
-    if (!cmd) {
-      return html``;
-    }
-
-    return html`
-        <sl-tree-item expanded ?selected="${selected === cmd}" data-cmd-id="${cmd.commandmentNumber}">
-          <sl-icon name="plus-square" slot="expand-icon"></sl-icon>
-          <sl-icon name="dash-square" slot="collapse-icon"></sl-icon>
-          ${cmd.shortSummary}
-
-          ${childGenerationsToRender > 0 ? html`
-            ${repeat(cmd.children || [], c => c.commandmentNumber, c => this.renderCommandmentTreeItem(c, selected, childGenerationsToRender - 1))}
-          ` : html``}
-        </sl-tree-item>
-      `;
-  }
-
-  getStarLevel(level?: CommandmentObedience): number {
-    switch (level) {
-      case "none":
-        return 0;
-      case "recognized":
-        return 1;
-      case "recognizedPartial":
-        return 2;
-      case "recognizedButPrevented":
-        return 3;
-      case "binding":
-        return 4;
-      default:
-        return 0;
-    }
-  }
-
-  getCommandmentObedienceDescription(level: CommandmentObedience | null | undefined, groupName: string): string {
-    switch (level) {
-      case "none":
-        return `${groupName} does not widely practice this commandment nor recognize it as binding.`;
-      case "recognized":
-        return `${groupName} recognizes this commandment as binding, but does not widely practice it or all the aspects of the commandment as laid out in the text.`;
-      case "recognizedPartial":
-        return `${groupName} recognizes this commandment as binding, but practices only some of the aspects of the commandment.`;
-      case "recognizedButPrevented":
-        return `${groupName} considers this commandment binding, but is prevented from keeping it for external reasons.`;
-      case "binding":
-        return `${groupName} considers this commandment binding and widely practices it.`;
-      default:
-        return "";
-    }
-  }
-
   createTree() {
     if (!this.root) {
-      console.warn("Can't create tree until roo commandment is set.");
+      alertService.showError("Can't create tree until root commandment is set.");
       return;
     }
 
-    var margin = { top: 50, right: 50, bottom: 20, left: 50 };
-    var width = 960 - margin.right - margin.left;
-    var height = 500 - margin.top - margin.bottom;
+    const svg = this.shadowRoot?.querySelector("svg");
+    if (!svg) {
+      alertService.showError("Unable to find SVG for rendering.");
+      return;
+    }
+
+    const margin = { top: 50, right: 50, bottom: 20, left: 50 };
+    const width = 960 - margin.right - margin.left;
+    const height = 500 - margin.top - margin.bottom;
 
     this.tree = d3.layout.tree<Commandment>()
         .size([height, width]);
@@ -258,8 +116,8 @@ export class AppHome extends LitElement {
         .projection(d => [d.x, d.y]);
 
     const initialScale = 1.0;
-    const initialTranslateX = (window.innerWidth / 2) - 100; // We want the initial X position to be about center of the window.
-    const initialTranslateY = 50;
+    const initialTranslateX = (svg.clientWidth / 2) - 100; // We want the initial X position to be about center of the window.
+    const initialTranslateY = 100; // We want the initial Y position of the root node to be 50, but on mobile we want it about 100 so it's not hidden by the toolbar.
     this.zoom = d3.behavior.zoom<Commandment>()
       .scaleExtent([this.minZoom, this.maxZoom]) // min and max zoom
       .scale(initialScale)
@@ -267,8 +125,9 @@ export class AppHome extends LitElement {
       .on("zoom", () => this.hierarchyZoomed());
 
     this.svgRootG = d3
-        .select("body")
-        .append("svg")
+        // .select("body")
+        // .append("svg")
+        .select(svg)
         .attr("width", "100%")
         .attr("height", height + margin.top + margin.bottom)
         .call(this.zoom)
@@ -341,7 +200,7 @@ export class AppHome extends LitElement {
     nodeEnter.append("circle")
         .attr("r", .000006)
         .attr("class", (d: Commandment) => d.type === "positive" ? "" : "negative")
-        .style("fill", (d: Commandment) => d.isExpanded ? "#fff" : "lightsteelblue");
+        //.style("fill", (d: Commandment) => d.isExpanded ? "#fff" : "lightsteelblue");
 
     // Append the text summary first line.
     nodeEnter
@@ -379,8 +238,8 @@ export class AppHome extends LitElement {
         .attr("transform", (d: Commandment) => "translate(" + d.x + "," + d.y + ")");
 
     nodeUpdate.select("circle")
-        .attr("r", 7)
-        .style("fill", (d: Commandment) => d.isExpanded ? "#fff" : "lightsteelblue");
+        .attr("r", 7);
+        //.style("fill", (d: Commandment) => d.isExpanded ? "#fff" : "lightsteelblue");
 
     nodeUpdate.select("text")
         .style("fill-opacity", 1);
@@ -438,29 +297,12 @@ export class AppHome extends LitElement {
 
   commandmentNodeClicked(cmd: Commandment) {
       this.selectedCommandment = cmd;
-      this.shadowRoot?.querySelector("sl-drawer")?.show();
-  }
 
-    // var template = $("#mitzvotPopoverTemplate").clone().css("display", "normal").html();
-    // $(node).popover({
-    //     container: 'body',
-    //     placement: 'auto right',
-    //     trigger: 'hover',
-    //     html: true,
-    //     delay: 100,
-    //     title: commandment.shortSummary.replace("<br />", ""),
-    //     content: function () {
-    //         return template
-    //             .replace("{{text}}", commandment.text)
-    //             .replace("{{book}}", commandment.getBookString())
-    //             .replace("{{chapter}}", commandment.chapter.toString())
-    //             .replace("{{verse}}", commandment.verse.toString())
-    //             .replace("{{observanceJudaism}}", commandment.getObservanceText("Jews", commandment.jewishObservance))
-    //             .replace("{{observanceChristianity}}", commandment.getObservanceText("Christians", commandment.christianObservance))
-    //             .replace("{{observanceMessianic}}", commandment.getObservanceText("Messianics", commandment.messianicObservance))
-    //     }
-    // });
-  //}
+      // Exit full screen if we're in it, otherwise we won't see anything.
+      if (document.exitFullscreen) {
+        document.exitFullscreen().catch(() => console.warn("Failed to exit full screen."));
+      }
+  }
 
   getNodeClass(cmd: Commandment): string {
     if (cmd === this.root) {
@@ -483,7 +325,7 @@ export class AppHome extends LitElement {
   }
 
   viewFullscreen(): void {
-    document.querySelector("svg")?.requestFullscreen();
+    this.shadowRoot?.querySelector("svg")?.requestFullscreen();
   }
 
   expandCollapseRoot(): void {
@@ -514,17 +356,7 @@ export class AppHome extends LitElement {
     }
   }
 
-  closeDrawer(): void {
-    this.shadowRoot?.querySelector("sl-drawer")?.hide();
-    this.selectedCommandment = null;
-  }
-
-  commandmentHierarchyTreeNodeSelected(e: CustomEvent): void {
-    console.log("zanz!");
-    const cmdId = e.detail?.getAttribute("data-cmd-id");
-    const cmd = this.commandmentsList.find(c => c.commandmentNumber === Number(cmdId));
-    if (cmd) {
-      this.commandmentNodeClicked(cmd);
-    }
+  scrollToTop(): void {
+    window.document.body.scrollTo({ top: 0, behavior: "smooth" });
   }
 }

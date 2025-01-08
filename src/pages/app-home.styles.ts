@@ -1,63 +1,67 @@
 import { css } from "lit";
 
 export const homeStyles = css`
-    .selected-commandment-details {
-        &::part(title) {
-            font-family: var(--title-font);
+    .svg-container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    svg {
+        cursor: grab;
+        background-color: white;
+        flex-grow: 1;
+
+        @media (max-width: 768px) {
+            height: 120vh;
+            touch-action: none;
         }
+    }
 
-        blockquote {
-            font-size: 18px;
-            font-family: var(--title-font);
-            max-height: 250px;
-            overflow: auto;
-            font-style: italic;
-            background-color: #FBFBFA;
-            padding: 20px;
-            margin: 0;
-            color: black;
-            border-left: 5px solid var(--manuscript-gold);
+    .node {
+        cursor: pointer;
+        user-select: none;
 
-            footer {
-                color: #5d5d5d;
-                font-family: var(--body-font);
-                font-style: normal;
-                font-size: 14px;
-                margin-top: 10px;
+        circle {
+            fill: #fff;
+            stroke: var(--tenakh-blue);
+            stroke-width: 5px;
+
+            &.negative {
+                stroke: var(--heifer-red);
             }
         }
 
-        .commandment-attributes-group {
-            margin-top: 24px;
-            cursor: pointer;
-        }
+        .commandment-text {
+            font-family: var(--body-font);
+            width: 20px;
+            fill: black;
+            text-shadow: 1px 1px 2px gray;
 
-        .commandment-attribute {
-            display: flex;
-            align-items: center;
-            gap: 1em;
-
-            sl-icon[name="star"] {
-                color: var(--sl-color-neutral-300);
+            &.verse {
+                fill: gray;
+                font-style: italic;
             }
 
-            sl-icon[name="star-fill"] {
-                color: var(--sl-color-amber-500);
+            &.golden-command .commandment-text {
+                fill: darkgoldenrod;
+                -webkit-text-shadow: 1px 1px 1px silver;
+                text-shadow: 1px 1px 1px silver;
+                font: 17px sans-serif;
             }
         }
+    }
 
-        sl-tree {
-            --indent-guide-width: 1px;
-        }
-
-         sl-tree-item::part(expand-button) {
-            /* Disable the expand/collapse animation */
-            rotate: none;
-         }
+    .link {
+        fill: none;
+        stroke: #ccc;
+        stroke-width: 2px;
     }
 
     .graph-toolbar {
-        position: absolute;
-        right: 25px;
+        display: flex;
+        flex-direction: row-reverse;
+        margin-bottom: -40px;
+        margin-top: 12px;
     }
 `;

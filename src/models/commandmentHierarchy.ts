@@ -28,7 +28,7 @@ class CommandmentHierarchy {
         return mitzvot.filter(mitzvah => !mitzvah.parentCommmandmentNumber);
     }
 
-    async fetchMitzvot(): Promise<Commandment[]> {
+    private async fetchMitzvot(): Promise<Commandment[]> {
         // First, grab the mitzvot flat list from mitzvot.json.
         const fetchResult = await fetch("/mitzvot.json");
         if (!fetchResult.ok) {
@@ -40,7 +40,6 @@ class CommandmentHierarchy {
         if (mitzvotData.length === 0) {
             throw new Error("mitzvot.json appears to contain an empty array.");
         }
-
 
         // Now, convert the flat list into a tree via the .parent property, which is a number that refers to the parent's commandment number.
         // To do this efficiently, we'll use a map for quick lookups of commandment by number.
@@ -54,7 +53,8 @@ class CommandmentHierarchy {
             }
         });
 
-        return mitzvotMap.values().toArray();
+        //return mitzvotMap.values().toArray(); // Can't use mitzvotMap.values().toArray() because iOS webkit doesn't support this yet as of 2025. ;-(
+        return Array.from(mitzvotMap.values());
     }
 
     getGreatestCommandmentPlaceholder(): Commandment {

@@ -105,4 +105,45 @@ export class Commandment {
             this.children = [];
         }
     }
+
+    /**
+     * Finds an ancestory commandment by its commandment number.
+     * @param cmdNumber
+     * @returns
+     */
+    getAncestor(cmdNumber: number): Commandment | null {
+        let parent = this.parent;
+        while (parent) {
+            if (parent.commandmentNumber === cmdNumber) {
+                return parent;
+            }
+
+            parent = parent.parent;
+        }
+
+        return null;
+    }
+
+    /**
+     * Finds a descendant commandment by its commandment number.
+     * @param cmdNumber
+     * @returns
+     */
+    getDescendant(cmdNumber: number): Commandment | null {
+        const descendants = this.children || [];
+        while (descendants.length > 0) {
+            const cmd = descendants.splice(0, 1)[0];
+            if (cmd.commandmentNumber === cmdNumber) {
+                return cmd;
+            }
+            descendants.push(...(cmd.children || []));
+        }
+
+        return null;
+    }
+
+    getSibling(cmdNumber: number): Commandment | null {
+        const siblings = this.parent?.children || [];
+        return siblings.find(s => s.commandmentNumber === cmdNumber) || null;
+    }
 }

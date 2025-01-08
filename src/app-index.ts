@@ -1,20 +1,20 @@
-import { LitElement, css, html } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { LitElement, TemplateResult, html } from 'lit';
+import { customElement, state } from 'lit/decorators.js';
 
-import './pages/app-home';
 import './components/header';
+import './components/sidebar';
 import './styles/global.css';
 import { router } from './router';
+import { alertService } from './services/alert-service';
+import { Alert } from './models/alert';
+import { sharedStyles } from './styles/shared-styles';
+import { appIndexStyles } from './app-index.styles';
 
 @customElement('app-index')
 export class AppIndex extends LitElement {
-  static styles = css`
-	main {
-	  padding-left: 16px;
-	  padding-right: 16px;
-	  padding-bottom: 16px;
-	}
-  `;
+	@state() activeAlert: Alert | null = null;
+
+  static styles = [appIndexStyles, sharedStyles];
 
   constructor() {
 	super();
@@ -22,8 +22,8 @@ export class AppIndex extends LitElement {
 
   connectedCallback(): void {
 	super.connectedCallback();
-	// cmdMap.getCommandments()
-	// 	.then(result => window.mitzvot = result);
+	window.addEventListener("unhandledrejection", e => this.unhandledRejection(e));
+	alertService.events.addEventListener("alert", e => this.showAlert(e as CustomEvent<Alert>));
   }
 
   firstUpdated() {
@@ -40,8 +40,52 @@ export class AppIndex extends LitElement {
   render() {
 	// router config can be round in src/router.ts
 	return html`
-		<app-header></app-header>
-		${router.render()}
+		<div class="layout-container">
+			<app-header></app-header>
+			<main>
+				<div class="router-outlet">
+					${router.render()}
+				</div>
+				<app-sidebar></app-sidebar>
+  			</main>
+		</div>
+		${this.renderAlert()}
 	`;
+  }
+
+  renderSidebar(): TemplateResult {
+	return html`
+		<div class="sidebar">
+
+		</div>
+	`;
+  }
+
+  renderAlert(): TemplateResult {
+	return html`
+		<div class="alert-container">
+			<sl-alert variant="${this.activeAlert?.variant || "primary"}" ?open="${!!this.activeAlert}" closable class="alert-closable" countdown="rtl" duration="10000">
+				<sl-icon slot="icon" name="info-circle"></sl-icon>
+				${this.activeAlert?.message}
+				<br>
+				<details class="${this.activeAlert?.details ? "" : "d-none"}">
+					<summary>Details</summary>
+					<pre>${this.activeAlert?.details}</pre>
+				</details>
+			</sl-alert>
+		</div>
+	`;
+  }
+
+  showAlert(e: CustomEvent<Alert>): void {
+	this.activeAlert = e.detail;
+  }
+
+  unhandledRejection(e: PromiseRejectionEvent): void {
+	const errorMessage = e.reason instanceof Error ? e.reason.message : "";
+	const stackTrace = e.reason instanceof Error ? e.reason.stack : "";
+	const alertMessage = errorMessage || "Woops, an error occurred. Please try again later.";
+	console.log("Unhandled rejection occurred", stackTrace);
+	alertService.showError(alertMessage, stackTrace);
   }
 }
