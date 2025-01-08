@@ -25,12 +25,10 @@ jobs:
         run: npm run build
 
       - name: Deploy to IIS
-        run: |
-          $username = "${{ secrets.IIS_USERNAME }}"
-          $password = "${{ secrets.IIS_PASSWORD }}"
-          $securePassword = ConvertTo-SecureString $password -AsPlainText -Force
-          $credential = New-Object System.Management.Automation.PSCredential ($username, $securePassword)
-          $session = New-PSSession -ComputerName ${{ secrets.IIS_SERVER }} -Credential $credential
-          Copy-Item -Path ./dist/* -Destination "c:\inetpub\domains\etzmitzvot" -Recurse -ToSession $session
-          Remove-PSSession $session
-        shell: pwsh
+        uses: cschleiden/webdeploy-action@v1
+        with:
+            webSiteName: 'EtzMitzvot'
+            package: ${{ github.workspace }}/dist
+            msdeployServiceUrl: ${{ secrets.IIS_SERVER }}
+            msdeployUsername: ${{ secrets.IIS_USERNAME }}
+            msdeployPassword: ${{ secrets.IIS_PASSWORD }}
