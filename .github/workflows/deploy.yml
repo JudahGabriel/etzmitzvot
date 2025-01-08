@@ -1,0 +1,36 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build application
+        run: npm run build
+
+      - name: Deploy to IIS
+        run: |
+          $username = "${{ secrets.IIS_USERNAME }}"
+          $password = "${{ secrets.IIS_PASSWORD }}"
+          $securePassword = ConvertTo-SecureString $password -AsPlainText -Force
+          $credential = New-Object System.Management.Automation.PSCredential ($username, $securePassword)
+          $session = New-PSSession -ComputerName ${{ secrets.IIS_SERVER }} -Credential $credential
+          Copy-Item -Path ./dist/* -Destination "c:\inetpub\domains\etzmitzvot" -Recurse -ToSession $session
+          Remove-PSSession $session
+        shell: pwsh
