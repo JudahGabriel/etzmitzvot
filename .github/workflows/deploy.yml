@@ -27,8 +27,8 @@ jobs:
       - name: Deploy to IIS
         uses: cschleiden/webdeploy-action@v1
         with:
-            webSiteName: EtzMitzvot
-            package: ${{ format('{0}\dist', runner.workspace) }}
+            webSiteName: 'EtzMitzvot'
+            package: ${{ github.workspace }}\dist
             msdeployServiceUrl: ${{ secrets.IIS_SERVER }}
             msdeployUsername: ${{ secrets.IIS_USERNAME }}
             msdeployPassword: ${{ secrets.IIS_PASSWORD }}
