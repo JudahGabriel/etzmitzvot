@@ -189,14 +189,14 @@ export class CommandmentDetail extends LitElement {
         }
     }
 
-    getCommandmentObedienceTitle(level: CommandmentObedience | null | undefined, group: string): string {
+    getCommandmentObedienceTitle(level: CommandmentObedience, group: string): string {
         switch (level) {
             case "none":
                 return `Not observed in ${group}`;
             case "recognized":
             case "recognizedPartial":
             case "recognizedButPrevented":
-                return `${group}`;
+                return `Partially observed in ${group}`;
             case "binding":
                 return `Observed in ${group}`;
             default:

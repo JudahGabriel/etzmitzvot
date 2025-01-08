@@ -48,7 +48,7 @@ export class AppSidebar extends LitElement {
                         <p>
                             An interactive visual map of every commandment in the
                             <abbr title="The Torah, the Law of Moses, is the first 5 books of the Hebrew Bible">Torah</abbr>.
-                            Explore the Biblical commandments from a thousand-foot view. <a href="https://blog.judahgabriel.com/2014/04/introducing-etzmiztvotcom-rebooting.html">Learn more</a>.
+                            Explore the Biblical commandments from a thousand-foot view. <a href="https://blog.judahgabriel.com/2025/01/re-introducing-etzmitzvot.html">Learn more</a>.
                         </p>
                         <p>
 

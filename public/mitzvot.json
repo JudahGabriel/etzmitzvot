@@ -919,7 +919,7 @@
     "christianObservance": "none",
     "messianicObservance": "binding",
     "jewishObservance": "binding",
-    "shortSummary": "Rest on Yom Teruah (Rosh Hashana)",
+    "shortSummary": "Rest on Yom Teruah",
     "text": "On the first day of the seventh month you are to have a day of rest, a sacred assembly commemorated with trumpet blasts.",
     "canBeCarriedOutToday": true,
     "requiresLivingInIsrael": false,
@@ -1114,7 +1114,7 @@
     "canBeCarriedOutToday": false,
     "requiresLivingInIsrael": true,
     "requiresTemple": true,
-    "commentary": "The additional offerings to be brought on Yom Teruah (Rosh Hashana) consist of animal sacrifices and food offerings. This requires the presence of a Temple or tabernacle in which to offfer these sacrifices, as well as a priesthood to serve in God's house. Since neither exists, I've deemed this commandment as requiring living in Israel, requiring a Temple, and thus cannot be carried out today.",
+    "commentary": "The additional offerings to be brought on Yom Teruah consist of animal sacrifices and food offerings. This requires the presence of a Temple or tabernacle in which to offfer these sacrifices, as well as a priesthood to serve in God's house. Since neither exists, I've deemed this commandment as requiring living in Israel, requiring a Temple, and thus cannot be carried out today.",
     "commentaryUrl": null,
     "parent": 116,
     "name": "BringYomTeruahOfferings"
