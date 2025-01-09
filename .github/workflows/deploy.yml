@@ -24,17 +24,12 @@ jobs:
       - name: Build application
         run: npm run build
 
-      - name: Write publish profile to directory
-        uses: DamianReeves/write-file-action@v1.2
+      - name: Deploy to VM
+        uses: ChristopheLav/iis-deploy@v1
         with:
-          path: ${{ env.home }}/EtzMitzvotOnVm.pubxml
-          contents: |
-            ${{ secrets.ETZMITZVOT_PUBXML }}
-          write-mode: overwrite
-
-      - name: Setup MSbuild
-        uses: microsoft/setup-msbuild@v1.0.2
-
-      - name: Publish project
-        run: |
-          msbuild /p:DeployOnBuild=true /p:PublishProfile=${{ env.home }}/EtzMitzvotOnVm.pubxml /p:username=${{ secrets.IIS_USERNAME }} /p:password=${{ secrets.IIS_PASSWORD }}
+          website-name: 'EtzMitzvot'
+          msdeploy-service-url: ${{ secrets.MSDEPLOY_URL }}
+          msdeploy-username: ${{ secrets.IIS_USERNAME }}
+          msdeploy-password: ${{ secrets.IIS_PASSWORD }}
+          source-path: ${{ github.workspace }}/dist
+          skip-extra-files: false
