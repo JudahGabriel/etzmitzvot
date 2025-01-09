@@ -32,3 +32,4 @@ jobs:
           msdeploy-username: ${{ secrets.IIS_USERNAME }}
           msdeploy-password: ${{ secrets.IIS_PASSWORD }}
           source-path: ${{ github.workspace }}/dist
+          skip-extra-files: 1
