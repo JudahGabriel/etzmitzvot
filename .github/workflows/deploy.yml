@@ -28,7 +28,7 @@ jobs:
         uses: ChristopheLav/iis-deploy@v1
         with:
           website-name: 'EtzMitzvot'
-          msdeploy-service-url: ${{ secrets.MSDEPLOY_URL }}
+          msdeploy-service-url: ${{ secrets.IIS_SERVER }}
           msdeploy-username: ${{ secrets.IIS_USERNAME }}
           msdeploy-password: ${{ secrets.IIS_PASSWORD }}
           source-path: ${{ github.workspace }}/dist
