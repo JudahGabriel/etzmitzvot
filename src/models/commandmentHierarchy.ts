@@ -30,7 +30,8 @@ class CommandmentHierarchy {
 
     private async fetchMitzvot(): Promise<Commandment[]> {
         // First, grab the mitzvot flat list from mitzvot.json.
-        const fetchResult = await fetch("/mitzvot.json");
+        const cacheBust = `${new Date().getDate()}-${new Date().getMonth() + 1}-${new Date().getFullYear()}`; // Cache busting using today's date to get latest version.
+        const fetchResult = await fetch(`/mitzvot.json?v=${cacheBust}`);
         if (!fetchResult.ok) {
             throw new Error(`Failed to fetch mitzvot.json: ${fetchResult.statusText}`);
         }
