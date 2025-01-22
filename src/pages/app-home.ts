@@ -52,7 +52,7 @@ export class AppHome extends LitElement {
         ${this.renderToolbar()}
         <svg></svg>
       </div>
-      <cmd-detail .commandment="${this.selectedCommandment}"></cmd-detail>>
+      <cmd-detail .commandment="${this.selectedCommandment}" @sl-hide="${this.resetSelectedCommandment}" @cmd-expand-toggled="${this.toggleNodeCollapsed}"></cmd-detail>>
     `;
   }
 
@@ -290,9 +290,11 @@ export class AppHome extends LitElement {
     });
   }
 
-  toggleNodeCollapsed(cmd: Commandment) {
-    cmd.isExpanded = !cmd.isExpanded;
-    this.updateTree(cmd);
+  toggleNodeCollapsed(cmd: Commandment | null) {
+    if (cmd) {
+      cmd.isExpanded = !cmd.isExpanded;
+      this.updateTree(cmd);
+    }
   }
 
   commandmentNodeClicked(cmd: Commandment) {
@@ -358,5 +360,9 @@ export class AppHome extends LitElement {
 
   scrollToTop(): void {
     window.document.body.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  resetSelectedCommandment(): void {
+    this.selectedCommandment = null;
   }
 }

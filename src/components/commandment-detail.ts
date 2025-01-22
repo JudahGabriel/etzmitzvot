@@ -95,7 +95,10 @@ export class CommandmentDetail extends LitElement {
             <h3>Hierarchy</h3>
             ${this.renderCommandmentParentAndChildren(cmd)}
 
-            <sl-button slot="footer" variant="primary" @click="${this.closeDrawer}">Close</sl-button>
+            <div slot="footer" class="d-flex justify-content-space-between">
+                <sl-button slot="footer" variant="default" @click="${this.collapseCommandment}">Toggle children</sl-button>
+                <sl-button slot="footer" variant="primary" @click="${this.closeDrawer}">Close</sl-button>
+            </div>
         `;
     }
 
@@ -220,5 +223,12 @@ export class CommandmentDetail extends LitElement {
     closeDrawer(): void {
         this.shadowRoot?.querySelector("sl-drawer")?.hide();
         this.commandment = null;
+    }
+
+    collapseCommandment(): void {
+        if (this.commandment) {
+            this.commandment.isExpanded = !this.commandment.isExpanded;
+            this.dispatchEvent(new CustomEvent("cmd-expand-toggled", { detail: this.commandment }));
+        }
     }
 }
