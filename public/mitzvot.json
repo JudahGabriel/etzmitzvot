@@ -778,6 +778,25 @@
     "name": "DontCoverUpIdolatry"
   },
   {
+    "commandmentNumber": 42,
+    "book": "Deuteronomy",
+    "chapter": 18,
+    "verse": 20,
+    "type": "negative",
+    "christianObservance": "binding",
+    "messianicObservance": "binding",
+    "jewishObservance": "binding",
+    "shortSummary": "Don't prophesy by idolatry.",
+    "text": "But any prophet who presumes to speak in My name an oracle that I did not command to be uttered, or who speaks in the name of other gods—that prophet shall die.",
+    "canBeCarriedOutToday": true,
+    "requiresLivingInIsrael": true,
+    "requiresTemple": false,
+    "commentary": null,
+    "commentaryUrl": null,
+    "parent": 36,
+    "name": "DontProphesyByIdolatry"
+  },
+  {
     "commandmentNumber": 44,
     "book": "Deuteronomy",
     "chapter": 18,
