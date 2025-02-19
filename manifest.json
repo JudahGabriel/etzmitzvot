@@ -1,0 +1,39 @@
+{
+  "id": "/",
+  "scope": "/",
+  "name": "Etz Mitzvot",
+  "display": "standalone",
+  "start_url": "/",
+  "short_name": "EtzMitzvot",
+  "theme_color": "#CCB479",
+  "description": "A visual hierarchy of the 613 commandments in the Hebrew Bible",
+  "orientation": "any",
+  "background_color": "#fff",
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "assets/icons/logo-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/logo-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/logo-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+  ],
+  "categories": [
+    "reference",
+    "religion",
+    "judaism",
+    "christianity"
+  ]
+}

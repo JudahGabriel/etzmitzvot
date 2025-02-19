@@ -1,0 +1,24 @@
+﻿body {
+  --title-font: "Cardo", serif;
+  --body-font: "Heebo", serif;
+  --tenakh-blue: #004E5F;
+  --manuscript-gold: #CCB479;
+  --heifer-red: #AB4E66;
+
+  width: 100%;
+  height: 100%;
+  font-family: var(--body-font);
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+}
+
+app-index {
+  height: 100vh;
+  display: block;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--title-font);
+}
