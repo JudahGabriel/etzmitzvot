@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -7,29 +7,25 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20'
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '22'
 
-      - name: Install dependencies
-        run: npm install
+    - name: Install dependencies
+      run: npm install
 
-      - name: Build application
-        run: npm run build
+    - name: Build project
+      run: npm run build
 
-      - name: Deploy to VM
-        uses: ChristopheLav/iis-deploy@v1
-        with:
-          website-name: 'EtzMitzvot'
-          msdeploy-service-url: ${{ secrets.IIS_SERVER }}
-          msdeploy-username: ${{ secrets.IIS_USERNAME }}
-          msdeploy-password: ${{ secrets.IIS_PASSWORD }}
-          source-path: ${{ github.workspace }}/dist
-          skip-extra-files: 1
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist # This should point to your build output directory
