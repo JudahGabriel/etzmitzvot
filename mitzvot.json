@@ -797,6 +797,25 @@
     "name": "DontProphesyByIdolatry"
   },
   {
+    "commandmentNumber": 43,
+    "book": "Deuteronomy",
+    "chapter": 13,
+    "verse": 4,
+    "type": "negative",
+    "christianObservance": "binding",
+    "messianicObservance": "binding",
+    "jewishObservance": "binding",
+    "shortSummary": "Don't listen to a false prophet.",
+    "text": "If there will arise among you a prophet, or a dreamer of a dream, and he gives yo ua sign or a wonder, and the sign or the wonder of which he spoke to you happens, [and he] says, \"Let us go after other gods which you have not known, and let us worship them.\" You shall not heed the words of that prophet, or that dreamer of a dream; for the Lord, your God, is testing you, to know whether you really love the Lord, your God, with all your heart and with all your soul.",
+    "canBeCarriedOutToday": true,
+    "requiresLivingInIsrael": true,
+    "requiresTemple": false,
+    "commentary": null,
+    "commentaryUrl": null,
+    "parent": 45,
+    "name": "DontListenToFalseProphet"
+  },
+  {
     "commandmentNumber": 44,
     "book": "Deuteronomy",
     "chapter": 18,
