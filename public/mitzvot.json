@@ -854,6 +854,25 @@
     "name": "DontFearFalseProphet"
   },
   {
+    "commandmentNumber": 46,
+    "book": "Exodus",
+    "chapter": 23,
+    "verse": 13,
+    "type": "negative",
+    "christianObservance": "binding",
+    "messianicObservance": "binding",
+    "jewishObservance": "binding",
+    "shortSummary": "Don't use the names of other gods.",
+    "text": "Concerning all that I have said to you you shall beware, and the name of the gods of others you shall not mention; it shall not be heard through your mouth.",
+    "canBeCarriedOutToday": true,
+    "requiresLivingInIsrael": false,
+    "requiresTemple": false,
+    "commentary": null,
+    "commentaryUrl": null,
+    "parent": 29,
+    "name": "DontUseNamesOfOtherGods"
+  },
+  {
     "commandmentNumber": 50,
     "book": "Deuteronomy",
     "chapter": 16,
