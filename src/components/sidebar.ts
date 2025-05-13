@@ -122,7 +122,7 @@ export class AppSidebar extends LitElement {
                         </div>
                     </div>
                 </div>
-                <div>
+                <div class="${this.sidebarCollapsed ? 'd-none' : ""}">
                     <sl-button href="/privacy-policy.html" variant="text">Privacy policy</sl-button>
                 </div>
                 <div class="${this.sidebarCollapsed ? '' : 'd-none'}">

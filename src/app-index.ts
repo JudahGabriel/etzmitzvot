@@ -4,7 +4,7 @@ import { customElement, state } from 'lit/decorators.js';
 import './components/header';
 import './components/sidebar';
 import './styles/global.css';
-import { RouteEvent, router } from './router';
+import { router } from './router';
 import { alertService } from './services/alert-service';
 import { Alert } from './models/alert';
 import { sharedStyles } from './styles/shared-styles';
@@ -27,7 +27,8 @@ export class AppIndex extends LitElement {
 	}
 
 	firstUpdated() {
-		router.addEventListener('route-changed', e => this.routeChanged(e as RouteEvent));	}
+		router.addEventListener('route-changed', () => this.routeChanged());
+	}
 
 	render() {
 		// router config can be round in src/router.ts
