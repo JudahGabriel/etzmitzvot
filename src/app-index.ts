@@ -61,7 +61,7 @@ export class AppIndex extends LitElement {
 	`;
 	}
 
-	routeChanged(e: RouteEvent): void {
+	routeChanged(): void {
 		if ("startViewTransition" in document) {
 			document.startViewTransition(() => this.requestUpdate());
 		}
