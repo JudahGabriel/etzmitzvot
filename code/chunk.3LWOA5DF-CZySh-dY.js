@@ -1,10 +1,4 @@
-import{i,c as h,S as p,H as b,x as c,e as u,r as m,s as v,t as _}from"./index-DDrsSLl_.js";const g=i`
-  @media(min-width: 1000px) {
-    sl-card {
-      max-width: 70vw;
-    }
-  }
-`;var f=i`
+import{i as a,c as d,S as o,H as e,e as s,x as l}from"./index-CpJOy08e.js";var t=a`
   :host {
     --border-color: var(--sl-color-neutral-200);
     --border-radius: var(--sl-border-radius-medium);
@@ -69,34 +63,15 @@ import{i,c as h,S as p,H as b,x as c,e as u,r as m,s as v,t as _}from"./index-DD
   .card:not(.card--has-footer) .card__footer {
     display: none;
   }
-`,n=class extends p{constructor(){super(...arguments),this.hasSlotController=new b(this,"footer","header","image")}render(){return c`
+`,r=class extends o{constructor(){super(...arguments),this.hasSlotController=new e(this,"footer","header","image")}render(){return l`
       <div
         part="base"
-        class=${u({card:!0,"card--has-footer":this.hasSlotController.test("footer"),"card--has-image":this.hasSlotController.test("image"),"card--has-header":this.hasSlotController.test("header")})}
+        class=${s({card:!0,"card--has-footer":this.hasSlotController.test("footer"),"card--has-image":this.hasSlotController.test("image"),"card--has-header":this.hasSlotController.test("header")})}
       >
         <slot name="image" part="image" class="card__image"></slot>
         <slot name="header" part="header" class="card__header"></slot>
         <slot part="body" class="card__body"></slot>
         <slot name="footer" part="footer" class="card__footer"></slot>
       </div>
-    `}};n.styles=[h,f];n.define("sl-card");var y=Object.defineProperty,w=Object.getOwnPropertyDescriptor,x=(l,a,o,e)=>{for(var r=e>1?void 0:e?w(a,o):a,d=l.length-1,s;d>=0;d--)(s=l[d])&&(r=(e?s(a,o,r):s(r))||r);return e&&r&&y(a,o,r),r};let t=class extends m{render(){return c`
-      <app-header ?enableBack="${!0}"></app-header>
-
-      <main>
-        <h2>About Page</h2>
-
-        <sl-card>
-          <h2>Did you know?</h2>
-
-          <p>PWAs have access to many useful APIs in modern browsers! These
-            APIs have enabled many new types of apps that can be built as PWAs, such as advanced graphics editing apps, games,
-            apps that use machine learning and more!
-          </p>
-
-          <p>Check out <a
-              href="https://docs.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/handle-files">these
-              docs</a> to learn more about the advanced features that you can use in your PWA</p>
-        </sl-card>
-      </main>
-    `}};t.styles=[v,g];t=x([_("app-about")],t);export{t as AppAbout};
-//# sourceMappingURL=app-about-Cetxyugb.js.map
+    `}};r.styles=[d,t];r.define("sl-card");
+//# sourceMappingURL=chunk.3LWOA5DF-CZySh-dY.js.map
