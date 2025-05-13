@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Etz Mitzvot Privacy Policy</title>
+
+  <base href="/" />
+
+  <!-- This meta viewport ensures the webpage's dimensions change according to the device it's on. This is called Responsive Web Design.-->
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A tree graph of the commandments in the Hebrew Bible" />
+
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#CCB479" />
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#CCB479" />
+
+  <link rel="manifest" href="manifest.json" />
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Etz Mitzvot" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="icon" href="/assets/icons/logo-128x128.png" type="image/png" size="128x128" />
+  <link rel="icon" href="/assets/icons/logo-256x256.png" type="image/png" size="256x256" />
+  <link rel="icon" href="/assets/icons/logo-512x512.png" type="image/png" size="512x512" />
+  <meta name="twitter:title" content="Etz Mitzvot" />
+  <meta name="twitter:description" content="A visual tree of the commandments in the Hebrew Bible" />
+  <meta name="twitter:image" content="https://etzmitzvot.com/assets/icons/logo-512x512.png">
+  <meta name="og:title" content="Etz Mitzvot" />
+  <meta name="og:description" content="A visual tree of the commandments in the Hebrew Bible" />
+  <meta name="og:image" content="https://etzmitzvot.com/assets/icons/logo-512x512.png">
+
+  <!-- light mode and dark mode CSS -->
+  <link rel="stylesheet" media="(prefers-color-scheme:light)"
+    href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/dist/themes/light.css">
+  <link rel="stylesheet" media="(prefers-color-scheme:dark)"
+    href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/dist/themes/dark.css"
+    onload="document.documentElement.classList.add('sl-theme-dark');">
+
+  <!-- Google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cardo:wght@700&family=Heebo:wght@100..900&display=swap" rel="stylesheet">
+
+  <link type="text/css" rel="stylesheet" href="app.css" />
+
+  <script type="module">
+    import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path.js';
+    setBasePath('https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.19.1/cdn/');
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <style>
+    body {
+        padding: 40px;
+    }
+  </style>
+</head>
+
+<body>
+    <h1>Privacy Policy</h1>
+    <p>EtzMitzvot is an open-source application committed to protecting your privacy. We do not collect, store, or share any personal information, including usernames, passwords, emails, or any other user data. Since we do not gather any information, there is no risk of your data being shared, sold, or misused. Your use of EtzMitzvot is entirely private and secure.</p>
+    <p>If you have any questions or concerns, feel free to reach out to <a href="mailto:contact@blessisraelonline.com">contact@blessisraelonline.com</a>. Thank you for using EtzMitzvot!</p>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.onload = () => navigator.serviceWorker.register('/sw.js');
+    }
+  </script>
+</body>
+
+</html>

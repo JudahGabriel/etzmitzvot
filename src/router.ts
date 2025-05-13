@@ -24,14 +24,6 @@ export const router = new Router({
       render: () => html`<app-home></app-home>`
     },
     {
-      path: resolveRouterPath("privacy"),
-      title: 'Etz Mitzvot - Privacy Policy',
-      render: () => html`<privacy-policy></privacy-policy>`,
-      plugins: [
-        lazy(() => import('./pages/privacy-policy.js')),
-      ]
-    },
-    {
       path: resolveRouterPath('about'),
       title: 'About',
       plugins: [

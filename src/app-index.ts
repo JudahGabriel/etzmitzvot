@@ -27,15 +27,7 @@ export class AppIndex extends LitElement {
 	}
 
 	firstUpdated() {
-		router.addEventListener('route-changed', e => this.routeChanged(e as RouteEvent));
-
-		// If we've got a redirect in the query string, nav there now.
-		const urlParams = new URLSearchParams(window.location.search);
-		const redirect = urlParams.get("redirect");
-		if (redirect) {
-			this.updateComplete.then(() => router.navigate("/" + redirect));
-		}
-	}
+		router.addEventListener('route-changed', e => this.routeChanged(e as RouteEvent));	}
 
 	render() {
 		// router config can be round in src/router.ts
@@ -70,11 +62,6 @@ export class AppIndex extends LitElement {
 	}
 
 	routeChanged(e: RouteEvent): void {
-		if (e.context.query.redirect) {
-			router.navigate("/" + e.context.query.redirect);
-			return;
-		}
-
 		if ("startViewTransition" in document) {
 			document.startViewTransition(() => this.requestUpdate());
 		}
