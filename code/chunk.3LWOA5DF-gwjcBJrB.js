@@ -1,4 +1,4 @@
-import{i as a,c as d,S as o,H as e,e as s,x as l}from"./index-CpJOy08e.js";var t=a`
+import{i as a,c as d,S as o,H as e,e as s,x as l}from"./index-C_IDl03s.js";var t=a`
   :host {
     --border-color: var(--sl-color-neutral-200);
     --border-radius: var(--sl-border-radius-medium);
@@ -74,4 +74,4 @@ import{i as a,c as d,S as o,H as e,e as s,x as l}from"./index-CpJOy08e.js";var t
         <slot name="footer" part="footer" class="card__footer"></slot>
       </div>
     `}};r.styles=[d,t];r.define("sl-card");
-//# sourceMappingURL=chunk.3LWOA5DF-CZySh-dY.js.map
+//# sourceMappingURL=chunk.3LWOA5DF-gwjcBJrB.js.map
