@@ -122,6 +122,9 @@ export class AppSidebar extends LitElement {
                         </div>
                     </div>
                 </div>
+                <div>
+                    <sl-button href="/privacy" variant="text">Privacy policy</sl-button>
+                </div>
                 <div class="${this.sidebarCollapsed ? '' : 'd-none'}">
                     <sl-tooltip content="Expand the sidebar" style="font-size: 1.5em;">
                         <sl-icon-button name="chevron-bar-left" @click="${this.toggleCollapse}"></sl-icon-button>

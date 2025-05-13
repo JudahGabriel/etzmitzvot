@@ -3,7 +3,7 @@
     "iconUrl": "https://etzmitzvot.com/assets/icons/logo-512x512.png",
     "category": "BooksAndReference",
     "secondaryCategory": "Education",
-    "privacyPolicyUrl": "https://messianicradio.com/#/privacy",
+    "privacyPolicyUrl": "https://etzmitzvot.com/privacy",
     "pwaPackage": {
         "url": "https://etzmitzvot.com",
         "manifestUrl": "https://etzmitzvot.com/manifest.json",
@@ -37,7 +37,7 @@
                 "Read the underlying passages of each commandment",
                 "Learn about the commandments in a visual way"
             ],
-            "whatsNew": "Added commandment 75, added store publish.json"
+            "whatsNew": "Added commandment 46"
         }
     ]
 }

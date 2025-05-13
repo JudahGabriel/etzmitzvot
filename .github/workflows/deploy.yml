@@ -24,8 +24,12 @@ jobs:
     - name: Build project
       run: npm run build
 
+    - name: Add CNAME file # this file will be used in peaceiris/actions-gh-pages@v3 to configure the domain name.
+      run: echo 'etzmitzvot.com' > ./public/CNAME
+
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./dist # This should point to your build output directory
+        cname: etzmitzvot.com
