@@ -3,5 +3,6 @@ importScripts(
 );
 
 // precache manifest is an array of { url:string, revision: string }
-const precacheManifest = (self.__WB_MANIFEST || []).filter(i => i.url === "index.html"); // We don't want to cache the index.html file.
+const precacheManifest = (self.__WB_MANIFEST || []).filter(i => i.url === "/index.html"); // We don't want to cache the index.html file.
+console.log("Precache manifest", precacheManifest);
 workbox.precaching.precacheAndRoute(precacheManifest);
