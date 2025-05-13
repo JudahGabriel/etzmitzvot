@@ -1,4 +1,4 @@
-import{i as c,a as l,x as p,s as y,t as u}from"./index-C_IDl03s.js";import"./chunk.3LWOA5DF-gwjcBJrB.js";const d=c`
+import{i as c,a as l,x as p,s as y,t as u}from"./index-CLd-AZPf.js";import"./chunk.3LWOA5DF-BoOF3dWl.js";const d=c`
     :host {
         padding: 40px;
         display: block;
@@ -8,4 +8,4 @@ import{i as c,a as l,x as p,s as y,t as u}from"./index-C_IDl03s.js";import"./chu
             <p>EtzMitzvot is an open-source application committed to protecting your privacy. We do not collect, store, or share any personal information, including usernames, passwords, emails, or any other user data. Since we do not gather any information, there is no risk of your data being shared, sold, or misused. Your use of EtzMitzvot is entirely private and secure.</p>
             <p>If you have any questions or concerns, feel free to reach out to <a href="mailto:contact@blessisraelonline.com">contact@blessisraelonline.com</a>. Thank you for using EtzMitzvot!</p>
         `}};r.styles=[d,y];r=h([u("privacy-policy")],r);export{r as PrivacyPolicy};
-//# sourceMappingURL=privacy-policy-C-SvbAZ2.js.map
+//# sourceMappingURL=privacy-policy-BlzswyDf.js.map
