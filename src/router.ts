@@ -17,40 +17,53 @@ import './pages/app-home.js';
 const baseURL: string = (import.meta as any).env.BASE_URL;
 
 export const router = new Router({
-    routes: [
-      {
-        path: resolveRouterPath(),
-        title: 'Etz Mitzvot - a visual tree of the commandments in the Hebrew Bible',
-        render: () => html`<app-home></app-home>`
-      },
-      {
-        path: resolveRouterPath("privacy"),
-        title: 'Etz Mitzvot - Privacy Policy',
-        render: () => html`<privacy-policy></privacy-policy>`,
-        plugins: [
-          lazy(() => import('./pages/privacy-policy.js')),
-        ]
-      },
-      {
-        path: resolveRouterPath('about'),
-        title: 'About',
-        plugins: [
-          lazy(() => import('./pages/app-about/app-about.js')),
-        ],
-        render: () => html`<app-about></app-about>`
-      }
-    ]
-  });
-
-  // This function will resolve a path with whatever Base URL was passed to the vite build process.
-  // Use of this function throughout the starter is not required, but highly recommended, especially if you plan to use GitHub Pages to deploy.
-  // If no arg is passed to this function, it will return the base URL.
-
-  export function resolveRouterPath(unresolvedPath?: string) {
-    var resolvedPath = baseURL;
-    if(unresolvedPath) {
-      resolvedPath = resolvedPath + unresolvedPath;
+  routes: [
+    {
+      path: resolveRouterPath(),
+      title: 'Etz Mitzvot - a visual tree of the commandments in the Hebrew Bible',
+      render: () => html`<app-home></app-home>`
+    },
+    {
+      path: resolveRouterPath("privacy"),
+      title: 'Etz Mitzvot - Privacy Policy',
+      render: () => html`<privacy-policy></privacy-policy>`,
+      plugins: [
+        lazy(() => import('./pages/privacy-policy.js')),
+      ]
+    },
+    {
+      path: resolveRouterPath('about'),
+      title: 'About',
+      plugins: [
+        lazy(() => import('./pages/app-about/app-about.js')),
+      ],
+      render: () => html`<app-about></app-about>`
     }
+  ]
+});
 
-    return resolvedPath;
+// This function will resolve a path with whatever Base URL was passed to the vite build process.
+// Use of this function throughout the starter is not required, but highly recommended, especially if you plan to use GitHub Pages to deploy.
+// If no arg is passed to this function, it will return the base URL.
+
+export function resolveRouterPath(unresolvedPath?: string) {
+  var resolvedPath = baseURL;
+  if (unresolvedPath) {
+    resolvedPath = resolvedPath + unresolvedPath;
   }
+
+  return resolvedPath;
+}
+
+
+export interface RouteEvent extends Event {
+  context: RouteContext;
+}
+
+export interface RouteContext {
+    title?: string;
+    query: Record<string, string>;
+    params: Record<string, string>;
+    url: URL;
+    [key: string]: unknown;
+}

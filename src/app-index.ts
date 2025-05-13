@@ -4,7 +4,7 @@ import { customElement, state } from 'lit/decorators.js';
 import './components/header';
 import './components/sidebar';
 import './styles/global.css';
-import { router } from './router';
+import { RouteEvent, router } from './router';
 import { alertService } from './services/alert-service';
 import { Alert } from './models/alert';
 import { sharedStyles } from './styles/shared-styles';
@@ -14,32 +14,33 @@ import { appIndexStyles } from './app-index.styles';
 export class AppIndex extends LitElement {
 	@state() activeAlert: Alert | null = null;
 
-  static styles = [appIndexStyles, sharedStyles];
+	static styles = [appIndexStyles, sharedStyles];
 
-  constructor() {
-	super();
-  }
+	constructor() {
+		super();
+	}
 
-  connectedCallback(): void {
-	super.connectedCallback();
-	window.addEventListener("unhandledrejection", e => this.unhandledRejection(e));
-	alertService.events.addEventListener("alert", e => this.showAlert(e as CustomEvent<Alert>));
-  }
+	connectedCallback(): void {
+		super.connectedCallback();
+		window.addEventListener("unhandledrejection", e => this.unhandledRejection(e));
+		alertService.events.addEventListener("alert", e => this.showAlert(e as CustomEvent<Alert>));
+	}
 
-  firstUpdated() {
-	router.addEventListener('route-changed', () => {
-	  if ("startViewTransition" in document) {
-		(document as any).startViewTransition(() => this.requestUpdate());
-	  }
-	  else {
-		this.requestUpdate();
-	  }
-	});
-  }
+	firstUpdated() {
+		// If we've got a redirect in the query string, nav there now.
+		const urlParams = new URLSearchParams(window.location.search);
+		const redirect = urlParams.get("redirect");
+		if (redirect) {
+			router.navigate("/" + redirect);
+			return;
+		}
 
-  render() {
-	// router config can be round in src/router.ts
-	return html`
+		router.addEventListener('route-changed', e => this.routeChanged(e as RouteEvent));
+	}
+
+	render() {
+		// router config can be round in src/router.ts
+		return html`
 		<div class="layout-container">
 			<app-header></app-header>
 			<main>
@@ -51,18 +52,10 @@ export class AppIndex extends LitElement {
 		</div>
 		${this.renderAlert()}
 	`;
-  }
+	}
 
-  renderSidebar(): TemplateResult {
-	return html`
-		<div class="sidebar">
-
-		</div>
-	`;
-  }
-
-  renderAlert(): TemplateResult {
-	return html`
+	renderAlert(): TemplateResult {
+		return html`
 		<div class="alert-container">
 			<sl-alert variant="${this.activeAlert?.variant || "primary"}" ?open="${!!this.activeAlert}" closable class="alert-closable" countdown="rtl" duration="10000">
 				<sl-icon slot="icon" name="info-circle"></sl-icon>
@@ -75,17 +68,31 @@ export class AppIndex extends LitElement {
 			</sl-alert>
 		</div>
 	`;
-  }
+	}
 
-  showAlert(e: CustomEvent<Alert>): void {
-	this.activeAlert = e.detail;
-  }
+	routeChanged(e: RouteEvent): void {
+		if (e.context.query.redirect) {
+			router.navigate("/" + e.context.query.redirect);
+			return;
+		}
 
-  unhandledRejection(e: PromiseRejectionEvent): void {
-	const errorMessage = e.reason instanceof Error ? e.reason.message : "";
-	const stackTrace = e.reason instanceof Error ? e.reason.stack : "";
-	const alertMessage = errorMessage || "Woops, an error occurred. Please try again later.";
-	console.log("Unhandled rejection occurred", stackTrace);
-	alertService.showError(alertMessage, stackTrace);
-  }
+		if ("startViewTransition" in document) {
+			document.startViewTransition(() => this.requestUpdate());
+		}
+		else {
+			this.requestUpdate();
+		}
+	}
+
+	showAlert(e: CustomEvent<Alert>): void {
+		this.activeAlert = e.detail;
+	}
+
+	unhandledRejection(e: PromiseRejectionEvent): void {
+		const errorMessage = e.reason instanceof Error ? e.reason.message : "";
+		const stackTrace = e.reason instanceof Error ? e.reason.stack : "";
+		const alertMessage = errorMessage || "Woops, an error occurred. Please try again later.";
+		console.log("Unhandled rejection occurred", stackTrace);
+		alertService.showError(alertMessage, stackTrace);
+	}
 }
