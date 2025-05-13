@@ -1,4 +1,10 @@
-import{i as a,c as d,S as o,H as e,e as s,x as l}from"./index-CLd-AZPf.js";var t=a`
+import{i as l,c as h,S as p,H as b,e as u,x as i,a as m,s as g,t as v}from"./index-DrK_Ike8.js";const _=l`
+  @media(min-width: 1000px) {
+    sl-card {
+      max-width: 70vw;
+    }
+  }
+`;var f=l`
   :host {
     --border-color: var(--sl-color-neutral-200);
     --border-radius: var(--sl-border-radius-medium);
@@ -63,15 +69,34 @@ import{i as a,c as d,S as o,H as e,e as s,x as l}from"./index-CLd-AZPf.js";var t
   .card:not(.card--has-footer) .card__footer {
     display: none;
   }
-`,r=class extends o{constructor(){super(...arguments),this.hasSlotController=new e(this,"footer","header","image")}render(){return l`
+`,c=class extends p{constructor(){super(...arguments),this.hasSlotController=new b(this,"footer","header","image")}render(){return i`
       <div
         part="base"
-        class=${s({card:!0,"card--has-footer":this.hasSlotController.test("footer"),"card--has-image":this.hasSlotController.test("image"),"card--has-header":this.hasSlotController.test("header")})}
+        class=${u({card:!0,"card--has-footer":this.hasSlotController.test("footer"),"card--has-image":this.hasSlotController.test("image"),"card--has-header":this.hasSlotController.test("header")})}
       >
         <slot name="image" part="image" class="card__image"></slot>
         <slot name="header" part="header" class="card__header"></slot>
         <slot part="body" class="card__body"></slot>
         <slot name="footer" part="footer" class="card__footer"></slot>
       </div>
-    `}};r.styles=[d,t];r.define("sl-card");
-//# sourceMappingURL=chunk.3LWOA5DF-BoOF3dWl.js.map
+    `}};c.styles=[h,f];c.define("sl-card");var y=Object.getOwnPropertyDescriptor,w=(o,d,n,s)=>{for(var r=s>1?void 0:s?y(d,n):d,a=o.length-1,t;a>=0;a--)(t=o[a])&&(r=t(r)||r);return r};let e=class extends m{render(){return i`
+      <app-header ?enableBack="${!0}"></app-header>
+
+      <main>
+        <h2>About Page</h2>
+
+        <sl-card>
+          <h2>Did you know?</h2>
+
+          <p>PWAs have access to many useful APIs in modern browsers! These
+            APIs have enabled many new types of apps that can be built as PWAs, such as advanced graphics editing apps, games,
+            apps that use machine learning and more!
+          </p>
+
+          <p>Check out <a
+              href="https://docs.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/handle-files">these
+              docs</a> to learn more about the advanced features that you can use in your PWA</p>
+        </sl-card>
+      </main>
+    `}};e.styles=[g,_];e=w([v("app-about")],e);export{e as AppAbout};
+//# sourceMappingURL=app-about-CdupHzLH.js.map

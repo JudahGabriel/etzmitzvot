@@ -3,7 +3,7 @@
     "iconUrl": "https://etzmitzvot.com/assets/icons/logo-512x512.png",
     "category": "BooksAndReference",
     "secondaryCategory": "Education",
-    "privacyPolicyUrl": "https://etzmitzvot.com/privacy",
+    "privacyPolicyUrl": "https://etzmitzvot.com/privacy-policy.html",
     "pwaPackage": {
         "url": "https://etzmitzvot.com",
         "manifestUrl": "https://etzmitzvot.com/manifest.json",
