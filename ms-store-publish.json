@@ -25,7 +25,7 @@
                     "caption": "Tap a commandment to read more about it, see its relationships to other commandments, and read the underlying passage."
                 },
                 {
-                    "url": "https://etzmitzvot.com/assets/screenshots/screenshot-cmd-sidebar.png",
+                    "url": "https://etzmitzvot.com/assets/screenshots/screenshot-sidebar.png",
                     "caption": "Dig into statistics and information about the commandments in the Hebrew Bible."
                 }
             ],
@@ -37,7 +37,7 @@
                 "Read the underlying passages of each commandment",
                 "Learn about the commandments in a visual way"
             ],
-            "whatsNew": "Added commandment 46"
+            "whatsNew": "Added commandment 47 regarding consulting mediums and soothsayers."
         }
     ]
 }

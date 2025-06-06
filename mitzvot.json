@@ -873,6 +873,25 @@
     "name": "DontUseNamesOfOtherGods"
   },
   {
+    "commandmentNumber": 47,
+    "book": "Leviticus",
+    "chapter": 19,
+    "verse": 31,
+    "type": "negative",
+    "christianObservance": "binding",
+    "messianicObservance": "binding",
+    "jewishObservance": "binding",
+    "shortSummary": "Don't consult mediums.",
+    "text": "“Do not turn to those who are mediums or to soothsayers. Do not seek them out to be defiled by them. I am Adonai your God.",
+    "canBeCarriedOutToday": true,
+    "requiresLivingInIsrael": false,
+    "requiresTemple": false,
+    "commentary": null,
+    "commentaryUrl": null,
+    "parent": 24,
+    "name": "DontConsultMediums"
+  },
+  {
     "commandmentNumber": 50,
     "book": "Deuteronomy",
     "chapter": 16,
