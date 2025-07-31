@@ -4,6 +4,7 @@
     "category": "BooksAndReference",
     "secondaryCategory": "Education",
     "privacyPolicyUrl": "https://etzmitzvot.com/privacy-policy.html",
+    "developerEmail": "contact@blessisraelonline.com",
     "pwaPackage": {
         "url": "https://etzmitzvot.com",
         "manifestUrl": "https://etzmitzvot.com/manifest.json",
