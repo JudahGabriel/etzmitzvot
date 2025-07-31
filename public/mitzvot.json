@@ -891,6 +891,25 @@
     "parent": 24,
     "name": "DontConsultMediums"
   },
+    {
+    "commandmentNumber": 48,
+    "book": "Leviticus",
+    "chapter": 19,
+    "verse": 31,
+    "type": "negative",
+    "christianObservance": "binding",
+    "messianicObservance": "binding",
+    "jewishObservance": "binding",
+    "shortSummary": "Don't consult soothsayers.",
+    "text": "“Do not turn to those who are mediums or to soothsayers. Do not seek them out to be defiled by them. I am Adonai your God.",
+    "canBeCarriedOutToday": true,
+    "requiresLivingInIsrael": false,
+    "requiresTemple": false,
+    "commentary": null,
+    "commentaryUrl": null,
+    "parent": 24,
+    "name": "DontConsultSoothsayers"
+  },
   {
     "commandmentNumber": 50,
     "book": "Deuteronomy",
