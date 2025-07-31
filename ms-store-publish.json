@@ -1,6 +1,6 @@
 {
     "name": "EtzMitzvot",
-    "iconUrl": "https://etzmitzvot.com/assets/icons/logo-512x512.png",
+    "iconUrl": "/blob/master/public/assets/icons/logo-512x512.png?raw=true",
     "category": "BooksAndReference",
     "secondaryCategory": "Education",
     "privacyPolicyUrl": "https://etzmitzvot.com/privacy-policy.html",
